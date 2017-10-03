@@ -10,14 +10,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-  <div id="heading">
+  <div id="heading"> <!-- Heading of page, includes navigation buttons -->
     <h1>Bridge <button type="button" class="btn btn-success btn-sm" data-toggle = "modal" data-target = "#Profile">Profile</button>
     <button type="button" class="btn btn-danger btn-sm">Internships</button>
     <button type="button" class="btn btn-warning btn-sm">Fab Five</button>
     <button type="button" class="btn btn-info btn-sm">Settings</button>
   </h1>
   </div>
-  <div class = "row row1">
+  <div class = "row row1"> <!-- First row of cards -->
     <div class = "col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="card card1" style="max-width: 20rem;">
         <div class="card-header">
@@ -63,7 +63,7 @@
   </div>
 
 
-  <div class = "row row2">
+  <div class = "row row2"> <!-- Second row of cards -->
     <div class = "col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="card card4" style="max-width: 20rem;">
         <div class="card-header">
@@ -109,7 +109,7 @@
   </div>
 
 
-  <div class = "row row3">
+  <div class = "row row3"> <!-- Third row of cards -->
     <div class = "col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
       <div class="card card7" style="max-width: 20rem;">
         <div class="card-header">
@@ -154,6 +154,7 @@
 </div>
   </div>
 
+<!-- Profile page and Edit Profile page, activated and swapped by buttons -->
   <div class="modal fade" id="Profile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -167,7 +168,7 @@
         Bio goes here
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Edit Profile</button>
+        <button type="button" class="btn btn-danger" data-toggle ="modal" data-target = "eProfile">Edit Profile</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
       </div>
     </div>
