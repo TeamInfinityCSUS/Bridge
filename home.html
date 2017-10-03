@@ -14,7 +14,7 @@
     <h1>Bridge <button type="button" class="btn btn-success btn-sm" data-toggle = "modal" data-target = "#Profile">Profile</button>
     <button type="button" class="btn btn-danger btn-sm">Internships</button>
     <button type="button" class="btn btn-warning btn-sm">Fab Five</button>
-    <button type="button" class="btn btn-info btn-sm">Settings</button>
+    <button type="button" class="btn btn-info btn-sm" data-toggle = "modal" data-target = "#Settings">Settings</button>
   </h1>
   </div>
   <div class = "row row1"> <!-- First row of cards -->
@@ -168,7 +168,7 @@
         Bio goes here
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-toggle ="modal" data-target = "eProfile">Edit Profile</button>
+        <button type="button" class="btn btn-danger" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
       </div>
     </div>
@@ -188,12 +188,29 @@
           <input class="text input-lg newProfile"></input>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Edit Profile</button>
+          <button type="button" class="btn btn-success" data-toggle ="modal" data-target = "#Profile">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
         </div>
       </div>
       </div>
       </div>
+
+      <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              </button>
+            <h4 class="modal-title" id="modalLabel">Settings</h4>
+          </div>
+          <div class="modal-body">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Log Out</button>
+          </div>
+        </div>
+        </div>
+        </div>
 	<style>
 	h1{
 		background-color: #1A7CBC;
