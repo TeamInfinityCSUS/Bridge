@@ -182,7 +182,7 @@
           <input class="text input-lg newProfile"></input>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle ="modal" data-target = "#Profile">Save</button>
+          <button type="button" class="btn btn-success" id ="sPB" data-dismiss="modal" data-toggle ="modal" data-target = "#Profile">Save</button>
           <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
         </div>
       </div>
@@ -225,13 +225,19 @@
     <script>
     $(document).ready(function () {
         $('#ePB').onClick(function onchange() {
-              var box1 = $('#Bio');
-              var box2 = $('#newProfile');
-              box2.val(box1.val());
-          }
-      ););
+              var old = $('#Bio');
+              var edit = $('#newProfile');
+              edit.val(old.val());
+          });
 
-    </script
+          $('#sPB').onClick(function onchange() {
+                var old = $('#Bio');
+                var edit = $('#newProfile');
+                old.val(edit.val());
+            });
+    });
+
+    </script>
 		<!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
