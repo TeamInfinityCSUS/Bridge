@@ -224,13 +224,13 @@
     <!-- JavaScript: placed at the end of the document so the pages load faster -->
     <script>
     $(document).ready(function () {
-        $('#ePB').onClick(function onchange() {
+        $('#ePB').onClick(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
               var old = $('#Bio');
               var edit = $('#newProfile');
               edit.val(old.val());
           });
 
-          $('#sPB').onClick(function onchange() {
+          $('#sPB').onClick(function onchange() { //replace old profile with new one, primitive
                 var old = $('#Bio');
                 var edit = $('#newProfile');
                 old.val(edit.val());
