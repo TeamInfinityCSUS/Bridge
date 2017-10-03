@@ -161,11 +161,11 @@
         <div class="modal-header">
         <h4 class="modal-title" id="modalLabel">Static profile info here</h4>
       </div>
-      <div class="modal-body">
-        Bio goes here
+      <div class="modal-body Bio">
+        Static profile info here
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
+        <button type="button" class="btn btn-danger" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Exit</button>
       </div>
     </div>
@@ -222,6 +222,16 @@
 	</style>
 
     <!-- JavaScript: placed at the end of the document so the pages load faster -->
+    <script>
+    $(document).ready(function () {
+        $('#ePB').onClick(function onchange() {
+              var box1 = $('#Bio');
+              var box2 = $('#newProfile');
+              box2.val(box1.val());
+          }
+      ););
+
+    </script
 		<!-- jQuery library -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 
