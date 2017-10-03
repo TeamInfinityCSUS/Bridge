@@ -225,11 +225,11 @@
     <script>
     $(document).ready(function () {
         $('#ePB').onClick(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
-              $('#newProfile').val($('#Bio').text());
+              $('#newProfile').val($('#Bio').html());
           });
 
           $('#sPB').onClick(function onchange() { //replace old profile with new one, primitive
-                $('#Bio').text($('#newProfile').val());
+                $('#Bio').html($('#newProfile').val());
             });
     });
 
