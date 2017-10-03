@@ -158,7 +158,7 @@
   <div class="modal fade" id="Profile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" id = "pHeader">
           <img src="defaultavatar.png" id = "pPic" class="img-thumbnail">
         <h3 id="pName">Bob<br /></h3>
         <h3 id="pAffil">Intel Corporation<br /></h3>
@@ -178,8 +178,11 @@
     <div class="modal fade" id="eProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
-          <div class="modal-header">
-          <h4 class="modal-title" id="modalLabel">Static profile info here</h4>
+          <div class="modal-header" id = "pHeader">
+            <img src="defaultavatar.png" id = "pPic" class="img-thumbnail">
+          <h3 id="pName">Bob<br /></h3>
+          <h3 id="pAffil">Intel Corporation<br /></h3>
+          <h3 id="pRole">Senior Software Engineer<br /></h3>
         </div>
         <div class="modal-body">
           <input class="text input-lg" id ="newProfile"></input>
@@ -222,8 +225,8 @@
   .modal-header{
     justify-content:flex-start
   }
-  .profilePic{
-
+  .pHeader{
+    white-space:pre
   }
 	</style>
 
