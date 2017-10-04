@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Bridge</title>
     <title>Bridge: Home</title>
     <meta charset="utf-8">
     <!-- Viewport Meta Tag -->
@@ -162,9 +161,11 @@
       <div class="modal-content">
         <div class="modal-header" id = "pHeader">
           <img src="defaultavatar.png" id = "pPic" class="img-thumbnail">
-        <h2 id="pName">Bob</h2>
-        <p id="pAffil">Intel Corporation</p>
-        <p id="pRole">Senior Software Engineer</p>
+          <div class="modal-body">
+            <h2 id="pName">Bob</h2>
+            <p id="pAffil">Intel Corporation</p>
+            <p id="pRole">Senior Software Engineer</p>
+      </div>
       </div>
       <div class="modal-body">
         <div id = "Bio">Static profile info here</div>
@@ -182,10 +183,12 @@
         <div class="modal-content">
           <div class="modal-header" id = "pHeader">
             <img src="defaultavatar.png" id = "pPic" class="img-thumbnail">
-          <h3 id="pName">Bob<br /></h3>
-          <h3 id="pAffil">Intel Corporation<br /></h3>
-          <h3 id="pRole">Senior Software Engineer<br /></h3>
-        </div>
+            <div class="modal-body">
+              <h3 id="pName">Bob</h3>
+              <h3 id="pAffil">Intel Corporation</h3>
+              <h3 id="pRole">Senior Software Engineer</h3>
+            </div>
+          </div>
         <div class="modal-body">
           <input class="text input-lg" id ="newProfile"></input>
         </div>
@@ -202,11 +205,13 @@
           <div class="modal-content">
             <div class="modal-header">
             <img src="defaultavatar.png" id = "pPic" class="img-thumbnail">
-            <h3 id="pName">Bob<br /></h3>
-            <h3 id="pAffil">Intel Corporation<br /></h3>
-            <h3 id="pRole">Senior Software Engineer<br /></h3>
+            <div class="modal-body">
+              <h2 id="pName">Bob</h2>
+              <p id="pAffil">Intel Corporation</p>
+              <p id="pRole">Senior Software Engineer</p>
           </div>
-          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal">Log Out</button>
           </div>
@@ -231,6 +236,13 @@
   }
   .aButton{
     background-color: #FF33E3;
+  }
+  .Settings:active{
+
+  }
+  .pAffil:default{
+    text-decoration-color: #FF33E3;
+
   }
 	</style>
 
