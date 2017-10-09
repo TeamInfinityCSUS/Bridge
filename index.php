@@ -5,7 +5,7 @@ if ($conn->connect_error) {
 
      die("Connection to database failed: " . $conn->connect_error);
 }
-$sql = "SELECT *, FROM STUDENT";
+$sql = "SELECT SSN, STUDENT_NAME FROM STUDENT";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {

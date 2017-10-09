@@ -11,26 +11,26 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
       <! TEST >
       <script>
-          var testcase = 0;
           $(document).ready(function(){
+            var testcase = 0;
             $("#logInBtn").click(function(){
                 if (testcase){
-                $.ajax({ method: "POST", url: "index.php",}).done(function( data ){
+                $.ajax({ method: "POST", url: 'index.php',}).done(function( data ){
                     var result = $.parseJSON(data);
                     var string = "";
-                    var string += $("#email").val();
                     $.each( result, function( key, value ) { 
                         string += value['SSN'] + ' ' + value['Student_Name'];  
                     });
                 });
                 alert(string);
                 }else{
-                    window.location.href = "home.html";
+                    window.location.href = 'home.html';
+                    alert("string");
                 }
             });
               
             $("#regBtn").click(function(){
-                window.location.href = "register.html";
+                window.location.href = 'register.html';
             });
           });
       </script>
