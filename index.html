@@ -2,15 +2,41 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <! JQuery Addon >
     <title>Bridge: Login</title>
     <meta charset="utf-8">
     <!-- Viewport Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <! TEST >
+      <script>
+          var testcase = 0;
+          $(document).ready(function(){
+            $("#logInBtn").click(function(){
+                if (testcase){
+                $.ajax({ method: "POST", url: "index.php",}).done(function( data ){
+                    var result = $.parseJSON(data);
+                    var string = "";
+                    var string += $("#email").val();
+                    $.each( result, function( key, value ) { 
+                        string += value['SSN'] + ' ' + value['Student_Name'];  
+                    });
+                });
+                alert(string);
+                }else{
+                    window.location.href = "home.html";
+                }
+            });
+              
+            $("#regBtn").click(function(){
+                window.location.href = "register.html";
+            });
+          });
+      </script>
+      <! TEST >
   </head>
   <body>
-
     <!-- YOUR CONTENT STARTS HERE -->
 	<h1>Bridge</h1>
 	<div class="row"></div>
@@ -24,8 +50,8 @@
 	<div class="container password">
 	<label class = "label" for="password">Password</label>
 	<input type="password" class="form-control" id="password" name="password">
-	<button type="submit" class="btn btn-primary btn-sm">Login</button>
-	<button type="submit" class="btn btn-success btn-sm">Register</button>
+	<button id="logInBtn" type="submit" class="btn btn-primary btn-sm">Login</button>
+	<button id="regBtn" type="submit" class="btn btn-success btn-sm">Sign Up</button>
 	</div>
 	</div>
 	<div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
