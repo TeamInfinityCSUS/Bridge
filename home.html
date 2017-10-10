@@ -10,9 +10,11 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Bridge</h1>
     <h1>
-    <button type="button" class="btn blue btn-sm" data-toggle = "modal" data-target = "#Profile">Profile</button>
+      Bridge
+      <img src="defaultavatar.png" id = "hPic" class="img-thumbnail" data-toggle = "modal" data-target="#Profile">
+    </h1>
+    <h1>
     <button type="button" class="btn blue btn-sm">Internships</button>
     <button type="button" class="btn blue btn-sm">Fab Five</button>
     <button type="button" class="btn blue btn-sm" data-toggle = "modal" data-target = "#Settings">Settings</button>
@@ -147,6 +149,19 @@
         </div>
         </div>
         </div>
+
+        <div class="modal fade" id="aSet" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+              <div class="modal-body">
+                <button type="button" class="btn blue" data-dismiss="modal">View All Accounts</button>
+                <button type="button" class="btn blue" data-dismiss="modal">View All Accounts</button>
+            </div>
+            </div>
+          </div>
+          </div>
+          </div>
 	<style>
 	h1{
 		background-color: #1A7CBC;
@@ -197,9 +212,12 @@ $(document).ready(function () {
           $('#newProfile').val($('#Bio').html());
       });
 
-      $('#sPB').click(function onchange() { //replace old profile with new one, primitive
-            $('#Bio').html($('#newProfile').val());
-        });
+    $('#sPB').click(function onchange() { //replace old profile with new one, primitive
+          $('#Bio').html($('#newProfile').val());
+      });
+    $('#sPB').click(function onchange() { //replace old profile with new one, primitive
+          $('#Bio').html($('#newProfile').val());
+      });
 });
 
 </script>
