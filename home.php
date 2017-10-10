@@ -13,15 +13,18 @@
     <h1> <!--Heading, includes Logo, Profile button, and other menu buttons -->
       Bridge
       <img src="images/defaultavatar.png" height = "40" width = "40" id = "hPic" class="rounded float-right" data-toggle = "modal" data-target="#Profile"><br />
-    <button type="button" class="btn blue btn-sm">Internships</button> <!-- if user is student, button will be "Internships", if user is content creator, button will be "Manage Content" -->
+    <button type="button" class="btn blue btn-sm">Internships</button>
+     <!-- if user is student, button will be "Internships", if user is content creator, button will be "Manage Content" -->
     <button type="button" class="btn blue btn-sm">Manage Content</button>
     <button type="button" class="btn blue btn-sm">Fab Five</button>
-    <button type="button" id = "aButton" class="btn blue btn-sm" data-toggle = "modal" data-target = "#aSet">Admin</button> <!--only visible if user is admin -->
+    <button type="button" id = "aButton" class="btn blue btn-sm" data-toggle = "modal" data-target = "#aSet">Admin</button>
+    <!--only visible if user is admin -->
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
     <!--image will be whatever user sets avatar to -->
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"> <!-- Container for cards -->
-    <div class="card mx-auto" style="width: 20rem;"> <!--card generation will be a PHP for loop, using a 2D array of user and video info to generate 12 cards -->
+    <div class="card mx-auto" style="width: 20rem;">
+      <!--card generation will be a PHP for loop, using a 2D array of user and video info to generate 12 cards -->
       <img class="card-img-top" src="..." alt="Thumbnail">
       <div class="card-block">
         <h4 class="card-title">Example 1</h4>
@@ -38,7 +41,8 @@
       <div class="modal-content">
         <div class="modal-header" id = "pHeader">
           <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
-          <div class="modal-body"> <!--Profile info will be whatever user used during registration and profile editing -->
+          <div class="modal-body">
+             <!--Profile info will be whatever user used during registration and profile editing -->
             <h2 id="pName">Bob</h2>
             <p id="pAffil">Intel Corporation</p>
             <p id="pRole">Senior Software Engineer</p>
@@ -48,8 +52,10 @@
         <div id = "Bio">Static profile info here</div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" id="rPB">Report</button> <!--only visible if profile is someone else's -->
-        <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button> <!-- Only visible if profile is one's own -->
+        <button type="button" class="btn btn-danger" id="rPB">Report</button>
+         <!--only visible if profile is someone else's -->
+        <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
+        <!-- Only visible if profile is one's own -->
       </div>
     </div>
     </div>
