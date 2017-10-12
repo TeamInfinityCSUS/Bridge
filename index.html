@@ -16,6 +16,7 @@
             $("#logInBtn").click(function(){
                 var user = $('#email').val();
                 var pass = $('#password').val();
+		var fail_login = true;
                 var database = {"john@email.com":'password',"jane@email.com":'smartpassword'};
                 if (testcase){
                 $.post("index.php", function(){
@@ -26,13 +27,15 @@
                         if (user.toLowerCase() == key && pass == database[key]){
                             alert("Profile Login: " + user);
                             window.location.href = 'home.html';
+			    fail_login = false;
 			    break;
-                        }else{
-                            email_label = 'Email Address'
-                            document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
-                            $('#password').val("");
                         }
                     }
+		    if (fail_login){
+			    email_label = 'Email Address'
+                            document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
+                            $('#password').val("");    
+		    }
                 }
             });
               
