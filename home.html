@@ -125,7 +125,7 @@
             </div>
           </div>
         <div class="modal-body">
-          <input class="text input-lg fluid" id ="newProfile"></input>
+          <input class="text input-lg" id ="newProfile"></input>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn blue" id ="sPB" data-dismiss="modal" data-toggle ="modal" data-target = "#Profile">Save</button>
@@ -138,9 +138,9 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-            <div class="modal-body" id="sBody">
+            <div class="modal-footer">
               <button type="button" class="btn blue" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button><br />
-              <button type="button" class="btn blue" data-dismiss="modal">Log Out</button>
+              <button type="button" class="btn blue" id="logOutB" data-dismiss="modal">Log Out</button>
           </div>
           </div>
         </div>
@@ -151,7 +151,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-              <div class="modal-body" id = "aBody">
+              <div class="modal-footer" id = "aBody">
                 <button type="button" class="btn blue" data-dismiss="modal">View All Accounts</button><br />
                 <button type="button" class="btn blue" data-dismiss="modal">Manage Flagged Content</button>
             </div>
@@ -169,6 +169,7 @@
 	}
   .newProfile{
     height:500px;
+    width: 500px;
   }
   .row{
     margin-bottom: 10px;
@@ -191,6 +192,9 @@
     text-decoration-color: #FF33E3;
 
   }
+  .modal-footer .btn{
+     margin-top: 15px;
+   }
   .blue{
     background-color:#B7ABFF;
   }
@@ -208,6 +212,7 @@
 		<!-- Latest compiled and minified Bootstrap JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!--JQuery used for AJAX (communication between PHP and Javascript) -->
 <script> //Javascript for the page here
 $(document).ready(function () {
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
@@ -216,6 +221,9 @@ $(document).ready(function () {
 
     $('#sPB').click(function onchange() { //replace old profile with new one, primitive
           $('#Bio').html($('#newProfile').val());
+      });
+    $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
+          window.location.href = '/Bridge/index.html';
       });
 
 });
