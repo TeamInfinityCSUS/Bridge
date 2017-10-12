@@ -140,7 +140,7 @@
             <div class="modal-header">
             <div class="modal-footer">
               <button type="button" class="btn blue" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button><br />
-              <button type="button" class="btn blue" data-dismiss="modal">Log Out</button>
+              <button type="button" class="btn blue" id="logOutB" data-dismiss="modal">Log Out</button>
           </div>
           </div>
         </div>
@@ -219,6 +219,9 @@ $(document).ready(function () {
 
     $('#sPB').click(function onchange() { //replace old profile with new one, primitive
           $('#Bio').html($('#newProfile').val());
+      });
+    $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
+          window.location.href = '/index.html';
       });
 
 });
