@@ -14,72 +14,17 @@
       Bridge
       <img src="images/defaultavatar.png" height = "40" width = "40" id = "hPic" class="rounded float-right" data-toggle = "modal" data-target="#Profile"><br />
     <button type="button" class="btn blue btn-sm">Internships</button>
+     <!-- if user is student, button will be "Internships", if user is content creator, button will be "Manage Content" -->
+    <button type="button" class="btn blue btn-sm">Manage Content</button>
     <button type="button" class="btn blue btn-sm">Fab Five</button>
     <button type="button" id = "aButton" class="btn blue btn-sm" data-toggle = "modal" data-target = "#aSet">Admin</button>
+    <!--only visible if user is admin -->
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
+    <!--image will be whatever user sets avatar to -->
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"> <!-- Container for cards -->
     <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
+      <!--card generation will be a PHP for loop, using a 2D array of user and video info to generate 12 cards -->
       <img class="card-img-top" src="..." alt="Thumbnail">
       <div class="card-block">
         <h4 class="card-title">Example 1</h4>
@@ -97,6 +42,7 @@
         <div class="modal-header" id = "pHeader">
           <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
           <div class="modal-body">
+             <!--Profile info will be whatever user used during registration and profile editing -->
             <h2 id="pName">Bob</h2>
             <p id="pAffil">Intel Corporation</p>
             <p id="pRole">Senior Software Engineer</p>
@@ -107,7 +53,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="rPB">Report</button>
+         <!--only visible if profile is someone else's -->
         <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
+        <!-- Only visible if profile is one's own -->
       </div>
     </div>
     </div>
@@ -118,13 +66,13 @@
         <div class="modal-content">
           <div class="modal-header" id = "pHeader">
             <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
-            <div class="modal-body">
+            <div class="modal-body"> <!--Same as above, editable through reaching database -->
               <h2 id="pName">Bob</h2>
               <p id="pAffil">Intel Corporation</p>
               <p id="pRole">Senior Software Engineer</p>
             </div>
           </div>
-        <div class="modal-body">
+        <div class="modal-body"> <!--If profile is edited, note changes to database -->
           <input class="text input-lg fluid" id ="newProfile"></input>
         </div>
         <div class="modal-footer">
@@ -138,7 +86,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-            <div class="modal-body" id="sBody">
+            <div class="modal-body">
               <button type="button" class="btn blue" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button><br />
               <button type="button" class="btn blue" data-dismiss="modal">Log Out</button>
           </div>
@@ -151,7 +99,7 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-              <div class="modal-body" id = "aBody">
+              <div class="modal-body">
                 <button type="button" class="btn blue" data-dismiss="modal">View All Accounts</button><br />
                 <button type="button" class="btn blue" data-dismiss="modal">Manage Flagged Content</button>
             </div>
@@ -174,14 +122,10 @@
     margin-bottom: 10px;
     margin-left: 10px;
   }
-  .aBody{
-    padding-bottom:5px;
-    text-align: center;
+  .modal-body{
+    margin-bottom:5px;
   }
-  .Settings{
-      margin-bottom:5px;
-  }
-  .sBody{
+  .aButton{
     background-color: #FF33E3;
   }
   .Settings:active{
@@ -191,16 +135,11 @@
     text-decoration-color: #FF33E3;
 
   }
-<<<<<<< HEAD
-  .modal-footer .btn{
-     margin-top: 15px;
-=======
   .blue{
     background-color:#B7ABFF;
   }
   .card{
     margin-bottom: 15px;
->>>>>>> 8a795c3d311f234dc56872515e6b40467e88babe
   }
 	</style>
 
