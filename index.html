@@ -26,6 +26,7 @@
                         if (user.toLowerCase() == key && pass == database[key]){
                             alert("Profile Login: " + user);
                             window.location.href = 'home.html';
+			    break;
                         }else{
                             email_label = 'Email Address'
                             document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
