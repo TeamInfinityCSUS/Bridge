@@ -9,35 +9,85 @@
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
   integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <! TEST >
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript">
+      $(document).ready(function(){
+        var testcase = 0;
+        $("#logInBtn").click(function(){
+            var user = $('#email').val();
+            var pass = $('#password').val();
+var fail_login = true;
+            var database = {"john@email.com":'password',"jane@email.com":'smartpassword'};
+            if (testcase){
+            $.post("index.php", function(){
+                alert("data: "+data);
+            });
+            }else{
+                for (var key in database){
+                    if (user.toLowerCase() == key && pass == database[key]){
+      fail_login = false;
+      break;
+                    }
+                }
+    if (fail_login){
+  email_label = 'Email Address'
+                    document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
+                    $('#password').val("");
+    }else{
+                    alert("Profile Login: " + user);
+                    window.location.href = 'home.html';
+
+    }
+            }
+        });
+
+        $("#stdtAcct").click(function(){
+            window.location.href = 'registerStudent.html';
+        });
+      });
+  </script>
+  <! TEST >
   </head>
   <h1>Bridge</h1>
   <body>
+    <!-- Start of the Login Area -->
     <div class="row loginblock">
-  	<div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
-  	<div class = "col-lg-8 col-md-8 col-sm-10 col-xs-12">
-      <label class = "label" for="email">Select your account type</label>
+      <!-- This bit helps center the login Area (Left side)-->
+	  <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
+  	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12"
+      id="loginBlock">
+      <label class ="label" for="acctDropBtn" id="acctTypeLblfor">Select your account type</label>
     <div class="dropdown">
-      <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+      <button id="acctDropBtn" class="btn btn-primary btn-sm dropdown-toggle"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Choose the account type.
       </button>
       <div class="dropdown-menu" aria-labelledby="dropButton">
-      <a class="dropdown-item" href="#">Student</a>
-      <a class="dropdown-item" href="#">Contributor</a>
-      <a class="dropdown-item" href="#">Administrator</a>
+      <a class="dropdown-item" id="stdtAcct" href="#">Student</a>
+      <a class="dropdown-item" id="contAcct" href="#">Contributor</a>
+      <a class="dropdown-item" id="adminAcct" href="#">Administrator</a>
       </div>
     </div>
     <div></div>
-  	<button type="submit" class="btn btn-success btn-sm">Continue</button>
+  	<!-- <button type="submit" class="btn btn-success btn-sm">Continue</button> -->
   	</div>
+          <!-- This bit helps center the login Area (Right side)-->
+    <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
   	</div>
+
   	<style>
   	h1{
   		background-color: #1A7CBC;
   	}
   	body{
   		background-color: #82CBFB;
+      margin: auto;
   	}
+    .center {
+      margin: auto;
+
+    }
     /*Overides the Bootstrap settings*/
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited,
       .btn-primary:focus{
