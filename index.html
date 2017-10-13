@@ -11,6 +11,12 @@
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript">
           $(document).ready(function(){ // Wait until page is ready
+ 	    var profile_id = sessionStorage.getItem('profile_id');
+	    if (profile_id == nil || profile_id == 0){
+                profile_id = 0;
+	    }else{
+		window.location.href = 'home.html'; // move to home page   
+	    }
             var testcase = 0; // Used to test PHP database
             $("#logInBtn").click(function(){ // click -Jquery
                 var user = $('#email').val(); // grabs object with id==email
