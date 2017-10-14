@@ -13,37 +13,16 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript">
       $(document).ready(function(){
-        var testcase = 0;
-        $("#logInBtn").click(function(){
-            var user = $('#email').val();
-            var pass = $('#password').val();
-var fail_login = true;
-            var database = {"john@email.com":'password',"jane@email.com":'smartpassword'};
-            if (testcase){
-            $.post("index.php", function(){
-                alert("data: "+data);
-            });
-            }else{
-                for (var key in database){
-                    if (user.toLowerCase() == key && pass == database[key]){
-      fail_login = false;
-      break;
-                    }
-                }
-    if (fail_login){
-  email_label = 'Email Address'
-                    document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
-                    $('#password').val("");
-    }else{
-                    alert("Profile Login: " + user);
-                    window.location.href = 'home.html';
-
-    }
-            }
-        });
-
+        /* This function sets the input fields to visible when the
+            Student account item is selected from the dropdown menu. */
         $("#stdtAcct").click(function(){
-            window.location.href = 'registerStudent.html';
+          var studentIDInput = document.getElementById("stdtIDInpt");
+          var studentButton = document.getElementById("stdtBtn");
+            /*  */
+            studentIDInput.style="display: block";
+            studentIDInput.style="visibility: visible";
+            //studentButton.style.visibility= 'visible';
+            studentButton.style='display: block';
         });
       });
   </script>
@@ -55,26 +34,57 @@ var fail_login = true;
     <div class="row loginblock">
       <!-- This bit helps center the login Area (Left side)-->
 	  <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
-  	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12"
-      id="loginBlock">
-      <label class ="label" for="acctDropBtn" id="acctTypeLblfor">Select your account type</label>
+      <!-- Start of the Login input block -->
+      <div class="accountForm"
+  	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="loginBlock">
+      <label class ="label" for="acctDropBtn" id="acctTypeLbl">Select your account type</label>
     <div class="dropdown">
       <button id="acctDropBtn" class="btn btn-primary btn-sm dropdown-toggle"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Choose the account type.
       </button>
       <div class="dropdown-menu" aria-labelledby="dropButton">
-      <a class="dropdown-item" id="stdtAcct" href="#">Student</a>
-      <a class="dropdown-item" id="contAcct" href="#">Contributor</a>
-      <a class="dropdown-item" id="adminAcct" href="#">Administrator</a>
-      </div>
-    </div>
-    <div></div>
-  	<!-- <button type="submit" class="btn btn-success btn-sm">Continue</button> -->
-  	</div>
-          <!-- This bit helps center the login Area (Right side)-->
-    <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
-  	</div>
+      <a class="dropdown-item" id="studentAcct" href="#">Student</a>
+      <a class="dropdown-item" id="bAdminAcct" href="#">Business Administrator</a>
+      <a class="dropdown-item" id="creatorAcct" href="#">Creator</a>
+      </div> <!--  -->
+    </div> <!-- Dropdown Menu -->
+    <!--This is the Student ID input field-->
+    <div class="container studentID" id="stdtIDInpt">
+    <label class = "label" for="studentID">Student ID</label>
+    <input type="text" class="form-control" id="studentID" name="studentID">
+  </div> <!-- Student ID -->
+    <!--This is the UserName input field-->
+    <div class="container uName" id="uNameInpt">
+    <label class = "label" for="uName">Username</label>
+    <input type="text" class="form-control" id="uName" name="uName">
+  </div> <!-- Username -->
+    <!--This is the Password input field-->
+    <div class="container password" id="pwInpt">
+    <label class = "label" for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+    </div> <!-- Password -->
+    <!--This is the Confirm Password input field-->
+    <div class="container cPassword" id="cpwInpt">
+    <label class = "label" for="password">Confirm Password</label>
+    <input type="password" class="form-control" id="cpassword" name="cPassword">
+  </div> <!-- Confirm Password -->
+    <!--This is the Email input field-->
+    <div class="container email">
+    <label class = "label" for="email">Email Address</label>
+    <input type="email" class="form-control" id="email" name="email">
+    </div> <!-- Email Address -->
+    <!--This is the Confirm Email input field-->
+    <div class="container cEmail">
+    <label class = "label" for="email">Confirm Email Address</label>
+    <input type="email" class="form-control" id="cEmail" name="cEmail">
+  </div> <!-- Confirm Email Address -->
+    <div class="container" id="stdtBtn">
+    <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
+  </div> <!-- Student Continue Button -->
+  </div> <!-- Registration Block -->
+
+  </div> <!-- Account Form -->
 
   	<style>
   	h1{
@@ -84,28 +94,24 @@ var fail_login = true;
   		background-color: #82CBFB;
       margin: auto;
   	}
-    .center {
-      margin: auto;
-
-    }
     /*Overides the Bootstrap settings*/
     .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited,
       .btn-primary:focus{
       background-color: #1A7CBC !important;
-      width: 95%;
-      margin-top: 2%;
-      margin-left: 2.5%;
+      width: auto;
+      margin-top: auto;
+      margin-left: auto;
     }
     .btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited,
       .btn-success:focus{
-      width: 25%;
-      margin-top: 2%;
-      margin-left: 2.5%;
+
     }
     .form-control, .form-control:active, .form-control:hover, .form-control:visited,
       .form-control:focus{
-        background-color: #E3E9ED;
-        margin-bottom: 1px;
+
+      }
+      .hiddenContainer{
+
       }
   	</style>
       <!-- JavaScript: placed at the end of the document so the pages load faster -->
