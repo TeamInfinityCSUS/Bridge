@@ -1,6 +1,6 @@
 <?php
 $result_array = array();
-$conn = new mysqli('http://athena.ecs.csus.edu/~cs174131/','cs174131','oojbbidr','cs174131');
+/*$conn = new mysqli('http://athena.ecs.csus.edu/~cs174131/','cs174131','oojbbidr','cs174131');
 if ($conn->connect_error) {
 
      die("Connection to database failed: " . $conn->connect_error);
@@ -17,7 +17,8 @@ if ($result->num_rows > 0) {
     }
 
 }
-
+*/
+$result_array = "stuff";
 echo json_encode($result_array);
 
 $conn->close();
