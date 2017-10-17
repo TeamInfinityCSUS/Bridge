@@ -18,8 +18,8 @@ if ($result->num_rows > 0) {
 
 }
 */
-$result_array = "stuff";
-echo json_encode($result_array);
+echo "stuff";
+//echo json_encode($result_array);
 
 /*$conn->close();*/
 ?>
