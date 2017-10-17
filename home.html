@@ -160,6 +160,7 @@ $(document).ready(function () {
         data: {action: 'cards'},
         type: 'get',
         success: function(data) {
+          alert(data);
         for(i = 0;i<12;i++) $('#column').append(data[i]);
         }
     });
