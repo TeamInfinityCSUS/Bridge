@@ -155,7 +155,8 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-    $.ajax({ url: 'index.php',
+    $.ajax({
+                 url: 'home.php',
                  data: {action: 'cards'},
                  type: 'post',
                  success: function(output) {
