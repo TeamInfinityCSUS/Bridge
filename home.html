@@ -20,14 +20,6 @@
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
     <script>
-    $.ajax({
-                 url: 'home.php',
-                 data: {action: 'cards'},
-                 type: 'get',
-                 success: function(output) {
-                 alert(output);
-                }
-        });
      </script>
   </div>
 <!-- Profile page,Edit Profile page and Settings page, activated and swapped by buttons -->
@@ -165,6 +157,14 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
+    $.ajax({
+        url: 'home.php',
+        data: {action: 'cards'},
+        type: 'get',
+        success: function(output) {
+        alert(output);
+        }
+    });
 
 });
 
