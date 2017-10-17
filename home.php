@@ -36,7 +36,7 @@
 
     );
     for($i = 0; $i < 12; $i++){ //card generation, will post videos based on fetched database info
-    echo "<div class="card mx-auto" style="width: 20rem;">
+    echo '<div class="card mx-auto" style="width: 20rem;">
       <img class="card-img-top" src="..." alt="Thumbnail">
       <div class="card-block">
         <h4 class="card-title">$videos[i][1]</h4>
@@ -47,7 +47,7 @@
           <h4>$videos[i][6] Likes</h4>
         </div>
       </div>
-    </div>"
+    </div>'
     }
     ?>
   </div>
