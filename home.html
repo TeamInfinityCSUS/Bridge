@@ -155,7 +155,7 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-    var jqxhr = $.post({'home.php',{action: 'cards'})
+    var jqxhr = $.post("home.php",action: 'cards')
         .done(function(data) {
           alert(data);
         for(i = 0;i<12;i++) $('#column').append(data[i]);
