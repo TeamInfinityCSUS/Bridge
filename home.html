@@ -159,8 +159,8 @@ $(document).ready(function () {
         url: 'home.php',
         data: {action: 'cards'},
         type: 'get',
-        success: function(output) {
-        alert(output);
+        success: function(data) {
+        for(i = 0;i<12;i++) $('#column').append(data[i]);
         }
     });
 

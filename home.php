@@ -8,6 +8,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
 }
 
 function generateCards(){ //function to generate video cards, may possibly split fetching database data to different function
+  $results = array();
   $videos = array( //2D Array of videos of the form (id,title,field,author,date uploaded,views,likes), will most likely be changed later
     array(001,"Title 1","Computer Science","Bob","October 12th, 2017",500,10),
     array(002,"Title 2","Mechanical Engineering","Mary","October 2nd,2017",250,5),
@@ -23,7 +24,7 @@ function generateCards(){ //function to generate video cards, may possibly split
     array(010,"Title 12","Civil Engineering","Michael","August 11th,2017",343,22)
   );
   for($i = 0; $i < 12; $i++){ //card generation, will post videos based on fetched database info
-    echo '<div class="card mx-auto" style="width: 20rem;">
+    $results[$i] = '<div class="card mx-auto" style="width: 20rem;">
             <img class="card-img-top" src="..." alt="Thumbnail">
             <div class="card-block">
               <h4 class="card-title">$videos[i][1]</h4>
@@ -34,7 +35,8 @@ function generateCards(){ //function to generate video cards, may possibly split
               <h4>$videos[i][6] Likes</h4>
               </div>
               </div>
-              </div>'
-            }
-          }
+              </div>';
+    }
+    return $results;
+}
 ?>
