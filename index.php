@@ -5,6 +5,7 @@ if ($conn->connect_error) {
 
      die("Connection to database failed: " . $conn->connect_error);
 }
+$conn->select_db("bridge");
 $sql = "SELECT SSN, STUDENT_NAME FROM STUDENT";
 $result = $conn->query($sql);
 
