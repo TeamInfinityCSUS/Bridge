@@ -1,6 +1,6 @@
 <?php
 $result_array = array();
-/*$conn = new mysqli('http://athena.ecs.csus.edu/~cs174131/','cs174131','oojbbidr','cs174131');
+/*$conn = new mysqli(url,user,password,databasename);
 if ($conn->connect_error) {
 
      die("Connection to database failed: " . $conn->connect_error);
