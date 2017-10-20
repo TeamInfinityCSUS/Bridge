@@ -157,9 +157,11 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-    var jqxhr = $.post("home.php", action: "cards")
-		.done(function(data) {
+    $.post("home.php", {action:"cards"})
+	.done(function(data){
 			$('#videoList').append(data);
+			});
+			
 		});
 		
 </script>
