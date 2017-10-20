@@ -24,7 +24,7 @@ function generateCards(){ //function to generate video cards, may possibly split
     array(010,"Title 12","Civil Engineering","Michael","August 11th,2017",343,22)
   );
   for($i = 0; $i < 12; $i++){ //card generation, will post videos based on fetched database info
-    $results[$i] = '<div class="card mx-auto" style="width: 20rem;">
+    echo '<div class="card mx-auto" style="width: 20rem;">
             <img class="card-img-top" src="..." alt="Thumbnail">
             <div class="card-block">
               <h4 class="card-title">$videos[i][1]</h4>
@@ -37,6 +37,5 @@ function generateCards(){ //function to generate video cards, may possibly split
               </div>
               </div>';
     }
-    return $results;
 }
 ?>
