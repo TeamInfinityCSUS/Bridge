@@ -1,7 +1,7 @@
 <?php
 
-if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html file sends requests with certain string and this will determine which function to call
-    $action = $_POST['action'];
+if(isset($_GET['action']) && !empty($_GET['action'])) { //control module, html file sends requests with certain string and this will determine which function to call
+    $action = $_GET['action'];
     switch($action) {
         case 'cards' : generateCards();break;
     }

@@ -157,7 +157,7 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-    $.post("php/home.php", {action:"cards"})
+    $.get("php/home.php", {action:"cards"})
 	.done(function(data){
 			$('#videoList').append(data);
 			});
