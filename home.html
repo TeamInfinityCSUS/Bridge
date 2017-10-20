@@ -18,78 +18,8 @@
     <button type="button" id = "aButton" class="btn blue btn-sm" data-toggle = "modal" data-target = "#aSet">Admin</button>
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
   </h1>
-  <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12"> <!-- Container for cards -->
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-    <div class="card mx-auto" style="width: 20rem;">
-      <img class="card-img-top" src="..." alt="Thumbnail">
-      <div class="card-block">
-        <h4 class="card-title">Example 1</h4>
-        <div class="card-footer text-muted">
-          <h4>By: Mary</h4>
-          <h4>Uploaded 12 hours ago</h4>
-        </div>
-      </div>
-    </div>
-</div>
+  <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
+  </div>
 <!-- Profile page,Edit Profile page and Settings page, activated and swapped by buttons -->
   <div class="modal fade" id="Profile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -97,7 +27,7 @@
         <div class="modal-header" id = "pHeader">
           <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
           <div class="modal-body">
-            <h2 id="pName">Bob</h2>
+            <h2 id="pName">Bob Walter</h2>
             <p id="pAffil">Intel Corporation</p>
             <p id="pRole">Senior Software Engineer</p>
       </div>
@@ -196,7 +126,7 @@
      margin-top: 15px;
    }
   .blue{
-    background-color:#B7ABFF;
+    background-color:#000873;
   }
   .card{
     margin-bottom: 15px;
@@ -225,8 +155,12 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-
-});
+    var jqxhr = $.post("home.php",action: 'cards')
+        .done(function(data) {
+          alert(data);
+        for(i = 0;i<12;i++) $('#column').append(data[i]);
+        })
+      });
 
 </script>
 
