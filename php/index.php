@@ -6,7 +6,7 @@ $output = 0;
 $result_array[1]=['john@email.com','password'];
 
 foreach($result_array as $key => $value){
-  if ($input[0]==$value[0] && $input[1]==$value[1]){
+  if (strtolower($input[0])==$value[0] && strtolower($input[1])==$value[1]){
     $output=$key;
     break;
   }
