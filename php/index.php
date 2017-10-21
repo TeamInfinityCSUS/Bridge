@@ -1,17 +1,16 @@
 <?php
-//$result_array = array(); // Hash are called Associative Array in PHP
-//$input = $_POST['input']; // input is an array [user, password]
-//$output = 0;
-/*
-// Data hashkey => [stringarray0, stringarray1] 
-$result_array[1]=['john@email.com','password'];
-
-foreach($result_array as $key => $value){
-  if (strtolower($input[0])==$value[0] && strtolower($input[1])==$value[1]){
-    $output=$key;
-    break;
-  }
-}*/
-
-echo json_encode(array("name"=>"John","time"=>"2pm"));  // if the output is 0 log in failed
+$result_array = array();
+$conn = new mysqli('http://athena.ecs.csus.edu/~cs174131/','cs174131','oojbbidr','cs174131');
+if ($conn->connect_error) {
+     die("Connection to database failed: " . $conn->connect_error);
+}
+$sql = "SELECT SSN, STUDENT_NAME FROM STUDENT";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        array_push($result_array, $row);
+    }
+}
+echo json_encode($result_array);
+$conn->close();
 ?>
