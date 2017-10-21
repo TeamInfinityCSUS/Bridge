@@ -1,6 +1,6 @@
 <?php
 //$result_array = array(); // Hash are called Associative Array in PHP
-$input = $_POST['input']; // input is an array [user, password]
+//$input = $_POST['input']; // input is an array [user, password]
 //$output = 0;
 /*
 // Data hashkey => [stringarray0, stringarray1] 
@@ -13,5 +13,5 @@ foreach($result_array as $key => $value){
   }
 }*/
 
-echo $input; // if the output is 0 log in failed
+echo json_encode(array("name"=>"John","time"=>"2pm"));  // if the output is 0 log in failed
 ?>
