@@ -26,10 +26,9 @@
 		var fail_login = 0; // iteration before log
                 var database = {1 : ["john@email.com",'password'], 2 : ["jane@email.com",'smartpassword']}; // database: array inside hash
                 if (testcase){
-		$.post( "php/test.php", { func: "getNameAndTime" }, function( data ) {
-  			console.log( data.name ); // John
-  			console.log( data.time ); // 2pm
-		}, "json");
+		$.post( "test.php", { name: "John", time: "2pm" }).done(function( data ) {
+    				alert( "Data Loaded: " + data );
+  			});
                 /*$.post("/admin/index.php").done(function(data){
 			alert("data: "+data);
 		});*/
