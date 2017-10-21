@@ -26,7 +26,7 @@
 		var fail_login = 0; // iteration before log
                 var database = {1 : ["john@email.com",'password'], 2 : ["jane@email.com",'smartpassword']}; // database: array inside hash
                 if (testcase){
-		$.post( "php/test.php", { name: "John", age: "2" }).done(function( data ) {
+		$.get( "admin/index.php", { name: "John", age: "2" }).done(function( data ) {
     				alert( "Data Loaded: " + data );
   			});
                 /*$.post("/admin/index.php").done(function(data){
