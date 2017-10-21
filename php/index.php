@@ -2,6 +2,7 @@
 $result_array = array(); // Hash are called Associative Array in PHP
 $input = $_POST['input']; // input is an array [user, password]
 $output = 0;
+/*
 // Data hashkey => [stringarray0, stringarray1] 
 $result_array[1]=['john@email.com','password'];
 
@@ -10,7 +11,7 @@ foreach($result_array as $key => $value){
     $output=$key;
     break;
   }
-}
+}*/
 
-echo $output; // if the output is 0 log in failed
+echo $input; // if the output is 0 log in failed
 ?>
