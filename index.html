@@ -19,8 +19,8 @@
 		window.location.href = 'home.html'; // move to home page   
 	    }
 	    	*/
-            var testcase = 1; // Used to test PHP database
-            $("#logInBtn").click(function(){ // click -Jquery
+            var testcase = 0; // Used to test PHP databasefunction 
+	    attemptlog(){ // click -Jquery
                 var user = $('#email').val(); // grabs object with id==email
                 var pass = $('#password').val(); // grabs object with id==password
 		var fail_login = 0; // iteration before log
@@ -49,8 +49,10 @@
                         window.location.href = 'home.html'; // move to home page    
 		    }
                 }
-            });
-              
+            }
+            $("#logInBtn").click( attemptlog; );
+	    $('#email').keyup(function(e){ if (e.keyCode === 13){ attemptlog; }; });  
+	    $('#password').keyup(function(e){ if (e.keyCode === 13){ attemptlog; }; }); 
             $("#regBtn").click(function(){ // move to register page
                 window.location.href = 'register.html';
             });
