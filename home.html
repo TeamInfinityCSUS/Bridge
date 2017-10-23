@@ -1,21 +1,5 @@
 <!-- DOCTYPE -->
 <!DOCTYPE html>
-<?php
-$videos = array( //2D Array of videos of the form (id,title,field,author,date uploaded,views,likes), will most likely be changed later
-  array(001,"Title 1","Computer Science","Bob","October 12th, 2017",500,10),
-  array(002,"Title 2","Mechanical Engineering","Mary","October 2nd,2017",250,5),
-  array(003,"Title 3","Civil Engineering","Tom","October 11th,2017",50,1),
-  array(004,"Title 4","Network Security","Walter","October 17th,2017",75,23),
-  array(005,"Title 5","Civil Engineering","Jim","October 17th,2017",125,6),
-  array(006,"Title 6","Civil Engineering","Rebecca","October 12th,2017",323,31),
-  array(007,"Title 7","Civil Engineering","Dylan","October 7th,2017",255,21),
-  array(008,"Title 8","Civil Engineering","Fred","October 5th,2017",456,32),
-  array(009,"Title 9","Civil Engineering","George","October 3rd,2017",678,32),
-  array(010,"Title 10","Civil Engineering","Jerry","October 17th,2017",111,12),
-  array(010,"Title 11","Civil Engineering","Kate","October 22th,2017",522,25),
-  array(010,"Title 12","Civil Engineering","Michael","August 11th,2017",343,22)
-);
-?>
 <html lang="en">
   <head>
     <title>Bridge: Home</title>
@@ -39,12 +23,12 @@ $videos = array( //2D Array of videos of the form (id,title,field,author,date up
     <div class="card mx-auto" style="width: 20rem;">
             <img class="card-img-top" src="..." alt="Thumbnail">
             <div class="card-block">
-              <h4 class="card-title"><?php echo $videos[0][1]; ?></h4>
+              <h4 class="card-title">Title/h4>
               <div class="card-footer text-muted">
-              <h4>By: <?php echo $videos[0][2]; ?></h4>
-              <h4>Uploaded <?php echo $videos[0][3]; ?></h4>
-              <h4><?php echo $videos[0][4]; ?> Views</h4>
-              <h4><?php echo $videos[0][5]; ?> Likes</h4>
+              <h4>By:</h4>
+              <h4>Uploaded</h4>
+              <h4>Views</h4>
+              <h4>Likes</h4>
               </div>
               </div>
               </div>
