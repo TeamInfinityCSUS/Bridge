@@ -9,55 +9,38 @@
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript">
+     <script type="text/javascript">
           $(document).ready(function(){ // Wait until page is ready
-		  /* Skips log on screen and takes you directly to the home page if already logged in
- 	    var profile_id = sessionStorage.getItem('profile_id');
-	    if (profile_id == null || profile_id == 0){
+                  /* Skips log on screen and takes you directly to the home page if already logged in
+            var profile_id = sessionStorage.getItem('profile_id');
+            if (profile_id == null || profile_id == 0){
                 profile_id = 0;
-	    }else{
-		window.location.href = 'home.html'; // move to home page   
-	    }
-	    	*/
-	    function attemptlog(){ // declare a function
-                var testcase = 0; // Used to test PHP database
-                var user = $('#email').val(); // grabs object with id==email
-                var pass = $('#password').val(); // grabs object with id==password
-		var fail_login = 0; // iteration before log
-                var database = {1 : ["john@email.com",'password'], 2 : ["jane@email.com",'smartpassword']}; // database: array inside hash
-                if (testcase){
-		$.post( "admin/index.php", { name: "John", age: "2" }).done(function( data ) {
-    			alert( "Data Loaded: " + data );
-  		});
-                /*$.post("/admin/index.php").done(function(data){
-			alert("data: "+data);
-		});*/
-                }else{
-                    for (var key in database){ // iteration
-                        if (user.toLowerCase() === database[key][0] && pass === database[key][1]){ // break if we have a username and pass match 
-			    fail_login = key; // load id as a log in key. A fail_login value of 0 means log in has failed
-			    break;
-                        }
-                    }
-		    if (fail_login === 0){ // log
-			email_label = 'Email Address' // Original label with added error label
-                        document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
-                        $('#password').val("");    // clears password if incorrect
-		    }else{
-			sessionStorage.setItem('profile_id',fail_login); // saves the profile_id in sessionStorage for the next page
-                        alert("Profile Login: " + user); // which user profile will be loaded
-                        window.location.href = 'home.html'; // move to home page    
-		    }
-                }
+            }else{
+                window.location.href = 'home.html'; // move to home page
             }
+                */
             $("#logInBtn").click( function(){ attemptlog() } ); // When log on button is press
-	    $('#email').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; });  // When enter is press inside email
-	    $('#password').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; }); // When enter is press inside email
+            $('#email').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; });  // When enter is press inside email
+            $('#password').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; }); // When enter is press inside email
             $("#regBtn").click( function(){ // When register button is press
                 window.location.href = 'register.html'; // move to register
             });
           });
+          function attemptlog(){ // declare a function
+                $.post( "php/log.php", { 'log': [$('#email').val(), $('#password').val()] }).done(function( data ) {
+                        if (data==0){ // log
+                                email_label = 'Email Address' // Original label with added error label
+                                document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
+                                $('#password').val("");    // clears password if incorrect
+                        }else{
+                                sessionStorage.setItem('profile_id',data); // saves the profile_id in sessionStorage for the next page
+                                alert("Profile Login: " + $('#email').val()); // which user profile will be loaded
+                                window.location.href = 'home.html'; // move to home page
+                        }
+                });
+            }
       </script>
+
   </head>
   <body>
     <!-- YOUR CONTENT STARTS HERE -->
