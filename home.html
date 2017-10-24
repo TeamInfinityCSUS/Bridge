@@ -20,18 +20,7 @@
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
 	<div class="container" id ="videoList">
-    <div class="card mx-auto" style="width: 20rem;">
-            <img class="card-img-top" src="..." alt="Thumbnail">
-            <div class="card-block">
-              <h4 class="card-title">Title/h4>
-              <div class="card-footer text-muted">
-              <h4>By:</h4>
-              <h4>Uploaded</h4>
-              <h4>Views</h4>
-              <h4>Likes</h4>
-              </div>
-              </div>
-              </div>
+
 	</div>
   </div>
 <!-- Profile page,Edit Profile page and Settings page, activated and swapped by buttons -->
@@ -41,13 +30,13 @@
         <div class="modal-header" id = "pHeader">
           <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
           <div class="modal-body">
-            <h2 id="pName">Bob Walter</h2>
-            <p id="pAffil">Intel Corporation</p>
-            <p id="pRole">Senior Software Engineer</p>
+            <h2 id="pName"></h2>
+            <p id="pAffil"></p>
+            <p id="pRole"></p>
       </div>
       </div>
       <div class="modal-body">
-        <div id = "Bio">Static profile info here</div>
+        <div id = "Bio"></div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="rPB">Report</button>
@@ -63,9 +52,9 @@
           <div class="modal-header" id = "pHeader">
             <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
             <div class="modal-body">
-              <h2 id="pName">Bob</h2>
-              <p id="pAffil">Intel Corporation</p>
-              <p id="pRole">Senior Software Engineer</p>
+              <h2 id="pName"></h2>
+              <p id="pAffil"></p>
+              <p id="pRole"></p>
             </div>
           </div>
         <div class="modal-body">
@@ -169,10 +158,14 @@ $(document).ready(function () {
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-    //$.get("php/home.php", {action:"cards"})
-	//.done(function(data){
-		//	$('#videoList').append(data);
-		//	});
+	$.post("php/home.php", {action:"init"})
+	.done(function(data){
+			document.getElementById("pName").innerHTML = data['username'];
+			});
+    $.post("php/home.php", {action:"cards"})
+	.done(function(data){
+			$('#videoList').append(data);
+			});
 
 		});
 
