@@ -9,24 +9,7 @@
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
   integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <! TEST >
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript">
-      $(document).ready(function(){
-        /* This function sets the input fields to visible when the
-            Student account item is selected from the dropdown menu. */
-        $("#stdtAcct").click(function(){
-          var studentIDInput = document.getElementById("stdtIDInpt");
-          var studentButton = document.getElementById("stdtBtn");
-            /*  */
-            studentIDInput.style="display: block";
-            studentIDInput.style="visibility: visible";
-            //studentButton.style.visibility= 'visible';
-            studentButton.style='display: block';
-        });
-      });
-  </script>
-  <! TEST >
+
   </head>
   <h1>Bridge</h1>
   <body>
@@ -37,26 +20,79 @@
       <!-- Start of the Login input block -->
     <div class="accountForm"
   	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="loginBlock">
-      <label class ="label" for="acctDropBtn" id="acctTypeLbl">Select your account type</label>
-    <div class="dropdown">
-      <button id="acctDropBtn" class="btn btn-primary btn-sm dropdown-toggle"
-      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Choose the account type.
-      </button>
-      <div class="dropdown-menu" aria-labelledby="dropButton">
-      <a class="dropdown-item" id="studentAcct" href="#">Student</a>
-      <a class="dropdown-item" id="bAdminAcct" href="#">Business Administrator</a>
-      <a class="dropdown-item" id="creatorAcct" href="#">Creator</a>
-      </div> <!--  -->
-    </div> <!-- Dropdown Menu -->
+<div>
+  <label class ="label" for="btn-group" id="acctTypeLbl">Select your account type</label>
+</div>
+    <!-- Radio buttons control what content is displayed -->
+    <div class="btn-group" data-toggle="buttons" >
+      <label class="btn btn-primary" >
+        <input type="radio" name="options" onchange="acctSel()" id="studentOption" value="student" checked> Student
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" onchange="acctSel()" id="creatorOption" value="creator"> Creator
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" name="options" onchange="acctSel()" id="bAdminOption" value="badmin"> Business Admin
+      </label>
+      <label class="errorMessage" <p id="errorText"></p><label>
+    </div> <!-- Radio Buttons -->
 
-    <!-- Hidden Container -->
-    <div class="hiddenContainer" id="StudentReg"
+
+    <!-- Hidden Container until Student is selected -->
+    <div class="container shidden" id="studentReg" >
     <!--This is the Student ID input field-->
     <div class="container studentID" id="stdtIDInpt">
     <label class = "label" for="studentID">Student ID</label>
-    <input type="text" class="form-control" id="studentID" name="studentID">
+    <input type="text" class="form-control" name="studentID">
     </div> <!-- Student ID -->
+    <!--This is the UserName input field-->
+    <div class="container uName" id="uNameInpt">
+    <label class = "label" for="uName">Username</label>
+    <input type="text" class="form-control" name="uName">
+    </div> <!-- Username -->
+    <!--This is the Password input field-->
+    <div class="container password" id="pwInpt">
+    <label class = "label" for="password">Password</label>
+    <input type="password" class="form-control" name="password">
+    </div> <!-- Password -->
+    <!--This is the Confirm Password input field-->
+    <div class="container cPassword" id="cpwInpt">
+    <label class = "label" for="password">Confirm Password</label>
+    <input type="password" class="form-control" name="cPassword">
+    </div> <!-- Confirm Password -->
+    <!--This is the Email input field-->
+    <div class="container email">
+    <label class = "label" for="email">Email Address</label>
+    <input type="email" class="form-control" name="email">
+    </div> <!-- Email Address -->
+    <!--This is the Confirm Email input field-->
+    <div class="container cEmail">
+    <label class = "label" for="email">Confirm Email Address</label>
+    <input type="email" class="form-control" name="cEmail">
+    </div> <!-- Confirm Email Address -->
+    <div class="dropdown">
+      <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Choose your field of Interest
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropButton">
+      <a class="dropdown-item" href="#">Computer Science</a>
+      <a class="dropdown-item" href="#">Civil Engineering</a>
+      <a class="dropdown-item" href="#">Mechanical Engineering</a>
+      </div>
+    </div>
+    <div class="container" id="stdtBtn">
+      <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
+    </div> <!-- Student Continue Button -->
+  </div> <!-- Hidden container: StudentReg -->
+
+    <!-- Hidden Container until Creator is selected -->
+    <div class="container chidden" id="creatorReg" >
+      <!--This is the Company Name input field-->
+      <div class="container companyName" id="companyName">
+      <label class = "label" for="companyName">Company Name</label>
+      <input type="text" class="form-control" id="compName" name="companyName">
+    </div> <!-- Company Name -->
     <!--This is the UserName input field-->
     <div class="container uName" id="uNameInpt">
     <label class = "label" for="uName">Username</label>
@@ -82,20 +118,74 @@
     <label class = "label" for="email">Confirm Email Address</label>
     <input type="email" class="form-control" id="cEmail" name="cEmail">
     </div> <!-- Confirm Email Address -->
+    <div class="dropdown">
+      <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Choose your field of Interest
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropButton">
+      <a class="dropdown-item" href="#">Computer Science</a>
+      <a class="dropdown-item" href="#">Civil Engineering</a>
+      <a class="dropdown-item" href="#">Mechanical Engineering</a>
+      </div>
+    </div>
     <div class="container" id="stdtBtn">
-    <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
-    </div> <!-- Student Continue Button -->
-    </div> <!-- Hidden conatiner -->
+      <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
+    </div> <!-- Creator Continue Button -->
+  </div> <!-- Hidden container: CreatorReg -->
+
+    <!-- Hidden Container until Business Admin is selected -->
+    <div class="container bhidden" id="bAdminReg" >
+    <!--This is the Company Name input field-->
+    <div class="container companyName" id="companyName">
+    <label class = "label" for="companyName">Company Name</label>
+    <input type="text" class="form-control" id="compName" name="companyName">
+  </div> <!-- Company Name -->
+    <!--This is the UserName input field-->
+    <div class="container uName" id="uNameInpt">
+    <label class = "label" for="uName">Username</label>
+    <input type="text" class="form-control" id="uName" name="uName">
+    </div> <!-- Username -->
+    <!--This is the Password input field-->
+    <div class="container password" id="pwInpt">
+    <label class = "label" for="password">Password</label>
+    <input type="password" class="form-control" id="password" name="password">
+    </div> <!-- Password -->
+    <!--This is the Confirm Password input field-->
+    <div class="container cPassword" id="cpwInpt">
+    <label class = "label" for="password">Confirm Password</label>
+    <input type="password" class="form-control" id="cpassword" name="cPassword">
+    </div> <!-- Confirm Password -->
+    <!--This is the Email input field-->
+    <div class="container email">
+    <label class = "label" for="email">Email Address</label>
+    <input type="email" class="form-control" id="email" name="email">
+    </div> <!-- Email Address -->
+    <!--This is the Confirm Email input field-->
+    <div class="container cEmail">
+    <label class = "label" for="email">Confirm Email Address</label>
+    <input type="email" class="form-control" id="cEmail" name="cEmail">
+    </div> <!-- Confirm Email Address -->
+    <div class="dropdown">
+      <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Choose your field of Interest
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropButton">
+      <a class="dropdown-item" href="#">Computer Science</a>
+      <a class="dropdown-item" href="#">Civil Engineering</a>
+      <a class="dropdown-item" href="#">Mechanical Engineering</a>
+      </div>
+    </div>
+    <div class="container" id="bAdminBtn">
+      <button type="submit" id="bAdminCbtn" class="btn btn-success btn-sm">Continue</button>
+    </div> <!-- bAdmin Continue Button -->
+  </div> <!-- Hidden conatiner: bAdminReg -->
   </div> <!-- Registration Block -->
 
   </div> <!-- Account Form -->
+</div> <!-- Login Block -->
 
-
-
-    <div></div>
-  	<button type="submit" class="btn btn-success btn-sm">Continue</button>
-  	</div>
-  	</div>
   	<style>
   	h1{
   		background-color: #1A7CBC;
@@ -105,23 +195,23 @@
       margin: auto;
   	}
     /*Overides the Bootstrap settings*/
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited,
-      .btn-primary:focus{
+    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
       background-color: #1A7CBC !important;
       width: auto;
       margin-top: auto;
       margin-left: auto;
     }
-    .btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited,
-      .btn-success:focus{
-
+    .shidden{
+      display: none;
     }
-    .form-control, .form-control:active, .form-control:hover, .form-control:visited,
-      .form-control:focus{
-
+    .chidden{
+      display: none;
     }
-    .hiddenContainer{
-
+    .bhidden{
+      display: none;
+    }
+    .blue{
+      background-color:#5B5B5B;
     }
   	</style>
       <!-- JavaScript: placed at the end of the document so the pages load faster -->
@@ -139,5 +229,41 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
     integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+
+      function acctSel() {
+        var stReg = document.getElementById("studentReg");
+        var crReg = document.getElementById("creatorReg");
+        var baReg = document.getElementById("bAdminReg");
+        var stOpt = document.getElementById("studentOption");
+        var crOpt = document.getElementById("creatorOption");
+        var baOpt = document.getElementById("bAdminOption");
+        var stSel = document.getElementById("studentOption").checked;
+        var crSel = document.getElementById("creatorOption").checked;
+        var baSel = document.getElementById("bAdminOption").checked;
+        if(stSel) {
+          stOpt.checked = false;
+          baOpt.checked = false;
+          stReg.style.display= "block";
+          crReg.style.display= "none";
+          baReg.style.display= "none";
+        }else if(crSel) {
+          stSel.checked = false;
+          baSel.checked = false;
+          stReg.style.display= "none";
+          crReg.style.display= "block";
+          baReg.style.display= "none";
+        }else {
+          stSel.checked = false;
+          stSel.checked = false;
+          stReg.style.display= "none";
+          crReg.style.display= "none";
+          baReg.style.display= "block";
+        }
+      }
+
+    </script>
     </body>
   </html>
