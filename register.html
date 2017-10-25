@@ -35,7 +35,7 @@
       <!-- This bit helps center the login Area (Left side)-->
 	  <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
       <!-- Start of the Login input block -->
-      <div class="accountForm"
+    <div class="accountForm"
   	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="loginBlock">
       <label class ="label" for="acctDropBtn" id="acctTypeLbl">Select your account type</label>
     <div class="dropdown">
@@ -49,16 +49,19 @@
       <a class="dropdown-item" id="creatorAcct" href="#">Creator</a>
       </div> <!--  -->
     </div> <!-- Dropdown Menu -->
+
+    <!-- Hidden Container -->
+    <div class="hiddenContainer" id="StudentReg"
     <!--This is the Student ID input field-->
     <div class="container studentID" id="stdtIDInpt">
     <label class = "label" for="studentID">Student ID</label>
     <input type="text" class="form-control" id="studentID" name="studentID">
-  </div> <!-- Student ID -->
+    </div> <!-- Student ID -->
     <!--This is the UserName input field-->
     <div class="container uName" id="uNameInpt">
     <label class = "label" for="uName">Username</label>
     <input type="text" class="form-control" id="uName" name="uName">
-  </div> <!-- Username -->
+    </div> <!-- Username -->
     <!--This is the Password input field-->
     <div class="container password" id="pwInpt">
     <label class = "label" for="password">Password</label>
@@ -68,46 +71,25 @@
     <div class="container cPassword" id="cpwInpt">
     <label class = "label" for="password">Confirm Password</label>
     <input type="password" class="form-control" id="cpassword" name="cPassword">
-  </div> <!-- Confirm Password -->
-      <a class="dropdown-item" href="#">Student</a>
-      <a class="dropdown-item" href="#">Contributor</a>
-      <a class="dropdown-item" href="#">Administrator</a>
-      </div>
-    </div>
-      <!--This is the UserName input field-->
-    <div class="container uName" style="visibility: hidden">
-    <label class = "label" for="uName">Username</label>
-    <input type="text" class="form-control" id="uName" name="uName">
-    </div>
-    <!--This is the Password input field-->
-    <div class="container password">
-    <label class = "label" for="password">Password</label>
-    <input type="password" class="form-control" id="password" name="password">
-    </div>
-    <!--This is the Confirm Password input field-->
-    <div class="container cPassword">
-    <label class = "label" for="password">Confirm Password</label>
-    <input type="password" class="form-control" id="cpassword" name="cpassword">
-    </div>
+    </div> <!-- Confirm Password -->
     <!--This is the Email input field-->
     <div class="container email">
     <label class = "label" for="email">Email Address</label>
     <input type="email" class="form-control" id="email" name="email">
     </div> <!-- Email Address -->
-    </div>
     <!--This is the Confirm Email input field-->
     <div class="container cEmail">
     <label class = "label" for="email">Confirm Email Address</label>
     <input type="email" class="form-control" id="cEmail" name="cEmail">
-  </div> <!-- Confirm Email Address -->
+    </div> <!-- Confirm Email Address -->
     <div class="container" id="stdtBtn">
     <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
-  </div> <!-- Student Continue Button -->
+    </div> <!-- Student Continue Button -->
+    </div> <!-- Hidden conatiner -->
   </div> <!-- Registration Block -->
 
   </div> <!-- Account Form -->
 
-    </div>
 
 
     <div></div>
@@ -137,10 +119,10 @@
     .form-control, .form-control:active, .form-control:hover, .form-control:visited,
       .form-control:focus{
 
-      }
-      .hiddenContainer{
+    }
+    .hiddenContainer{
 
-      }
+    }
   	</style>
       <!-- JavaScript: placed at the end of the document so the pages load faster -->
   		<!-- jQuery library -->
