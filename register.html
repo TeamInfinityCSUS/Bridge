@@ -34,12 +34,11 @@
       <label class="btn btn-primary">
         <input type="radio" name="options" onchange="acctSel()" id="bAdminOption" value="badmin"> Business Admin
       </label>
-      <label class="errorMessage" <p id="errorText"></p><label>
     </div> <!-- Radio Buttons -->
 
 
     <!-- Hidden Container until Student is selected -->
-    <div class="container shidden" id="studentReg" >
+    <div class="container" id="studentReg" >
     <!--This is the Student ID input field-->
     <div class="container studentID" id="stdtIDInpt">
     <label class = "label" for="studentID">Student ID</label>
@@ -70,12 +69,25 @@
     <label class = "label" for="email">Confirm Email Address</label>
     <input type="email" class="form-control" name="cEmail">
     </div> <!-- Confirm Email Address -->
-    <div class="dropdown">
+    <div class="dropdown" id="primaryCareer">
       <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Choose your field of Interest
+      Choose your primary field of interest
       </button>
       <div class="dropdown-menu" aria-labelledby="dropButton">
+      <a class="dropdown-item" href="#">Exploring</a>
+      <a class="dropdown-item" href="#">Computer Science</a>
+      <a class="dropdown-item" href="#">Civil Engineering</a>
+      <a class="dropdown-item" href="#">Mechanical Engineering</a>
+      </div>
+    </div>
+    <div class="dropdown" id="secondaryCareer">
+      <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Choose your secondary field of interest
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropButton">
+      <a class="dropdown-item" href="#">Exploring</a>
       <a class="dropdown-item" href="#">Computer Science</a>
       <a class="dropdown-item" href="#">Civil Engineering</a>
       <a class="dropdown-item" href="#">Mechanical Engineering</a>
@@ -129,6 +141,11 @@
       <a class="dropdown-item" href="#">Mechanical Engineering</a>
       </div>
     </div>
+    <!--This is the UserName input field-->
+    <div class="container bauName" id="cbauNameInpt">
+    <label class = "label" for="bauName">Username of Business Admin</label>
+    <input type="text" class="form-control" id="bauName" name="bauName">
+    </div> <!-- Username -->
     <div class="container" id="stdtBtn">
       <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
     </div> <!-- Creator Continue Button -->
@@ -177,6 +194,7 @@
       <a class="dropdown-item" href="#">Mechanical Engineering</a>
       </div>
     </div>
+
     <div class="container" id="bAdminBtn">
       <button type="submit" id="bAdminCbtn" class="btn btn-success btn-sm">Continue</button>
     </div> <!-- bAdmin Continue Button -->
@@ -200,9 +218,6 @@
       width: auto;
       margin-top: auto;
       margin-left: auto;
-    }
-    .shidden{
-      display: none;
     }
     .chidden{
       display: none;
@@ -230,40 +245,40 @@
     integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
 
+
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-
-      function acctSel() {
-        var stReg = document.getElementById("studentReg");
-        var crReg = document.getElementById("creatorReg");
-        var baReg = document.getElementById("bAdminReg");
-        var stOpt = document.getElementById("studentOption");
-        var crOpt = document.getElementById("creatorOption");
-        var baOpt = document.getElementById("bAdminOption");
-        var stSel = document.getElementById("studentOption").checked;
-        var crSel = document.getElementById("creatorOption").checked;
-        var baSel = document.getElementById("bAdminOption").checked;
-        if(stSel) {
-          stOpt.checked = false;
-          baOpt.checked = false;
-          stReg.style.display= "block";
-          crReg.style.display= "none";
-          baReg.style.display= "none";
-        }else if(crSel) {
-          stSel.checked = false;
-          baSel.checked = false;
-          stReg.style.display= "none";
-          crReg.style.display= "block";
-          baReg.style.display= "none";
-        }else {
-          stSel.checked = false;
-          stSel.checked = false;
-          stReg.style.display= "none";
-          crReg.style.display= "none";
-          baReg.style.display= "block";
-        }
-      }
-
+    <script type="text/javascript">
+          function acctSel() {
+            var stReg = document.getElementById("studentReg");
+            var crReg = document.getElementById("creatorReg");
+            var baReg = document.getElementById("bAdminReg");
+            var stOpt = document.getElementById("studentOption");
+            var crOpt = document.getElementById("creatorOption");
+            var baOpt = document.getElementById("bAdminOption");
+            var stSel = document.getElementById("studentOption").checked;
+            var crSel = document.getElementById("creatorOption").checked;
+            var baSel = document.getElementById("bAdminOption").checked;
+            if(stSel) {
+              stOpt.checked = false;
+              baOpt.checked = false;
+              stReg.style.display= "block";
+              crReg.style.display= "none";
+              baReg.style.display= "none";
+            }else if(crSel) {
+              stSel.checked = false;
+              baSel.checked = false;
+              stReg.style.display= "none";
+              crReg.style.display= "block";
+              baReg.style.display= "none";
+            }else {
+              stSel.checked = false;
+              stSel.checked = false;
+              stReg.style.display= "none";
+              crReg.style.display= "none";
+              baReg.style.display= "block";
+            }
+          }
     </script>
+
     </body>
   </html>

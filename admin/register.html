@@ -9,24 +9,7 @@
     <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
   integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <! TEST >
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript">
-      $(document).ready(function(){
-        /* This function sets the input fields to visible when the
-            Student account item is selected from the dropdown menu. */
-        $("#stdtAcct").click(function(){
-          var studentIDInput = document.getElementById("stdtIDInpt");
-          var studentButton = document.getElementById("stdtBtn");
-            /*  */
-            studentIDInput.style="display: block";
-            studentIDInput.style="visibility: visible";
-            //studentButton.style.visibility= 'visible';
-            studentButton.style='display: block';
-        });
-      });
-  </script>
-  <! TEST >
+
   </head>
   <h1>Bridge</h1>
   <body>
@@ -44,7 +27,6 @@
       Choose the account type.
       </button>
       <div class="dropdown-menu" aria-labelledby="dropButton">
-<<<<<<< HEAD
       <a class="dropdown-item" id="studentAcct" href="#">Student</a>
       <a class="dropdown-item" id="bAdminAcct" href="#">Business Administrator</a>
       <a class="dropdown-item" id="creatorAcct" href="#">Creator</a>
@@ -70,7 +52,6 @@
     <label class = "label" for="password">Confirm Password</label>
     <input type="password" class="form-control" id="cpassword" name="cPassword">
   </div> <!-- Confirm Password -->
-=======
       <a class="dropdown-item" href="#">Student</a>
       <a class="dropdown-item" href="#">Contributor</a>
       <a class="dropdown-item" href="#">Administrator</a>
@@ -91,21 +72,16 @@
     <label class = "label" for="password">Confirm Password</label>
     <input type="password" class="form-control" id="cpassword" name="cpassword">
     </div>
->>>>>>> afdb8ba12caec778483e5a4d2e9069ca348c787d
     <!--This is the Email input field-->
     <div class="container email">
     <label class = "label" for="email">Email Address</label>
     <input type="email" class="form-control" id="email" name="email">
-<<<<<<< HEAD
     </div> <!-- Email Address -->
-=======
     </div>
->>>>>>> afdb8ba12caec778483e5a4d2e9069ca348c787d
     <!--This is the Confirm Email input field-->
     <div class="container cEmail">
     <label class = "label" for="email">Confirm Email Address</label>
     <input type="email" class="form-control" id="cEmail" name="cEmail">
-<<<<<<< HEAD
   </div> <!-- Confirm Email Address -->
     <div class="container" id="stdtBtn">
     <button type="submit" id="stdtCbtn" class="btn btn-success btn-sm">Continue</button>
@@ -113,8 +89,6 @@
   </div> <!-- Registration Block -->
 
   </div> <!-- Account Form -->
-
-=======
     </div>
 
 
@@ -122,7 +96,6 @@
   	<button type="submit" class="btn btn-success btn-sm">Continue</button>
   	</div>
   	</div>
->>>>>>> afdb8ba12caec778483e5a4d2e9069ca348c787d
   	<style>
   	h1{
   		background-color: #494949;
@@ -165,5 +138,24 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
     integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
+
+    <! TEST >
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+          /* This function sets the input fields to visible when the
+              Student account item is selected from the dropdown menu. */
+          $("#stdtAcct").click(function(){
+            var studentIDInput = document.getElementById("stdtIDInpt");
+            var studentButton = document.getElementById("stdtBtn");
+              /*  */
+              studentIDInput.style="display: block";
+              studentIDInput.style="visibility: visible";
+              //studentButton.style.visibility= 'visible';
+              studentButton.style='display: block';
+          });
+        });
+    </script>
+    <! TEST >
     </body>
   </html>
