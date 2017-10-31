@@ -31,63 +31,65 @@
 
       <!-- Hidden Container until Student is selected -->
       <div class="container hidden" id="studentReg" >
-        <!--This is the Student ID input field-->
-        <div class="container studentID" id="stdtIDInpt">
-          <label class = "label" for="studentID">Student ID</label>
-          <input type="text" class="form-control" name="studentID">
-        </div> <!-- Student ID -->
-        <!--This is the UserName input field-->
-        <div class="container uName" id="uNameInpt">
-          <label class = "label" for="uName">Username</label>
-          <input type="text" class="form-control" name="uName">
-        </div> <!-- Username -->
-        <!--This is the Password input field-->
-        <div class="container password" id="pwInpt">
-          <label class = "label" for="password">Password</label>
-          <input type="password" class="form-control" name="password">
-        </div> <!-- Password -->
-        <!--This is the Confirm Password input field-->
-        <div class="container cPassword" id="cpwInpt">
-          <label class = "label" for="password">Confirm Password</label>
-          <input type="password" class="form-control" name="cPassword">
-        </div> <!-- Confirm Password -->
-        <!--This is the Email input field-->
-        <div class="container email">
-          <label class = "label" for="email">Email Address</label>
-          <input type="email" class="form-control" name="email">
-        </div> <!-- Email Address -->
-        <!--This is the Confirm Email input field-->
-        <div class="container cEmail">
-          <label class = "label" for="email">Confirm Email Address</label>
-          <input type="email" class="form-control" name="cEmail">
-        </div> <!-- Confirm Email Address -->
-        <div class="dropdown" id="primaryCareer">
-          <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose your primary field of interest
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropButton">
+        <form method="post" action="php/register.php">
+          <!--This is the Student ID input field-->
+          <div class="container studentID" id="stdtIDInpt">
+            <label class = "label" for="studentID">Student ID</label>
+            <input type="text" class="form-control" name="studentID">
+          </div> <!-- Student ID -->
+          <!--This is the UserName input field-->
+          <div class="container uName" id="uNameInpt">
+            <label class = "label" for="uName">Username</label>
+            <input type="text" class="form-control" name="uName">
+          </div> <!-- Username -->
+          <!--This is the Password input field-->
+          <div class="container password" id="pwInpt">
+            <label class = "label" for="password">Password</label>
+            <input type="password" class="form-control" name="password">
+          </div> <!-- Password -->
+          <!--This is the Confirm Password input field-->
+          <div class="container cPassword" id="cpwInpt">
+            <label class = "label" for="password">Confirm Password</label>
+            <input type="password" class="form-control" name="cPassword">
+          </div> <!-- Confirm Password -->
+          <!--This is the Email input field-->
+          <div class="container email">
+            <label class = "label" for="email">Email Address</label>
+            <input type="email" class="form-control" name="email">
+          </div> <!-- Email Address -->
+          <!--This is the Confirm Email input field-->
+          <div class="container cEmail">
+            <label class = "label" for="email">Confirm Email Address</label>
+            <input type="email" class="form-control" name="cEmail">
+          </div> <!-- Confirm Email Address -->
+          <div class="dropdown" id="primaryCareer">
+            <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose your primary field of interest
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropButton">
+              <a class="dropdown-item" href="#">Exploring</a>
+              <a class="dropdown-item" href="#">Computer Science</a>
+              <a class="dropdown-item" href="#">Civil Engineering</a>
+              <a class="dropdown-item" href="#">Mechanical Engineering</a>
+            </div>
+          </div>
+          <div class="dropdown" id="secondaryCareer">
+            <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Choose your secondary field of interest
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropButton">
             <a class="dropdown-item" href="#">Exploring</a>
             <a class="dropdown-item" href="#">Computer Science</a>
             <a class="dropdown-item" href="#">Civil Engineering</a>
             <a class="dropdown-item" href="#">Mechanical Engineering</a>
+            </div>
           </div>
-        </div>
-        <div class="dropdown" id="secondaryCareer">
-          <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose your secondary field of interest
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropButton">
-          <a class="dropdown-item" href="#">Exploring</a>
-          <a class="dropdown-item" href="#">Computer Science</a>
-          <a class="dropdown-item" href="#">Civil Engineering</a>
-          <a class="dropdown-item" href="#">Mechanical Engineering</a>
-          </div>
-        </div>
-        <div class="container" id="stBtn">
-          <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
-        </div> <!-- Student Continue Button -->
+          <div class="container" id="stBtn">
+            <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
+          </div> <!-- Student Continue Button -->
+        </form>
       </div> <!-- Hidden container: StudentReg -->
 
       <!-- Hidden Container until Creator is selected -->
