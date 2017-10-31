@@ -13,9 +13,10 @@
     <h1> <!--Heading, includes Logo, Profile button, and other menu buttons -->
       Bridge
       <img src="images/defaultavatar.png" height = "40" width = "40" id = "hPic" class="rounded float-right" data-toggle = "modal" data-target="#Profile"><br />
-    <button type="button" class="btn blue btn-sm">Internships</button>
-    <button type="button" class="btn blue btn-sm">Fab Five</button>
-    <button type="button" id = "aButton" class="btn blue btn-sm" data-toggle = "modal" data-target = "#aSet">Admin</button>
+	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+    <button type="button" id ="etern" class="btn blue btn-sm">Eternships</button>
+    <button type="button" id ="f5" class="btn blue btn-sm">Fab Five</button>
+	<button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
@@ -147,7 +148,11 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!--JQuery used for AJAX (communication between PHP and Javascript) -->
 <script> //Javascript for the page here
+var user;
 $(document).ready(function () {
+    $('#hPic').click(function onchange() { //click on to open own profile window
+          $('#pName').append(user[0].first_name + " " + user[0].last_name);
+      });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
           $('#newProfile').val($('#Bio').html());
       });
@@ -160,7 +165,14 @@ $(document).ready(function () {
       });
 	$.post("php/home.php", {action:"init"})
 	.done(function(data){
-			document.getElementById("pName").innerHTML = data['username'];
+			user = JSON.parse(data);
+			if(user[0].account_type = 'student'){
+				$('badmin').removeClass("btn");
+				$('mcon').removeClass("button");
+			} 
+			if(user[0].account_type = "Creator"){
+				$('badmin').hide();
+			} 
 			});
     $.post("php/home.php", {action:"cards"})
 	.done(function(data){
