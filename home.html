@@ -211,6 +211,16 @@ $(document).ready(function () {
 			} 
 			else if(user[0].account_type == "Creator"){
 			    $("#creatorB").show();
+		    document.getElementById("Bio").innerHTML = user[0].about_us;
+			if(user[0].account_type = 'Student'){ //change page based on user type (hide options, tweak profile, etc.)
+				$('#badmin').hide();
+				$('#mcon').hide();
+			} 
+			if(user[0].account_type = "Creator"){
+				$('#badmin').hide();
+				$('#etern').hide();
+				$('#f5').hide();
+>>>>>>> 132ac050967ae592bacd6ec511de42169372d67f
 			} 
 			});
 			
