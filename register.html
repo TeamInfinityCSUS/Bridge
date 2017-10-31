@@ -23,15 +23,10 @@
       <div>
         <label class ="label" for="btn-group">Select your account type</label>
       </div>
-      <!-- Radio buttons control what content is displayed -->
-      <div class="btn-group" data-toggle="buttons" id="acctSelect">
-        <label class="btn btn-primary" >
-          <input type="radio" name="options"  id="studentOption" value="student"> Student
-        </label>
-        <label class="btn btn-primary">
-          <input type="radio" name="options"  id="creatorOption" value="creator"> Creator
-        </label>
-      </div> <!-- Radio Buttons -->
+        <!-- Buttons control what content is displayed -->
+        <button type="submit" id="studentOption" class="btn btn-primary">Student</button>
+        <button type="submit" id="creatorOption" class="btn btn-primary">Creator</button>
+      </div> <!-- Account Select Buttons -->
 
 
       <!-- Hidden Container until Student is selected -->
@@ -227,20 +222,14 @@
         */
 
 
+        $("#studentOption").click(function onchange() {
+          $("#creatorReg").hide();
+          $("#studentReg").show();
+        });
 
-        $("#acctSelect").click(function onchange() {
-          var stu = $("#studentOption").is(":checked");
-          var cre = $("#creatorOption").is(":checked");
-          if(stu) {
-            console.log('inside student option');
-            $("#creatorReg").hide();
-            $("#studentReg").show();
-          } else if(cre) {
-            $("#studentReg").hide();
-            $("#creatorReg").show();
-          }
-
-          console.log('inside function');
+        $("#creatorOption").click(function onchange() {
+          $("#studentReg").hide();
+          $("#creatorReg").show();
         });
         /*
         //Sends the information of the Student fields to the database
