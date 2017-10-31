@@ -13,10 +13,19 @@
     <h1> <!--Heading, includes Logo, Profile button, and other menu buttons -->
       Bridge
       <img src="images/defaultavatar.png" height = "40" width = "40" id = "hPic" class="rounded float-right" data-toggle = "modal" data-target="#Profile"><br />
-	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
-    <button type="button" id ="etern" class="btn blue btn-sm">Eternships</button>
+	<div id = "studentB" class = "container hidden"> <!-- separating button groups by user type, will determine which one to show -->
+	<button type="button" id ="etern" class="btn blue btn-sm">Eternships</button>
     <button type="button" id ="f5" class="btn blue btn-sm">Fab Five</button>
-	<button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
+	</div>
+	
+	<div id = "creatorB" class = "container hidden">
+	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+	</div>
+	
+	<div id = "badminB" class = "container hidden">
+	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+    <button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
+	</div>
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
@@ -32,34 +41,55 @@
           <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
           <div class="modal-body">
             <h2 id="pName"></h2>
-            <p id="pAffil"></p>
-            <p id="pRole"></p>
       </div>
       </div>
       <div class="modal-body">
         <div id = "Bio"></div>
+		<h2 id = "pAffil"></h2>
+		<p id= "group"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit</button>
+      </div>
+    </div>
+    </div>
+    </div>
+	
+	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header" id = "pHeader">
+          <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
+          <div class="modal-body">
+            <h2 id="poName"></h2>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div id = "oBio"></div>
+		<h2 id = "opAffil"></h2>
+		<p id= "ogroup"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" id="rPB">Report</button>
-        <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit Profile</button>
+        <button type="button" class="btn blue" id="fPB" data-toggle ="modal" data-target = "#eProfile">Follow</button>
       </div>
     </div>
     </div>
     </div>
 
-    <div class="modal fade" id="eProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal fade" id="eProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!--Modal opened when user wants to edit profile, same as self profile but with editable bio -->
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" id = "pHeader">
             <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
             <div class="modal-body">
-              <h2 id="pName"></h2>
-              <p id="pAffil"></p>
-              <p id="pRole"></p>
+              <h2 id="peName"></h2>
             </div>
           </div>
         <div class="modal-body">
-          <input class="text input-lg" id ="newProfile"></input>
+          <input class="text input-lg" id ="newBio"></input>
+		<h2 id = "peAffil"><br /><br /></h2>
+		<p id= "egroup"></p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn blue" id ="sPB" data-dismiss="modal" data-toggle ="modal" data-target = "#Profile">Save</button>
@@ -73,7 +103,7 @@
           <div class="modal-content">
             <div class="modal-header">
             <div class="modal-footer">
-              <button type="button" class="btn blue" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button><br />
+              <button type="button" class="btn blue"  id="cFieldB" data-dismiss="modal" data-toggle ="modal" data-target = "eProfile">Change Field</button><br />
               <button type="button" class="btn blue" id="logOutB" data-dismiss="modal">Log Out</button>
           </div>
           </div>
@@ -151,30 +181,40 @@
 var user;
 $(document).ready(function () {
     $('#hPic').click(function onchange() { //click on to open own profile window
-          $('#pName').append(user[0].first_name + " " + user[0].last_name);
+		  document.getElementById("newBio").val("");
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
-          $('#newProfile').val($('#Bio').html());
+          document.getElementById("newBio").innerHTML = " "
       });
 
-    $('#sPB').click(function onchange() { //replace old profile with new one, primitive
-          $('#Bio').html($('#newProfile').val());
+    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
+		  var newB = document.getElementById("newBio").text();
+          $.post("php/home.php", {action:"eProfile", newBio:newB})
+			.done(function(data){ //update profile live when finished
+			document.getElementById("Bio").innerHTML = user[0].about_us;
+			});
+
       });
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
-	$.post("php/home.php", {action:"init"})
+	$.post("php/home.php", {action:'init'}) //initial setup, runs on startup
 	.done(function(data){
-			user = JSON.parse(data);
-			if(user[0].account_type = 'student'){
-				$('badmin').removeClass("btn");
-				$('mcon').removeClass("button");
+			user = JSON.parse(data); //fetch self information
+			document.getElementById("pName").innerHTML = user[0].first_name + " " + user[0].last_name; //fill in self profile with information
+			document.getElementById("peName").innerHTML = user[0].first_name + " " + user[0].last_name;
+			document.getElementById("pAffil").innerHTML = "Company";
+			document.getElementById("peAffil").innerHTML = "Company";
+		    document.getElementById("Bio").innerHTML = user[0].about_us;
+			if(user[0].account_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
+				$('#studentB').show();
 			} 
-			if(user[0].account_type = "Creator"){
-				$('badmin').hide();
+			else if(user[0].account_type == "Creator"){
+			    $("#creatorB").show();
 			} 
 			});
-    $.post("php/home.php", {action:"cards"})
+			
+    $.post("php/home.php", {action:'cards'}) //generates cards
 	.done(function(data){
 			$('#videoList').append(data);
 			});
