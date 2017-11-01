@@ -17,11 +17,19 @@
 	<button type="button" id ="etern" class="btn blue btn-sm">Eternships</button>
     <button type="button" id ="f5" class="btn blue btn-sm">Fab Five</button>
 	</div>
+<<<<<<< HEAD
+	
+	<div id = "creatorB" class = "container hidden">
+	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+	</div>
+	
+=======
 
 	<div id = "creatorB" class = "container hidden">
 	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
 	</div>
 
+>>>>>>> 0809d0912147d59b38a53d5f2a44626313186e28
 	<div id = "badminB" class = "container hidden">
 	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
     <button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
@@ -54,7 +62,11 @@
     </div>
     </div>
     </div>
+<<<<<<< HEAD
+	
+=======
 
+>>>>>>> 0809d0912147d59b38a53d5f2a44626313186e28
 	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -181,6 +193,17 @@
 var user;
 $(document).ready(function () {
     $('#hPic').click(function onchange() { //click on to open own profile window
+<<<<<<< HEAD
+		  $("#newBio").val("");
+      });
+    $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
+          $("#newBio").text($("#bio").text());
+      });
+
+    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
+		  var newB = $("#newBio").text();
+          $.post("php/home.php", {action:"eProfile", newBio:newB})
+=======
 		  document.getElementById("Bio").innerHTML = user[0].about_us;
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
@@ -190,6 +213,7 @@ $(document).ready(function () {
     $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = document.getElementById("newBio").text();
       $.post("php/home.php", {action:"eProfile", newBio:newB})
+>>>>>>> 0809d0912147d59b38a53d5f2a44626313186e28
 			.done(function(data){ //update profile live when finished
 			document.getElementById("Bio").innerHTML = user[0].about_us;
 			});
@@ -205,6 +229,17 @@ $(document).ready(function () {
 			document.getElementById("peName").innerHTML = user[0].first_name + " " + user[0].last_name;
 			document.getElementById("pAffil").innerHTML = "Company";
 			document.getElementById("peAffil").innerHTML = "Company";
+<<<<<<< HEAD
+		    document.getElementById("Bio").innerHTML = user[0].about_us;
+			if(user[0].account_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
+				$('#studentB').show();
+			} 
+			else if(user[0].account_type == "Creator"){
+			    $("#creatorB").show();
+			} 
+			});
+			
+=======
 		  document.getElementById("Bio").innerHTML = user[0].about_us;
 			if(user[0].account_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
 				$('#studentB').show();
@@ -223,6 +258,7 @@ $(document).ready(function () {
 			}
 			});
 
+>>>>>>> 0809d0912147d59b38a53d5f2a44626313186e28
     $.post("php/home.php", {action:'cards'}) //generates cards
 	.done(function(data){
 			$('#videoList').append(data);
