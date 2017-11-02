@@ -13,16 +13,17 @@
     <h1> <!--Heading, includes Logo, Profile button, and other menu buttons -->
       Bridge
       <img src="images/defaultavatar.png" height = "40" width = "40" id = "hPic" class="rounded float-right" data-toggle = "modal" data-target="#Profile"><br />
-	<div id = "studentB" class = "container"> <!-- separating button groups by user type, will determine which one to show -->
+
+	<div id = "studentB" class = "container hidden"> <!-- separating button groups by user type, will determine which one to show -->
 	<button type="button" id ="etern" class="btn blue btn-sm">Eternships</button>
     <button type="button" id ="f5" class="btn blue btn-sm">Fab Five</button>
 	</div>
-	
-	<div id = "creatorB" class = "container">
+
+	<div id = "creatorB" class = "container hidden">
 	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
 	</div>
-	
-	<div id = "badminB" class = "container">
+
+	<div id = "badminB" class = "container hidden">
 	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
     <button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
 	</div>
@@ -54,7 +55,7 @@
     </div>
     </div>
     </div>
-	
+
 	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
@@ -196,6 +197,15 @@ $(document).ready(function () {
     $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = $("#newBio").text();
           $.post("php/home.php", {action:"eProfile", newBio:newB})
+		  document.getElementById("Bio").innerHTML = user[0].about_us;
+      });
+    $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
+          document.getElementById("newBio").innerHTML = " "
+      });
+
+    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
+		  var newB = document.getElementById("newBio").text();
+      $.post("php/home.php", {action:"eProfile", newBio:newB})
 			.done(function(data){ //update profile live when finished
 			document.getElementById("Bio").innerHTML = user[0].about_us;
 			});
@@ -213,13 +223,13 @@ $(document).ready(function () {
 			document.getElementById("peAffil").innerHTML = "Company";
 		    document.getElementById("Bio").innerHTML = user[0].about_us;
 			if(user[0].account_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
-				$("#studentB").show();
-			} 
+				$('#studentB').show();
+			}
 			else if(user[0].account_type == "Creator"){
-			    $("#creatorB").show();
-			} 
+			  $("#creatorB").show();
+			}
 			});
-			
+
     $.post("php/home.php", {action:'cards'}) //generates cards
 	.done(function(data){
 			$('#videoList').append(data);
