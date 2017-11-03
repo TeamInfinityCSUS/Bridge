@@ -251,7 +251,7 @@
         //Sends the information of the Student fields to the database
         $.post("php/register.php", {action:"stReg"})
       	.done(function(data){
-        
+          echo console.log('Account creation successful.');
       			});
         //Sends the information of the Creator fields to the database
         $.post("php/register.php", {action:"crReg"})
