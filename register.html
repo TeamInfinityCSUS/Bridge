@@ -37,6 +37,16 @@
             <label class = "label" for="studentID">Student ID</label>
             <input type="text" class="form-control" name="studentID">
           </div> <!-- Student ID -->
+          <!--This is the First Name input field-->
+          <div class="container fName" id="fNameInpt">
+            <label class = "label" for="fName">First name</label>
+            <input type="text" class="form-control" name="fName">
+          </div> <!-- First Name -->
+          <!--This is the Last Name input field-->
+          <div class="container lName" id="lNameInpt">
+            <label class = "label" for="lName">Last name</label>
+            <input type="text" class="form-control" name="lName">
+          </div> <!-- Last Name -->
           <!--This is the UserName input field-->
           <div class="container uName" id="uNameInpt">
             <label class = "label" for="uName">Username</label>
@@ -94,11 +104,16 @@
 
       <!-- Hidden Container until Creator is selected -->
       <div class="container hidden" id="creatorReg" >
-        <!--This is the Company Name input field-->
-        <div class="container companyName" id="companyName">
-          <label class = "label" for="companyName">Company Name</label>
-          <input type="text" class="form-control" id="compName" name="companyName">
-        </div> <!-- Company Name -->
+        <!--This is the First Name input field-->
+        <div class="container fName" id="fNameInpt">
+          <label class = "label" for="fName">First name</label>
+          <input type="text" class="form-control" name="fName">
+        </div> <!-- First Name -->
+        <!--This is the Last Name input field-->
+        <div class="container lName" id="lNameInpt">
+          <label class = "label" for="lName">Last name</label>
+          <input type="text" class="form-control" name="lName">
+        </div> <!-- Last Name -->
         <!--This is the UserName input field-->
         <div class="container uName" id="uNameInpt">
           <label class = "label" for="uName">Username</label>
@@ -197,7 +212,15 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
+      $("#studentOption").click(function onchange() {
+        $("#creatorReg").hide();
+        $("#studentReg").show();
+      });
 
+      $("#creatorOption").click(function onchange() {
+        $("#studentReg").hide();
+        $("#creatorReg").show();
+      });
       /*
       //This block of code takes the contents of the array and outputs it in the dropdown
       $('#acctSelect').click(function onchange() {
@@ -224,27 +247,17 @@
         */
 
 
-        $("#studentOption").click(function onchange() {
-          $("#creatorReg").hide();
-          $("#studentReg").show();
-        });
 
-        $("#creatorOption").click(function onchange() {
-          $("#studentReg").hide();
-          $("#creatorReg").show();
-        });
-        /*
         //Sends the information of the Student fields to the database
-        $.post("php/home.php", {action:"stReg"})
+        $.post("php/register.php", {action:"stReg"})
       	.done(function(data){
-
+        
       			});
         //Sends the information of the Creator fields to the database
-        $.post("php/home.php", {action:"crReg"})
+        $.post("php/register.php", {action:"crReg"})
       	.done(function(data){
 
       			});
-            */
     });
     </script>
     </body>

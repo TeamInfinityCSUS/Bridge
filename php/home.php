@@ -4,7 +4,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
     $action = $_POST['action'];
     switch($action) {
 		case 'init': init(); break; //fetch user info and fill in profile
-        case 'cards' : generateCards();break; //generate content
+    case 'cards' : generateCards();break; //generate content
 		case 'eProfile' : changeBio();break; //update new self bio
     }
 }
@@ -24,7 +24,7 @@ function init(){
 	}
 	$result = json_encode($user_info);
 	echo $result; // Returns the array
-	
+
 	$conn->close(); // Close Connection
 }
 
@@ -43,7 +43,7 @@ function generateCards(){ //function to generate video cards, may possibly split
 		}
 	}
 	$conn->close(); // Close Connection
-	
+
   foreach($content as $row){ //card generation, will post content based on fetched database info
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
             <img class=\"card-img-top\" src=\"...\" alt=\"Thumbnail\">
@@ -67,10 +67,10 @@ function changeBio(){
 	}
 	$isql = "UPDATE users SET about_us = $newBio WHERE username = 'HHill';"; // Query to update bio with new bio
 	$iresult = $conn->query($isql); // returns success msg, no need to use further
-	
+
 	$osql = "SELECT about_us FROM users WHERE username = 'HHill'"; //get updated bio to update profile live
 	$oresult = $conn->query($osql); //receive string
-	
+
 	$conn->close(); // Close Connection
 }
 
