@@ -4,7 +4,7 @@ if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 }
 $searchlname = $_POST['lastname'];
-$sql = "SELECT * FROM users;"; // Prepare Query
+$sql = "SELECT * FROM site_members;"; // Prepare Query
 $result = $conn->query($sql); // Sends Query
 /* ECHO FORMAT
       <tr>
@@ -24,15 +24,15 @@ $i = 0;
 $maxi = 2;
 if ($result->num_rows > 0) { //Checks if Query table is empty
     while($i < $maxi and $row = $result->fetch_assoc()) { // Fetches the first row
-        if ( substr_compare($searchlname,$row['last_name'],0,strlen($searchlname),true) !== 0 ){
+        if ( substr_compare($searchlname,$row['lname'],0,strlen($searchlname),true) !== 0 ){
                 continue;
         }
     $result_array .= '<tr>';
-        $result_array .= '<td>' . $row['last_name'] . '</td>';
-        $result_array .= '<td>' . $row['first_name'] . '</td>';
-        $result_array .= '<td>' . $row['email'] . '</td>';
         $result_array .= '<td>' . $row['username'] . '</td>';
-        $result_array .= '<td>' . $row['account_type'] . '</td>';
+        $result_array .= '<td>' . $row['email'] . '</td>';
+        $result_array .= '<td>' . $row['fname'] . '</td>';
+        $result_array .= '<td>' . $row['lname'] . '</td>';
+        $result_array .= '<td>' . $row['acc_type'] . '</td>';
         $result_array .= '<td>' . $row['is_verified'] . '</td>';
         $result_array .= '<td>' . '<button type="button" onclick="liveverify('.$i.')">Verify</button>';
         $result_array .= '<td>' . '<button type="button" onclick="liveedit('.$i.')">Edit</button>';
