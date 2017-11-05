@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript">
-        var inner;
+        var inner; // This has to be here so all functions can access it
         $(document).ready(function(){ // Wait until page is ready
                   /* Skips log on screen and takes you directly to the home page if already logged in
                 var profile_id = sessionStorage.getItem('profile_id');
@@ -20,6 +20,7 @@
                         window.location.href = 'home.html'; // move to home page
                 }
                 */
+                // The 4 button belows currently do nothing until admin log in built
                 $("#logInBtn").click( function(){ if(confirm("Log?")){attemptlog()} } ); // When log on button is press
                 $('#email').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; });  // When enter is press inside email
                 $('#password').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; }); // When enter is press inside email
@@ -29,29 +30,30 @@
                 });
                 update(); // This causes the function update go live on refresh
         });
-        function liveverify(num){
+        function liveverify(num){ //runs when the verify button is clicked. Parameter = username from the table
                 if( !confirm('Confirm verify of ' + inner[num] + '?') ){return;};
                 $.post( "php/edit.php", { 'funct': 'verify', 'num': inner[num] }).done(update());
         }
-        function liveedit(num){
-                if( !confirm('Confirm edit of ' + inner[num] + '?') ){return;};
-                $.post( "php/liveedit.php", { 'num': inner[num] }).done(function( data ){
+        function liveedit(num){ //runs when the edit button is clicked. Parameter = username from the table
+                //if( !confirm('Confirm edit of ' + inner[num] + '?') ){return;};
+                $.post( "php/liveedit.php", { 'num': inner[num] }).done(function( data ){ // Hides search and table
                         document.getElementById('live table').style.display = 'none';
                         document.getElementById('searchbar').style.visibility = 'hidden';
                         document.getElementById('edittable').innerHTML = data;
                 });
         }
-        function livedelete(num){
+        function livedelete(num){ //runs when the delete button is clicked. Parameter = username from the table
                 if( !confirm('Confirm delete of ' + inner[num] + '?') ){return;};
                 $.post( "php/edit.php", { 'funct': 'delete', 'num': inner[num] }).done(update());
         }
-        function editing(num){
+        function editing(num){ // This is the edit page. Parameter is 1 for accept and 0 for cancel
                 if( num && !confirm('Apply Changes?') ){return;};
-                document.getElementById('edittable').innerHTML = "";
+                $.post( "php/edit.php", { 'funct': 'edit', 'num': [$('#e1').val(),$('#e2').val(),$('#e3').val(),$('#e4').val(),$('#e5').val(),$('#e6').val()] }).done(update());
+                document.getElementById('edittable').innerHTML = ""; // Unhide search and table
                 document.getElementById('live table').style.display = 'block';
                 document.getElementById('searchbar').style.visibility = 'visible';
         }
-        function attemptlog(){ // declare a function
+        function attemptlog(){ // attempts to log in. Purely for verification. Not used, yet.
                 $.post( "php/log.php", { 'log': [$('#email').val(), $('#password').val()] }).done(function( data ) {
                         if (data==0){ // log
                                 email_label = 'Email Address' // Original label with added error label
@@ -64,15 +66,13 @@
                         }
                 });
         }
-        function update(){
-                var prepend = '<table class="table table-hover"><thead><tr><th>Last name</th><th>First name</th><th>Email</th><th>Username</th><th>Account Type</th><th>Verfied</th><th></th></tr></thead><tbody>';
+        function update(){ // Updates the live search table whenever something appears in the search box
+                var prepend = '<table class="table table-hover"><thead><tr><th>Username</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Account Type</th><th>Verfied</th><th></th></tr></thead><tbody>';
                 var postpend = '</tbody></table>';
-                $.post("php/livesearch.php", { 'lastname' : $('#searchinput').val() }).done(function(data){
-                        //alert(data);
+                $.post("php/livesearch.php", { 'search' : [$('#searchby').val(),$('#searchinput').val()] }).done(function(data){
                         var out = $.parseJSON(data);
                         inner = out.outlisting;
                         document.getElementById('live table').innerHTML = prepend + out.outstring + postpend;
-                        //document.getElementById('live table').innerHTML += prepend + out + postpend;
                 });
         }
       </script>
@@ -89,7 +89,15 @@
 
 <form>
   <div class="input-group" id="searchbar">
-    <input type="text" class="form-control" placeholder="Search" size="30" onkeyup="update(this.value)" id="searchinput">
+    <select id="searchby">
+        <option value = "username">By Username</option>
+        <option value = "email">By Email</option>
+        <option value = "fname">By First Name</option>
+        <option selected value = "lname">By Last Name</option>
+        <option value = "acc_type">By Account</option>
+        <option value = "is_verified">By Verified</option>
+   </select>
+    <input type="text" class="form-control" placeholder="Search" size="10" onkeyup="update(this.value)" id="searchinput">
   </div>
 </form>
 <div id="live table">
