@@ -1,16 +1,15 @@
 <?php
-if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html file sends requests with certain string and this will determine which function to call
-    echo console.log("in the php file.");
-    $action = $_POST['action'];
-    switch($action) {
-		case 'stReg': studentReg(); break; //fetch user info and fill in profile
-    case 'crReg': creatorReg(); break; //generate content
-    }
+if(isset($_POST['studentAcct']) && !empty($_POST['studentAcct'])) { //control module, html file sends requests with certain string and this will determine which function to call
+  echo console.log("In the php student control module.");
+  studentReg();
+} else if (isset($_POST['creatorAcct']) && !empty($_POST['creatorAcct'])) {
+  echo console.log("In the php creator control module.");
+  creatorReg();
 }
 
 //Student registration function
 function studentReg() {
-  echo conole.log("in the student Registration function");
+  echo conole.log("In the student registration function");
   // $conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
   // if ($conn->connect_error) { // Connection Check
   //      die("Connection to database failed: " . $conn->connect_error);
@@ -33,23 +32,25 @@ function studentReg() {
 
 //Creator registration function
 function creatorReg() {
-  $conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
-  if ($conn->connect_error) { // Connection Check
-       die("Connection to database failed: " . $conn->connect_error);
-  }
 
-  //sets up the Creator query
-  $addCreator = "INSERT INTO site_member(username, password, email, fname, lname, acc_type, is_verified)
-  VALUES ($creator[2], $creator[3], $creator[5], $creator[0], $creator[1], 'creator', 0);
-  INSERT INTO creators(field, ref_name, ref_email)
-  VALUES ($creator[7], $creator[8], $creator[9])";
-
-  if($conn->multi_query($addCreator) === TRUE) {
-    echo "console.log('New record created successfully')";
-  } else {
-    echo "console.log('Error: ' . $addCreator . '<br>' . $conn->error)";
-  }  //else
-
-  $conn->close(); // Close Connection
+    echo conole.log("In the creator registration function");
+  // $conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+  // if ($conn->connect_error) { // Connection Check
+  //      die("Connection to database failed: " . $conn->connect_error);
+  // }
+  //
+  // //sets up the Creator query
+  // $addCreator = "INSERT INTO site_member(username, password, email, fname, lname, acc_type, is_verified)
+  // VALUES ($creator[2], $creator[3], $creator[5], $creator[0], $creator[1], 'creator', 0);
+  // INSERT INTO creators(field, ref_name, ref_email)
+  // VALUES ($creator[7], $creator[8], $creator[9])";
+  //
+  // if($conn->multi_query($addCreator) === TRUE) {
+  //   echo "console.log('New record created successfully')";
+  // } else {
+  //   echo "console.log('Error: ' . $addCreator . '<br>' . $conn->error)";
+  // }  //else
+  //
+  // $conn->close(); // Close Connection
 }  //creatorReg()
 ?>

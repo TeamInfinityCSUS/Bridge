@@ -274,12 +274,11 @@
           var cEmail = $('#cEmail').val();
           if(pass!=='' && pass===cPass && email!=='' && email===cEmail) {
             console.log('passwords and emails match');
-          // if(data==0) {
-          //   selectLabel = 'Select your account type' // Original label with added error label
-          //   document.getElementById('selectLabel').innerHTML = selectLabel + ' Nothing was entered.'.fontcolor("red").fontsize(1);
-          // }
+        } else {
+            selectLabel = 'Select your account type' // Original label with added error label
+            document.getElementById('selectLabel').innerHTML = selectLabel + ' Passwords or Emails do not match.'.fontcolor("red").fontsize(1);
         }
-        })
+      });
       };
 
       function attemptCreatorSubmit() {
