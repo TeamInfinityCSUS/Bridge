@@ -80,7 +80,7 @@
     </div>
 
     <div class="modal fade" id="eProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!--Modal opened when user wants to edit profile, same as self profile but with editable bio -->
-      <div class="modal-dialog modal-lg" role="document"> 
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header" id = "pHeader">
             <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
@@ -99,8 +99,8 @@
       </div>
       </div>
       </div>
-	  
-	  
+
+
 	    <div class="modal fade" id="mConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document"> <!--Manage Content modal, can either view content already uploaded or upload a new one -->
       <div class="modal-content">
@@ -115,7 +115,7 @@
     </div>
     </div>
     </div>
-	
+
 	    <div class="modal fade" id="uConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content"> <!-- modal to upload content -->
@@ -157,7 +157,7 @@
         </div>
         </div>
         </div>
-		
+
 		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -260,20 +260,13 @@ $(document).ready(function () {
           $.post("php/home.php", {action:"eProfile", newBio:newB})
 		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
-	  
+
 	 $('#UC').click(function onchange() { //upload new content to database and to users
-<<<<<<< HEAD
 	      var uType = $("#uType").text();
 		  var uURL = $("#uURL").text();
 		  var uTitle = $("#uTitle").text();
 		  var uDesc = $("#uDescription").text();
-          $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
-=======
-		  var uURL = $("#uURL").text();
-		  var uTitle = $("#uTitle").text();
-		  var uDescr = $("#uDescription").text();
-          $.post("php/home.php", {action:"upload", })
->>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
+      $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
 		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
@@ -300,7 +293,7 @@ $(document).ready(function () {
 			if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
 				$('#studentB').show();
 				document.getElementById("peAffil").innerHTML = "School";
-				
+
 			}
 			else if(user[0].acc_type == "Creator"){
 			  $("#creatorB").show();
