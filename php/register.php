@@ -1,11 +1,31 @@
 <?php
-if(isset($_POST['studentAcct']) && !empty($_POST['studentAcct'])) { //control module, html file sends requests with certain string and this will determine which function to call
-  echo console.log("In the php student control module.");
-  studentReg();
-} else if (isset($_POST['creatorAcct']) && !empty($_POST['creatorAcct'])) {
-  echo console.log("In the php creator control module.");
-  creatorReg();
+// define variables and set to empty values
+$uName = $password = $email = $fName = $lName = $studentID = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+$uName = test_input($_POST["uName"]);
+$password = test_input($_POST["password"]);
+$email = test_input($_POST["email"]);
+$fName = test_input($_POST["fName"]);
+$lName = test_input($_POST["lName"]);
+$studentID = test_input($_POST["studentID"]);
 }
+
+function test_input($data) {
+$data = trim($data);
+$data = stripslashes($data);
+$data = htmlspecialchars($data);
+return $data;
+}
+
+
+// if(isset($_POST['studentAcct']) && !empty($_POST['studentAcct'])) { //control module, html file sends requests with certain string and this will determine which function to call
+//   echo console.log("In the php student control module.");
+//   studentReg();
+// } else if (isset($_POST['creatorAcct']) && !empty($_POST['creatorAcct'])) {
+//   echo console.log("In the php creator control module.");
+//   creatorReg();
+// }
 
 //Student registration function
 function studentReg() {

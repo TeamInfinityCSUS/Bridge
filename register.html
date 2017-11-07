@@ -31,7 +31,7 @@
 
       <!-- Hidden Container until Student is selected -->
       <div class="container hidden" id="studentReg" >
-        <!-- <form method="post" action="php/register.php"> -->
+        <form method="post" action="php/register.php">
           <!--This is the Student ID input field-->
           <div class="container studentID" id="stdtIDInpt">
             <label class = "label" for="studentID">Student ID</label>
@@ -99,7 +99,7 @@
           <div class="container" id="stBtn">
             <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
           </div> <!-- Student Continue Button -->
-        <!-- </form> -->
+        </form>
       </div> <!-- Hidden container: StudentReg -->
 
       <!-- Hidden Container until Creator is selected -->
@@ -230,71 +230,36 @@
         $("#creatorReg").show();
       });
 
-      /*
-      //Takes the contents of the array and outputs it in the Career dropdown
-      $('#acctSelect').click(function onchange() {
-        var careerOptions = [ "Agriculture, Food & Natural Resources",
-                              "Architecture & Construction",
-                              "Arts, Audio/Video Technology and Communications",
-                              "Business Management & Administration",
-                              "Education & Training",
-                              "Finance",
-                              "Government & Public Administration",
-                              "Health Science",
-                              "Hospitality & Tourism",
-                              "Human Services",
-                              "Information Technology",
-                              "Law, Public Safety, Corrections & Security",
-                              "Manufacturing",
-                              "Marketing, Sales & Service",
-                              "Science, Technology, Engineering & Mathematics",
-                              "Transportation, Distribution & Logistics"];
-        $('#dropDown').empty();
-        $.each(careerOptions, function(i, p) {
-          $('#dropDown').append($('<a></a>').val(p).html(p));
-        });
-        */
+      // $('#studentSubmitBtn').click(function(){ attemptStudentSubmit(); });
+      // $('#creatorSubmitBtn').click(function(){ attemptCreatorSubmit(); });
+      //
+      // function attemptStudentSubmit() {
+      //   console.log("Student button was pressed.");  //Test: Verifing my traversal
+      //   $.post("php/register.php", {'studentAcct': [$('#uName').val(),
+      //                                               $('#password').val(),
+      //                                               $('#email').val(),
+      //                                               $('#fName').val(),
+      //                                               $('#lName').val(),
+      //                                               $('#studentID').val()
+      //   ]})
+      //   .done(function(data) {
+      //     var pass = $('#password').val();
+      //     var cPass = $('#cPassword').val();
+      //     var email = $('#email').val();
+      //     var cEmail = $('#cEmail').val();
+      //     if(pass!=='' && pass===cPass && email!=='' && email===cEmail) {
+      //       console.log('passwords and emails match');
+      //   } else {
+      //       selectLabel = 'Select your account type' // Original label with added error label
+      //       document.getElementById('selectLabel').innerHTML = selectLabel + ' Passwords or Emails do not match.'.fontcolor("red").fontsize(1);
+      //   }
+      // });
+      // };
+      //
+      // function attemptCreatorSubmit() {
+      //   console.log("Creator button was pressed.")
+      // };
 
-      $('#studentSubmitBtn').click(function(){ attemptStudentSubmit(); });
-      $('#creatorSubmitBtn').click(function(){ attemptCreatorSubmit(); });
-
-      function attemptStudentSubmit() {
-        console.log("Student button was pressed.");  //Test: Verifing my traversal
-        $.post("php/register.php", {'studentAcct': [$('#uName').val(),
-                                                    $('#password').val(),
-                                                    $('#email').val(),
-                                                    $('#fName').val(),
-                                                    $('#lName').val(),
-                                                    $('#studentID').val()
-        ]})
-        .done(function(data) {
-          var pass = $('#password').val();
-          var cPass = $('#cPassword').val();
-          var email = $('#email').val();
-          var cEmail = $('#cEmail').val();
-          if(pass!=='' && pass===cPass && email!=='' && email===cEmail) {
-            console.log('passwords and emails match');
-        } else {
-            selectLabel = 'Select your account type' // Original label with added error label
-            document.getElementById('selectLabel').innerHTML = selectLabel + ' Passwords or Emails do not match.'.fontcolor("red").fontsize(1);
-        }
-      });
-      };
-
-      function attemptCreatorSubmit() {
-        console.log("Creator button was pressed.")
-      };
-
-        // //Sends the information of the Student fields to the database
-        // $.post("php/register.php", {action:"stReg"})
-      	// .done(function(data){
-        //   echo console.log('Account creation successful.');
-      	// 		});
-        // //Sends the information of the Creator fields to the database
-        // $.post("php/register.php", {action:"crReg"})
-      	// .done(function(data){
-        //
-      	// 		});
     });
     </script>
     </body>
