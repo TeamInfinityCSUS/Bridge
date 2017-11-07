@@ -4,8 +4,10 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
     $action = $_POST['action'];
     switch($action) {
 		case 'init': init(); break; //fetch user info and fill in profile
-    case 'cards' : generateCards();break; //generate content
+		case 'cards' : generateCards();break; //generate content
 		case 'eProfile' : changeBio();break; //update new self bio
+		case 'viewP' :viewProfile();break;
+		case 'upload' : uploadContent();break;
     }
 }
 function init(){
@@ -14,7 +16,7 @@ function init(){
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT * FROM users WHERE username = 'HHill';"; // Prepare Query
+	$sql = "SELECT * FROM site_members,creators,students WHERE username = 'HHill';"; // Prepare Query
 	$result = $conn->query($sql); // Sends Query
 
 	if ($result->num_rows > 0) { //Checks if Query table is empty
@@ -28,6 +30,25 @@ function init(){
 	$conn->close(); // Close Connection
 }
 
+function viewProfile(){
+	$user_info = array();
+	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+	if ($conn->connect_error) { // Connection Check
+     die("Connection to database failed: " . $conn->connect_error);
+	}
+	$sql = "SELECT * FROM site_members,creators,students WHERE username = 'HHill' AND (site_members.username = creators.username OR site_members.username = students.username);"; // Prepare Query
+	$result = $conn->query($sql); // Sends Query
+
+	if ($result->num_rows > 0) { //Checks if Query table is empty
+		while($row = $result->fetch_assoc()) { // Fetches the first row
+			array_push($user_info, $row); // Push the first row into the array
+		}
+	}
+	$result = json_encode($user_info);
+	echo $result; // Returns the array
+
+	$conn->close(); // Close Connection
+}
 function generateCards(){ //function to generate video cards, may possibly split fetching database data to different function
   $content = array();
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
@@ -45,21 +66,36 @@ function generateCards(){ //function to generate video cards, may possibly split
 	$conn->close(); // Close Connection
 
   foreach($content as $row){ //card generation, will post content based on fetched database info
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+	if($row[1] == 'video'){
+    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"Player\">
             <img class=\"card-img-top\" src=\"...\" alt=\"Thumbnail\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$row[1]</h3>
               <div class=\"card-footer text-muted\">
-              <p>By: $row[3]</p>
-              <p>Uploaded $row[4]</p>
-              <p>$row[5] Views</p>
-              <p>$row[6] Likes</p>
+              <p>By: $row[2]</p>
+              <p>Uploaded $row[7]</p>
+              <p>$row[8] Views</p>
+              <p>$row[9] Likes</p>
               </div>
               </div>
               </div>";
+	}
+	if($row[1] == 'post'){
+    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+            <div class=\"card-block\">
+              <h3 class=\"card-title\">$row[1]</h3>
+              <div class=\"card-footer text-muted\">
+              <p>By: $row[2]</p>
+              <p>Uploaded $row[7]</p>
+              <p>$row[8] Views</p>
+              <p>$row[9] Likes</p>
+              </div>
+              </div>
+              </div>";
+	}
     }
 }
-function changeBio(){
+function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
@@ -73,5 +109,18 @@ function changeBio(){
 
 	$conn->close(); // Close Connection
 }
+function uploadContent(){ //uploads content to database
+	$date = date("m d,Y");
+	$time = date("h:i:sa");
+	if($_POST['type'] == eternship) $et = 1;
+	else $et = 0;
+	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+	if ($conn->connect_error) { // Connection Check
+     die("Connection to database failed: " . $conn->connect_error);
+	}
+	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert content into database
+	$result = $conn->query($sql);
 
+	$conn ->close();
+}
 ?>
