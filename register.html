@@ -21,7 +21,7 @@
     <div class="accountForm"
     	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="loginBlock">
       <div>
-        <label class ="label" for="btn-group">Select your account type</label>
+        <label class ="label" for="btn-group" id="selectLabel" >Select your account type</label>
       </div>
         <!-- Buttons control what content is displayed -->
         <button type="submit" id="studentOption" class="btn btn-primary">Student</button>
@@ -31,53 +31,53 @@
 
       <!-- Hidden Container until Student is selected -->
       <div class="container hidden" id="studentReg" >
-        <form method="post" action="php/register.php">
+        <!-- <form method="post" action="php/register.php"> -->
           <!--This is the Student ID input field-->
           <div class="container studentID" id="stdtIDInpt">
             <label class = "label" for="studentID">Student ID</label>
-            <input type="text" class="form-control" name="studentID">
+            <input type="text" class="form-control" id="studentID" name="studentID">
           </div> <!-- Student ID -->
           <!--This is the First Name input field-->
           <div class="container fName" id="fNameInpt">
             <label class = "label" for="fName">First name</label>
-            <input type="text" class="form-control" name="fName">
+            <input type="text" class="form-control" id="fName" name="fName">
           </div> <!-- First Name -->
           <!--This is the Last Name input field-->
           <div class="container lName" id="lNameInpt">
             <label class = "label" for="lName">Last name</label>
-            <input type="text" class="form-control" name="lName">
+            <input type="text" class="form-control" id="lName" name="lName">
           </div> <!-- Last Name -->
           <!--This is the UserName input field-->
           <div class="container uName" id="uNameInpt">
             <label class = "label" for="uName">Username</label>
-            <input type="text" class="form-control" name="uName">
+            <input type="text" class="form-control" id="uName" name="uName">
           </div> <!-- Username -->
           <!--This is the Password input field-->
           <div class="container password" id="pwInpt">
             <label class = "label" for="password">Password</label>
-            <input type="password" class="form-control" name="password">
+            <input type="password" class="form-control" id="password" name="password">
           </div> <!-- Password -->
           <!--This is the Confirm Password input field-->
           <div class="container cPassword" id="cpwInpt">
             <label class = "label" for="password">Confirm Password</label>
-            <input type="password" class="form-control" name="cPassword">
+            <input type="password" class="form-control" id="cPassword" name="cPassword">
           </div> <!-- Confirm Password -->
           <!--This is the Email input field-->
           <div class="container email">
             <label class = "label" for="email">Email Address</label>
-            <input type="email" class="form-control" name="email">
+            <input type="email" class="form-control" id="email" name="email">
           </div> <!-- Email Address -->
           <!--This is the Confirm Email input field-->
           <div class="container cEmail">
             <label class = "label" for="email">Confirm Email Address</label>
-            <input type="email" class="form-control" name="cEmail">
+            <input type="email" class="form-control" id="cEmail" name="cEmail">
           </div> <!-- Confirm Email Address -->
           <div class="dropdown" id="primaryCareer">
             <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Choose your primary field of interest
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropButton">
+            <div class="dropdown-menu" aria-labelledby="dropButton" >
               <a class="dropdown-item" href="#">Exploring</a>
               <a class="dropdown-item" href="#">Computer Science</a>
               <a class="dropdown-item" href="#">Civil Engineering</a>
@@ -89,7 +89,7 @@
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Choose your secondary field of interest
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropButton">
+            <div class="dropdown-menu" aria-labelledby="dropButton" >
             <a class="dropdown-item" href="#">Exploring</a>
             <a class="dropdown-item" href="#">Computer Science</a>
             <a class="dropdown-item" href="#">Civil Engineering</a>
@@ -99,7 +99,7 @@
           <div class="container" id="stBtn">
             <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
           </div> <!-- Student Continue Button -->
-        </form>
+        <!-- </form> -->
       </div> <!-- Hidden container: StudentReg -->
 
       <!-- Hidden Container until Creator is selected -->
@@ -212,17 +212,26 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
+      //Skips log on screen and takes you directly to the home page if already logged in
+      var profile_id = sessionStorage.getItem('profile_id');
+      if (profile_id == null || profile_id == 0){
+        profile_id = 0;
+      }else{
+        window.location.href = 'home.html'; // move to home page
+      }
+      //Student account form is displayed when clicked
       $("#studentOption").click(function onchange() {
         $("#creatorReg").hide();
         $("#studentReg").show();
       });
-
+      //Creator account form is displayed when clicked
       $("#creatorOption").click(function onchange() {
         $("#studentReg").hide();
         $("#creatorReg").show();
       });
+
       /*
-      //This block of code takes the contents of the array and outputs it in the dropdown
+      //Takes the contents of the array and outputs it in the Career dropdown
       $('#acctSelect').click(function onchange() {
         var careerOptions = [ "Agriculture, Food & Natural Resources",
                               "Architecture & Construction",
@@ -246,18 +255,47 @@
         });
         */
 
+      $('#studentSubmitBtn').click(function(){ attemptStudentSubmit(); });
+      $('#creatorSubmitBtn').click(function(){ attemptCreatorSubmit(); });
 
+      function attemptStudentSubmit() {
+        console.log("Student button was pressed.");  //Test: Verifing my traversal
+        $.post("php/register.php", {'studentAcct': [$('#uName').val(),
+                                                    $('#password').val(),
+                                                    $('#email').val(),
+                                                    $('#fName').val(),
+                                                    $('#lName').val(),
+                                                    $('#studentID').val()
+        ]})
+        .done(function(data) {
+          var pass = $('#password').val();
+          var cPass = $('#cPassword').val();
+          var email = $('#email').val();
+          var cEmail = $('#cEmail').val();
+          if(pass!=='' && pass===cPass && email!=='' && email===cEmail) {
+            console.log('passwords and emails match');
+          // if(data==0) {
+          //   selectLabel = 'Select your account type' // Original label with added error label
+          //   document.getElementById('selectLabel').innerHTML = selectLabel + ' Nothing was entered.'.fontcolor("red").fontsize(1);
+          // }
+        }
+        })
+      };
 
-        //Sends the information of the Student fields to the database
-        $.post("php/register.php", {action:"stReg"})
-      	.done(function(data){
-          echo console.log('Account creation successful.');
-      			});
-        //Sends the information of the Creator fields to the database
-        $.post("php/register.php", {action:"crReg"})
-      	.done(function(data){
+      function attemptCreatorSubmit() {
+        console.log("Creator button was pressed.")
+      };
 
-      			});
+        // //Sends the information of the Student fields to the database
+        // $.post("php/register.php", {action:"stReg"})
+      	// .done(function(data){
+        //   echo console.log('Account creation successful.');
+      	// 		});
+        // //Sends the information of the Creator fields to the database
+        // $.post("php/register.php", {action:"crReg"})
+      	// .done(function(data){
+        //
+      	// 		});
     });
     </script>
     </body>
