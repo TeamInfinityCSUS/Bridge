@@ -262,11 +262,24 @@ $(document).ready(function () {
       });
 	  
 	 $('#UC').click(function onchange() { //upload new content to database and to users
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 	      var uType = $("#uType").text();
 		  var uURL = $("#uURL").text();
 		  var uTitle = $("#uTitle").text();
 		  var uDesc = $("#uDescription").text();
           $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
+<<<<<<< HEAD
+=======
+=======
+		  var uURL = $("#uURL").text();
+		  var uTitle = $("#uTitle").text();
+		  var uDescr = $("#uDescription").text();
+          $.post("php/home.php", {action:"upload", })
+>>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
+>>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
