@@ -34,8 +34,7 @@
 
 	</div>
   </div>
-<!-- Profile page,Edit Profile page and Settings page, activated and swapped by buttons -->
-  <div class="modal fade" id="Profile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal fade" id="Profile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!--Own user's profile page, similar to viewing another's profile-->
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" id = "pHeader">
@@ -48,6 +47,8 @@
         <div id = "Bio"></div>
 		<h2 id = "pAffil"></h2>
 		<p id= "group"></p>
+		<p id= "pInterest"></p>
+		<p id= "sInterest"></p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn blue" id="ePB" data-toggle ="modal" data-target = "#eProfile">Edit</button>
@@ -56,7 +57,7 @@
     </div>
     </div>
 
-	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- modal used to view other users' profiles -->
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" id = "pHeader">
@@ -79,7 +80,7 @@
     </div>
 
     <div class="modal fade" id="eProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!--Modal opened when user wants to edit profile, same as self profile but with editable bio -->
-      <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-dialog modal-lg" role="document"> 
         <div class="modal-content">
           <div class="modal-header" id = "pHeader">
             <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
@@ -98,6 +99,51 @@
       </div>
       </div>
       </div>
+	  
+	  
+	    <div class="modal fade" id="mConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document"> <!--Manage Content modal, can either view content already uploaded or upload a new one -->
+      <div class="modal-content">
+          <div class="modal-header">
+            <h2>Manage Conent</h2>
+      </div>
+      </div>
+      <div class="modal-body">
+	  <button type="button" class="btn blue" id="viewC">View My Content</button>
+	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "uConM">Upload Content</button>
+      </div>
+    </div>
+    </div>
+    </div>
+	
+	    <div class="modal fade" id="uConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content"> <!-- modal to upload content -->
+          <div class="modal-header">
+            <h2>Upload Content</h2>
+      </div>
+      </div>
+      <div class="modal-body">
+		<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<div id= "uConType">Content Type</div>
+		</button>
+		<div class="dropdown-menu" aria-labelledby="Content Type">
+			<a class="dropdown-item" id = "uMessage">Message</a>
+			<a class="dropdown-item" id = "uVideo">Video</a>
+			<a class="dropdown-item" id = "uAnn">Announcement</a>
+		</div>
+		</div>
+	  <p>Youtube URL<input class = "text" id = "uURL"></input></p>
+	  <p>Title<input class = "text" id = "uTitle"></input></p>
+	  <p>Description/Message<input class = "text" id = "uDescription"></input></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn blue" id="UC">Upload</button>
+      </div>
+    </div>
+    </div>
+    </div>
 
       <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -111,14 +157,29 @@
         </div>
         </div>
         </div>
+		
+		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+			<div id="vTitle"></div>
+			<iframe src = "..."></iframe>
+            <div class="modal-footer">
+              <button type="button" class="btn blue"  id="reactB">React</button><br />
+              <button type="button" class="btn blue" id="likeB">Like</button>
+          </div>
+          </div>
+        </div>
+        </div>
+        </div>
 
         <div class="modal fade" id="aSet" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
               <div class="modal-footer" id = "aBody">
-                <button type="button" class="btn blue" data-dismiss="modal">View All Accounts</button><br />
-                <button type="button" class="btn blue" data-dismiss="modal">Manage Flagged Content</button>
+                <button type="button" class="btn blue" data-dismiss="modal">View Company Profile</button><br />
+                <button type="button" class="btn blue" data-dismiss="modal">Verify Users</button>
             </div>
             </div>
           </div>
@@ -197,36 +258,46 @@ $(document).ready(function () {
     $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = $("#newBio").text();
           $.post("php/home.php", {action:"eProfile", newBio:newB})
-		  document.getElementById("Bio").innerHTML = user[0].about_us;
+		  document.getElementById("Bio").innerHTML = user[0].bio;
+      });
+	  
+	 $('#UC').click(function onchange() { //upload new content to database and to users
+	      var uType = $("#uType").text();
+		  var uURL = $("#uURL").text();
+		  var uTitle = $("#uTitle").text();
+		  var uDesc = $("#uDescription").text();
+          $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
+		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
           document.getElementById("newBio").innerHTML = " "
       });
 
-    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
+    /*$('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = document.getElementById("newBio").text();
       $.post("php/home.php", {action:"eProfile", newBio:newB})
 			.done(function(data){ //update profile live when finished
 			document.getElementById("Bio").innerHTML = user[0].about_us;
 			});
 
-      });
+      });*/
     $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
           window.location.href = '/Bridge/index.html';
       });
 	$.post("php/home.php", {action:'init'}) //initial setup, runs on startup
 	.done(function(data){
 			user = JSON.parse(data); //fetch self information
-			document.getElementById("pName").innerHTML = user[0].first_name + " " + user[0].last_name; //fill in self profile with information
-			document.getElementById("peName").innerHTML = user[0].first_name + " " + user[0].last_name;
-			document.getElementById("pAffil").innerHTML = "Company";
-			document.getElementById("peAffil").innerHTML = "Company";
+			document.getElementById("pName").innerHTML = user[0].fname + " " + user[0].lname; //fill in self profile with information
+			document.getElementById("peName").innerHTML = user[0].fname + " " + user[0].lname;
 		    document.getElementById("Bio").innerHTML = user[0].about_us;
-			if(user[0].account_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
+			if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
 				$('#studentB').show();
+				document.getElementById("peAffil").innerHTML = "School";
+				
 			}
-			else if(user[0].account_type == "Creator"){
+			else if(user[0].acc_type == "Creator"){
 			  $("#creatorB").show();
+			  document.getElementById("peAffil").innerHTML = "Company";
 			}
 			});
 
