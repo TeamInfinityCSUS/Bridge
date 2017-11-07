@@ -6,10 +6,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
 		case 'init': init(); break; //fetch user info and fill in profile
 		case 'cards' : generateCards();break; //generate content
 		case 'eProfile' : changeBio();break; //update new self bio
-<<<<<<< HEAD
 		case 'viewP' :viewProfile();break;
-=======
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 		case 'upload' : uploadContent();break;
     }
 }
@@ -70,15 +67,7 @@ function generateCards(){ //function to generate video cards, may possibly split
 
   foreach($content as $row){ //card generation, will post content based on fetched database info
 	if($row[1] == 'video'){
-<<<<<<< HEAD
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"Player\">
-=======
-<<<<<<< HEAD
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"Player\">
-=======
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
->>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
             <img class=\"card-img-top\" src=\"...\" alt=\"Thumbnail\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$row[1]</h3>
@@ -87,7 +76,6 @@ function generateCards(){ //function to generate video cards, may possibly split
               <p>Uploaded $row[7]</p>
               <p>$row[8] Views</p>
               <p>$row[9] Likes</p>
-<<<<<<< HEAD
               </div>
               </div>
               </div>";
@@ -101,28 +89,10 @@ function generateCards(){ //function to generate video cards, may possibly split
               <p>Uploaded $row[7]</p>
               <p>$row[8] Views</p>
               <p>$row[9] Likes</p>
-=======
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
               </div>
               </div>
               </div>";
 	}
-<<<<<<< HEAD
-=======
-	if($row[1] == 'post'){
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
-            <div class=\"card-block\">
-              <h3 class=\"card-title\">$row[1]</h3>
-              <div class=\"card-footer text-muted\">
-              <p>By: $row[2]</p>
-              <p>Uploaded $row[7]</p>
-              <p>$row[8] Views</p>
-              <p>$row[9] Likes</p>
-              </div>
-              </div>
-              </div>";
-	}
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
     }
 }
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
@@ -139,34 +109,16 @@ function changeBio(){ //changes user's bio and returns it back to the page to ch
 
 	$conn->close(); // Close Connection
 }
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 function uploadContent(){ //uploads content to database
 	$date = date("m d,Y");
-	$time = date("h:i:sa");
+	$time = date("h:i a");
 	if($_POST['type'] == eternship) $et = 1;
 	else $et = 0;
-<<<<<<< HEAD
-=======
-=======
-function uploadContent(){
->>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
-<<<<<<< HEAD
 	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert content into database
-=======
-<<<<<<< HEAD
-	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert content into database
-=======
-	$sql = "INSERT INTO content () VALUES ();"; // insert content into database
->>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
->>>>>>> 8985a1ab76083a034d0a9c6350154025cb1dcd5f
 	$result = $conn->query($sql);
 
 	$conn ->close();
