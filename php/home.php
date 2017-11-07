@@ -47,7 +47,11 @@ function generateCards(){ //function to generate video cards, may possibly split
 
   foreach($content as $row){ //card generation, will post content based on fetched database info
 	if($row[1] == 'video'){
+<<<<<<< HEAD
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"Player\">
+=======
+    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+>>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
             <img class=\"card-img-top\" src=\"...\" alt=\"Thumbnail\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$row[1]</h3>
@@ -89,16 +93,24 @@ function changeBio(){ //changes user's bio and returns it back to the page to ch
 
 	$conn->close(); // Close Connection
 }
+<<<<<<< HEAD
 function uploadContent(){ //uploads content to database
 	$date = date("m d,Y");
 	$time = date("h:i:sa");
 	if($_POST['type'] == eternship) $et = 1;
 	else $et = 0;
+=======
+function uploadContent(){
+>>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
+<<<<<<< HEAD
 	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert content into database
+=======
+	$sql = "INSERT INTO content () VALUES ();"; // insert content into database
+>>>>>>> 7872f99b71b3ff0ff2d30e039a52ac367a391d47
 	$result = $conn->query($sql);
 
 	$conn ->close();
