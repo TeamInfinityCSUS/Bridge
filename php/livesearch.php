@@ -3,7 +3,7 @@ $conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); //
 if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 }
-$sql = "SELECT * FROM site_members;"; // Prepare Query
+$sql = 'SELECT * FROM site_members;'; // Prepare Query
 $result = $conn->query($sql); // Sends Query
 /* ECHO FORMAT
       <tr>
@@ -20,9 +20,9 @@ $result = $conn->query($sql); // Sends Query
 $result_array = "";
 $outlisting = array();
 $i = 0;
-$maxi = 2;
 if ($result->num_rows > 0) { //Checks if Query table is empty
-    while($i < $maxi and $row = $result->fetch_assoc()) { // Fetches the first row
+        //$_POST['search] is an array [0] is incoming search by. [1] is incoming search on bar. [2] is
+    while($i < $_POST['search'][2] and $row = $result->fetch_assoc()) { // Fetches the first row
         if ( substr_compare($_POST['search'][1],$row[$_POST['search'][0]],0,strlen($_POST['search'][1]),true) !== 0 ){
                 continue;
         }

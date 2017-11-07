@@ -28,11 +28,13 @@
                         $("#container").load("stuff/fields.txt");
                         window.location.href = 'register.html'; // move to register
                 });
+                //$('#searchbar').keyup( function(e){ if (e.keyCode === 13){ update() }; });  // When enter is press inside email
                 update(); // This causes the function update go live on refresh
         });
         function liveverify(num){ //runs when the verify button is clicked. Parameter = username from the table
                 if( !confirm('Confirm verify of ' + inner[num] + '?') ){return;};
-                $.post( "php/edit.php", { 'funct': 'verify', 'num': inner[num] }).done(update());
+                $.post( "php/edit.php", { 'funct': 'verify', 'num': inner[num] });
+                update();
         }
         function liveedit(num){ //runs when the edit button is clicked. Parameter = username from the table
                 //if( !confirm('Confirm edit of ' + inner[num] + '?') ){return;};
@@ -44,11 +46,13 @@
         }
         function livedelete(num){ //runs when the delete button is clicked. Parameter = username from the table
                 if( !confirm('Confirm delete of ' + inner[num] + '?') ){return;};
-                $.post( "php/edit.php", { 'funct': 'delete', 'num': inner[num] }).done(update());
+                $.post( "php/edit.php", { 'funct': 'delete', 'num': inner[num] });
+                update();
         }
         function editing(num){ // This is the edit page. Parameter is 1 for accept and 0 for cancel
                 if( num && !confirm('Apply Changes?') ){return;};
-                $.post( "php/edit.php", { 'funct': 'edit', 'num': [$('#e1').val(),$('#e2').val(),$('#e3').val(),$('#e4').val(),$('#e5').val(),$('#e6').val()] }).done(update());
+                $.post( "php/edit.php", { 'funct': 'edit', 'num': [$('#e1').val(),$('#e2').val(),$('#e3').val(),$('#e4').val(),$('#e5').val(),$('#e6').val()] });
+                update();
                 document.getElementById('edittable').innerHTML = ""; // Unhide search and table
                 document.getElementById('live table').style.display = 'block';
                 document.getElementById('searchbar').style.visibility = 'visible';
@@ -69,7 +73,7 @@
         function update(){ // Updates the live search table whenever something appears in the search box
                 var prepend = '<table class="table table-hover"><thead><tr><th>Username</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Account Type</th><th>Verfied</th><th></th></tr></thead><tbody>';
                 var postpend = '</tbody></table>';
-                $.post("php/livesearch.php", { 'search' : [$('#searchby').val(),$('#searchinput').val()] }).done(function(data){
+                $.post("php/livesearch.php", { 'search' : [$('#searchby').val(),$('#searchinput').val(),$('#searchshow').val()] }).done(function(data){
                         var out = $.parseJSON(data);
                         inner = out.outlisting;
                         document.getElementById('live table').innerHTML = prepend + out.outstring + postpend;
@@ -98,6 +102,13 @@
         <option value = "is_verified">By Verified</option>
    </select>
     <input type="text" class="form-control" placeholder="Search" size="10" onkeyup="update(this.value)" id="searchinput">
+    <select id="searchshow">
+        <option value = "1">Show 1</option>
+        <option value = "5">Show 5</option>
+        <option selected value = "10">Show 10</option>
+        <option value = "15">Show 15</option>
+        <option value = "20">Show 20</option>
+   </select>
   </div>
 </form>
 <div id="live table">
