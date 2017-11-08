@@ -55,7 +55,7 @@ function generateCards(){ //function to generate video cards, may possibly split
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT * FROM content;"; // Grab all content from database, will refine later
+	$sql = "SELECT * FROM content WHERE field = \"Computer Science\";"; // Grab all content from database, will refine later
 	$result = $conn->query($sql); // receive list of content
 
 	if ($result->num_rows > 0) { //while list is not empty
