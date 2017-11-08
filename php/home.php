@@ -68,7 +68,7 @@ function generateCards(){ //function to generate video cards, may possibly split
   foreach($content as $row){ //card generation, will post content based on fetched database info
 	if($row[1] == 'video'){
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"Player\">
-            <img class=\"card-img-top\" src=\"...\" alt=\"Thumbnail\">
+            <img class=\"card-img-top\" src=\"https://img.youtube.com/vi/$row[4]/hqdefault.jpg\" alt=\"Thumbnail\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$row[1]</h3>
               <div class=\"card-footer text-muted\">
@@ -131,7 +131,13 @@ function uploadContent(){ //uploads content to database
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
-	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert content into database
+  if($_POST['type'] == video){
+  $vID = substr($_POST['URL'],31,11); //store youtube's video ID into database, every URL is the same other than ID
+	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$vID,$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert video info into database
+  }
+  if($_POST['type'] == post){
+	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],\"post\",$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert post info into database
+  }
 	$result = $conn->query($sql);
 
 	$conn ->close();
