@@ -45,9 +45,11 @@
       </div>
       <div class="modal-body">
         <div id = "Bio"></div>
-		<h2 id = "pAffil"></h2>
+		<h2 id = "pAffil"></h2> <!--School/Company -->
 		<p id= "group"></p>
+    <h2 id = "pDescrip1"></h2> <!--Primary Interest/Field -->
 		<p id= "pInterest"></p>
+    <h2 id = "pDescrip2"></h2> <!-- Secondary Interest/Creator Interests-->
 		<p id= "sInterest"></p>
       </div>
       <div class="modal-footer">
@@ -249,15 +251,24 @@ $(document).ready(function () {
         user = JSON.parse(data); //fetch self information
         document.getElementById("pName").innerHTML = user[0].fname + " " + user[0].lname; //fill in self profile with information
         document.getElementById("peName").innerHTML = user[0].fname + " " + user[0].lname;
-          document.getElementById("Bio").innerHTML = user[0].about_us;
+        document.getElementById("Bio").innerHTML = user[0].about_us;
         if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
           $('#studentB').show(); //show student buttons
           document.getElementById("peAffil").innerHTML = "School"; //show student's group as a school
-
+          document.getElementByID("group").innerHTML = user[0].school;
+          document.getElementByID("pDescrip1").innerHTML = Primary Interest
+          document.getElementByID("pInterest").innerHTML = user[0].primary_interest;
+          document.getElementByID("pDescrip2").innerHTML = Secondary Interests
+          document.getElementByID("sInterest").innerHTML = user[0].secondary_interest;
         }
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
           document.getElementById("peAffil").innerHTML = "Company"; //show creator's group as a company
+          document.getElementByID("group").innerHTML = user[0].company;
+          document.getElementByID("pDescrip1").innerHTML = Field
+          document.getElementByID("pInterest").innerHTML = user[0].field;
+          document.getElementByID("pDescrip2").innerHTML = Interests
+          document.getElementByID("sInterest").innerHTML = user[0].interests;
         }
         });
 
