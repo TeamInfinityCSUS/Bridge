@@ -134,8 +134,8 @@
 			<a class="dropdown-item" id = "uAnn">Announcement</a>
 		</div>
 		</div>
-	  <p>Youtube URL<input class = "text" id = "uURL"></input></p>
-	  <p>Title<input class = "text" id = "uTitle"></input></p>
+	  <p>Youtube URL (For Videos)<input class = "text" id = "uURL"></input></p>
+	  <p>Title (For Announcements and Videos)<input class = "text" id = "uTitle"></input></p>
 	  <p>Description/Message<input class = "text" id = "uDescription"></input></p>
       </div>
       <div class="modal-footer">
@@ -230,6 +230,9 @@
   .card{
     margin-bottom: 15px;
   }
+  .viewp{
+    color: blue;
+  }
 	</style>
 
 		<!-- jQuery library -->
@@ -244,6 +247,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!--JQuery used for AJAX (communication between PHP and Javascript) -->
 <script> //Javascript for the page here
 var user;
+var uType;
 $(document).ready(function () {
 	$("#creatorB").hide();
     $("#badminB").hide();
@@ -260,9 +264,11 @@ $(document).ready(function () {
           $.post("php/home.php", {action:"eProfile", newBio:newB})
 		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
-
+   $('#uVideo, #uMessage, #uAnn').click(function onchange() {
+     $("#uType").text($(this).text());
+   });
 	 $('#UC').click(function onchange() { //upload new content to database and to users
-	      var uType = $("#uType").text();
+	    uType = $("#uType").text();
 		  var uURL = $("#uURL").text();
 		  var uTitle = $("#uTitle").text();
 		  var uDesc = $("#uDescription").text();

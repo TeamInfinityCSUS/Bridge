@@ -72,18 +72,17 @@ function generateCards(){ //function to generate video cards, may possibly split
             <div class=\"card-block\">
               <h3 class=\"card-title\">$row[1]</h3>
               <div class=\"card-footer text-muted\">
-              <p>By: $row[2]</p>
+              <p class = \"viewp\">By: $row[2]</p>
               <p>Uploaded $row[7]</p>
               <p>$row[8] Views</p>
               <p>$row[9] Likes</p>
               </div>
               </div>
               </div>";
-	}
+	           }
 	if($row[1] == 'post'){
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
             <div class=\"card-block\">
-              <h3 class=\"card-title\">$row[1]</h3>
               <div class=\"card-footer text-muted\">
               <p>By: $row[2]</p>
               <p>Uploaded $row[7]</p>
@@ -92,8 +91,22 @@ function generateCards(){ //function to generate video cards, may possibly split
               </div>
               </div>
               </div>";
-	}
-    }
+	           }
+   if($row[1] == 'announcement'){
+     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+             <div class=\"card-block\">
+               <h3 class=\"card-title\">$row[1]</h3>
+               <div class=\"card-footer text-muted\">
+               <p>By: $row[2]</p>
+               <p>Uploaded $row[7]</p>
+               <p>$row[8] Views</p>
+               <p>$row[9] Likes</p>
+               </div>
+               </div>
+               </div>";
+ 	           }
+   }
+  }
 }
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
