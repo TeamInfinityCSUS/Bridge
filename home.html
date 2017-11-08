@@ -249,9 +249,36 @@
 var user;
 var uType;
 $(document).ready(function () {
-	$("#creatorB").hide();
+  if (sessionStorage.getItem('profile_id') == null){ //if no session is detected, move to login page to create session
+    window.location.href = 'index.html';
+  }
+  else{
+    $("#creatorB").hide(); //initally hide all buttons, only one set will be shown after initialization
     $("#badminB").hide();
-	$("#studentB").hide();
+    $("#studentB").hide();
+    var uName = sessionStorage.getItem('profile_id');
+    $.post("php/home.php", {action:'init', name:uName}) //initial setup, runs on startup
+    .done(function(data){
+        user = JSON.parse(data); //fetch self information
+        document.getElementById("pName").innerHTML = user[0].fname + " " + user[0].lname; //fill in self profile with information
+        document.getElementById("peName").innerHTML = user[0].fname + " " + user[0].lname;
+          document.getElementById("Bio").innerHTML = user[0].about_us;
+        if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
+          $('#studentB').show(); //show student buttons
+          document.getElementById("peAffil").innerHTML = "School"; //show student's group as a school
+
+        }
+        else if(user[0].acc_type == "Creator"){
+          $("#creatorB").show(); //show creator buttons
+          document.getElementById("peAffil").innerHTML = "Company"; //show creator's group as a company
+        }
+        });
+
+      $.post("php/home.php", {action:'cards'}) //generates content cards, thumbnails for videos or posts, initally primitive
+    .done(function(data){
+        $('#videoList').append(data);
+        });
+  }
     $('#hPic').click(function onchange() { //click on to open own profile window
 		  $("#newBio").val("");
       });
@@ -264,16 +291,15 @@ $(document).ready(function () {
           $.post("php/home.php", {action:"eProfile", newBio:newB})
 		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
-   $('#uVideo, #uMessage, #uAnn').click(function onchange() {
+   $('#uVideo, #uMessage, #uAnn').click(function onchange() { //if option is selected, make dropdown menu title the selection
      $("#uType").text($(this).text());
    });
 	 $('#UC').click(function onchange() { //upload new content to database and to users
 	    uType = $("#uType").text();
-		  var uURL = $("#uURL").text();
+		  var uURL = $("#uURL").text(); //get URL,Title, and Description/message from input
 		  var uTitle = $("#uTitle").text();
 		  var uDesc = $("#uDescription").text();
       $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
-		  document.getElementById("Bio").innerHTML = user[0].bio;
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
           document.getElementById("newBio").innerHTML = " "
@@ -287,30 +313,10 @@ $(document).ready(function () {
 			});
 
       });*/
-    $('#logOutB').click(function onchange() { //replace old profile with new one, primitive
+    $('#logOutB').click(function onchange() { //clear session, return back to login page
+          sessionStorage.clear();
           window.location.href = '/Bridge/index.html';
       });
-	$.post("php/home.php", {action:'init'}) //initial setup, runs on startup
-	.done(function(data){
-			user = JSON.parse(data); //fetch self information
-			document.getElementById("pName").innerHTML = user[0].fname + " " + user[0].lname; //fill in self profile with information
-			document.getElementById("peName").innerHTML = user[0].fname + " " + user[0].lname;
-		    document.getElementById("Bio").innerHTML = user[0].about_us;
-			if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
-				$('#studentB').show();
-				document.getElementById("peAffil").innerHTML = "School";
-
-			}
-			else if(user[0].acc_type == "Creator"){
-			  $("#creatorB").show();
-			  document.getElementById("peAffil").innerHTML = "Company";
-			}
-			});
-
-    $.post("php/home.php", {action:'cards'}) //generates cards
-	.done(function(data){
-			$('#videoList').append(data);
-			});
 
 		});
 
