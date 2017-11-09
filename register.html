@@ -36,26 +36,31 @@
           <div class="container studentID" id="stdtIDInpt">
             <label class = "label" for="studentID">Student ID</label>
             <input type="text" class="form-control" id="studentID" name="studentID">
+            <span class="error"> <?php echo $studentIDErr;?></span>
           </div> <!-- Student ID -->
           <!--This is the First Name input field-->
           <div class="container fName" id="fNameInpt">
             <label class = "label" for="fName">First name</label>
             <input type="text" class="form-control" id="fName" name="fName">
+            <span class="error"> <?php echo $fNameErr;?></span>
           </div> <!-- First Name -->
           <!--This is the Last Name input field-->
           <div class="container lName" id="lNameInpt">
             <label class = "label" for="lName">Last name</label>
             <input type="text" class="form-control" id="lName" name="lName">
+            <span class="error"> <?php echo $lNameErr;?></span>
           </div> <!-- Last Name -->
           <!--This is the UserName input field-->
           <div class="container uName" id="uNameInpt">
             <label class = "label" for="uName">Username</label>
             <input type="text" class="form-control" id="uName" name="uName">
+            <span class="error"> <?php echo $uNameErr;?></span>
           </div> <!-- Username -->
           <!--This is the Password input field-->
           <div class="container password" id="pwInpt">
             <label class = "label" for="password">Password</label>
             <input type="password" class="form-control" id="password" name="password">
+            <span class="error"> <?php echo $passwordErr;?></span>
           </div> <!-- Password -->
           <!--This is the Confirm Password input field-->
           <div class="container cPassword" id="cpwInpt">
@@ -66,6 +71,7 @@
           <div class="container email">
             <label class = "label" for="email">Email Address</label>
             <input type="email" class="form-control" id="email" name="email">
+            <span class="error"> <?php echo $emailErr;?></span>
           </div> <!-- Email Address -->
           <!--This is the Confirm Email input field-->
           <div class="container cEmail">

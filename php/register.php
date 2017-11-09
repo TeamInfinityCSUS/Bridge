@@ -1,14 +1,72 @@
 <?php
 // define variables and set to empty values
-$uName = $password = $email = $fName = $lName = $studentID = "";
+$uNameErr = $passwordErr = $emailErr = $fNameErr = $lNameErr = $studentIDErr = "";
+$uName = $password = $cPassword = $email = $cEmail = $fName = $lName = $studentID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-$uName = test_input($_POST["uName"]);
-$password = test_input($_POST["password"]);
-$email = test_input($_POST["email"]);
-$fName = test_input($_POST["fName"]);
-$lName = test_input($_POST["lName"]);
-$studentID = test_input($_POST["studentID"]);
+  //Validates Username
+  if(empty($_POST["uName"])) {
+    $uNameErr = "Username is required";
+  } else {
+    $uName = test_input($_POST["uName"]);
+    // check if name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z0-9]*$/",$uName)) {
+      $uNameErr = "Only letters and numbers allowed";
+    }
+  }
+  //Validates Password
+  if(empty($_POST["password"])) {
+    $passwordErr = "Password is required";
+  } else {
+    $password = test_input($_POST["password"]);
+    $cPassword = test_input($_POST["cPassword"]);
+    // check if Password only contains letters, numbers and special characters
+    if (!preg_match("/^[a-zA-Z0-9!@#$%^&*()_+-=[]\{}|;:,./<>?~]*$/",$password)) {
+      $passwordErr = "Only letters and white space allowed";
+    } else if($password !== $cPassword) {
+      $passwordErr = "Passwords must match";
+    }
+  }
+  //Validates Email address
+  if(empty($_POST["email"])) {
+    $emailErr = "Email is required";
+  } else {
+    $email = test_input($_POST["email"]);
+    $cEmail = test_input($_POST["cEmail"]);
+    // check if e-mail address is well-formed
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+    } else if($email !== $cEmail) {
+      $emailErr = "Email addresses must match";
+    }
+
+  }
+  //Validates First Name
+  if(empty($_POST["fName"])) {
+    $fNameErr = "First Name is required";
+  } else {
+    $fName = test_input($_POST["fName"]);
+    // check if First Name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$fName)) {
+      $fNameErr = "Only letters and white space allowed";
+    }
+  }
+  //Validates Last Name
+  if(empty($_POST["lName"])) {
+    $lNameErr = "Last Name is required";
+  } else {
+    $lName = test_input($_POST["lName"]);
+    // check if Last Name only contains letters and whitespace
+    if (!preg_match("/^[a-zA-Z ]*$/",$lName)) {
+      $lNameErr = "Only letters and white space allowed";
+    }
+  }
+  //Validates Student ID
+  if(empty($_POST["studentID"])) {
+    $studentIDErr = "Student ID is required";
+  } else {
+    $studentID = test_input($_POST["studentID"]);
+  }
 }
 
 function test_input($data) {
