@@ -242,7 +242,7 @@ $(document).ready(function () {
     window.location.href = 'index.html';
   }
   else{
-    $("#creatorB").hide(); //initally hide all buttons, only one set will be shown after initialization
+    $("#creatorB").hide(); //initially hide all buttons, only one set will be shown after initialization
     $("#badminB").hide();
     $("#studentB").hide();
     var uName = sessionStorage.getItem('profile_id');
@@ -255,20 +255,20 @@ $(document).ready(function () {
         if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
           $('#studentB').show(); //show student buttons
           document.getElementById("peAffil").innerHTML = "School"; //show student's group as a school
-          document.getElementByID("group").innerHTML = user[0].school;
-          document.getElementByID("pDescrip1").innerHTML = Primary Interest
-          document.getElementByID("pInterest").innerHTML = user[0].primary_interest;
-          document.getElementByID("pDescrip2").innerHTML = Secondary Interests
-          document.getElementByID("sInterest").innerHTML = user[0].secondary_interest;
+          document.getElementById("group").innerHTML = user[0].school;
+          document.getElementById("pDescrip1").innerHTML = Primary Interest
+          document.getElementById("pInterest").innerHTML = user[0].primary_interest;
+          document.getElementById("pDescrip2").innerHTML = Secondary Interests
+          document.getElementById("sInterest").innerHTML = user[0].secondary_interest;
         }
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
           document.getElementById("peAffil").innerHTML = "Company"; //show creator's group as a company
-          document.getElementByID("group").innerHTML = user[0].company;
-          document.getElementByID("pDescrip1").innerHTML = Field
-          document.getElementByID("pInterest").innerHTML = user[0].field;
-          document.getElementByID("pDescrip2").innerHTML = Interests
-          document.getElementByID("sInterest").innerHTML = user[0].interests;
+          document.getElementById("group").innerHTML = user[0].company;
+          document.getElementById("pDescrip1").innerHTML = Field
+          document.getElementById("pInterest").innerHTML = user[0].field;
+          document.getElementById("pDescrip2").innerHTML = Interests
+          document.getElementById("sInterest").innerHTML = user[0].interests;
         }
         });
 
