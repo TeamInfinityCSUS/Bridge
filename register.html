@@ -232,36 +232,46 @@
           console.log("Student submit button was pressed.");
           //  var uname = $('#uName').val();
           // console.log("uName is " + uname);
-                // $.post( "php/log.php", { 'log': [$('#email').val(), $('#password').val()] }).done(function( data ) {
+
           $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
-                $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#studentID').val()]
-            }).done(function(data) {
+                $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#studentID').val()] }).done(function(data) {
               console.log("In the done function.");
-              // var errors = JSON.parse(data); //parses the return data
-              // var err;
-              // for(err in errors) {  //Iterate throught the error array to display all the arrays
-              //   switch (err) {
-              //     case 'uNameErr':
-              //       uname_label = 'Username' // Original label with added error label
-              //       document.getElementById('uName').innerHTML = uname_label + ' ' + errors[err].fontcolor("red").fontsize(1);
-              //       $('#uName').val("");    // clears username if incorrect
-              //       break;
-              //     case 'passwordErr':
-              //
-              //       break;
-              //     case 'emailErr':
-              //
-              //       break;
-              //     case 'fNameErr':
-              //
-              //       break;
-              //     case 'lNameErr':
-              //
-              //       break;
-              //     case 'studentID':
-              //
-              //   }  //switch: error
-              // }  //for: errors
+              console.log("pre parse " + data);
+              var errors = JSON.parse(data); //parses the return data
+              var err;
+
+              console.log(errors);
+              console.log("length of errors is " + errors.length);
+              errors.push('blah');
+              console.log(errors);
+              console.log("length of errors is " + errors.length);
+              for(err in errors) {  //Iterate through the error array to display all the arrays
+              console.log("post parse " + err);
+              console.log("post parse " + errors[err]);
+              console.log("post parse " + errors.uNameErr);
+              console.log("value of uName " + $('#uName').val());
+                // switch (err) {
+                //   case 'uNameErr':
+                //     uname_label = 'Username' // Original label with added error label
+                //     document.getElementById('uName').innerHTML = uname_label + " " + errors[err].fontcolor("red").fontsize(1);
+                //     $('#uName').val("");    // clears username if incorrect
+                //     break;
+                //   case 'passwordErr':
+                //
+                //     break;
+                //   case 'emailErr':
+                //
+                //     break;
+                //   case 'fNameErr':
+                //
+                //     break;
+                //   case 'lNameErr':
+                //
+                //     break;
+                //   case 'studentID':
+                //
+                // }  //switch: error
+              }  //for: errors
           });  //done()
         }  //studentSubmit()
 
