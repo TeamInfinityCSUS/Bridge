@@ -1,286 +1,276 @@
 <!-- DOCTYPE -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title>Bridge: Select Account Type</title>
     <meta charset="utf-8">
     <!-- Viewport Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
-  integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  </head>
-  <h1>Bridge</h1>
-  <body>
-    <!-- Start of the Login Area -->
-    <div class="row loginblock">
-      <!-- This bit helps center the login Area (Left side)-->
-	  <div class = "col-lg-4 col-md-2 col-sm-1 col-xs-12"></div>
-    <!-- Start of the Login input block -->
-    <div class="accountForm"
-    	<div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="loginBlock">
-      <div>
-        <label class ="label" for="btn-group" id="selectLabel" >Select your account type</label>
-      </div>
-        <!-- Buttons control what content is displayed -->
-        <button type="submit" id="studentOption" class="btn btn-primary">Student</button>
-        <button type="submit" id="creatorOption" class="btn btn-primary">Creator</button>
-      </div> <!-- Account Select Buttons -->
-
-
-      <!-- Hidden Container until Student is selected -->
-      <div class="container hidden" id="studentReg" >
-          <!--This is the Student ID input field-->
-          <div class="container studentID" id="stdtIDInpt">
-            <label class = "label" id="studentID_label" for="studentID">Student ID</label>
-            <input type="text" class="form-control" id="studentID" name="studentID">
-          </div> <!-- Student ID -->
-          <!--This is the First Name input field-->
-          <div class="container fName" id="fNameInpt">
-            <label class = "label" id="fname_label" for="fName">First Name</label>
-            <input type="text" class="form-control" id="fName" name="fName">
-          </div> <!-- First Name -->
-          <!--This is the Last Name input field-->
-          <div class="container lName" id="lNameInpt">
-            <label class = "label" id="lname_label" for="lName">Last Name</label>
-            <input type="text" class="form-control" id="lName" name="lName">
-          </div> <!-- Last Name -->
-          <!--This is the UserName input field-->
-          <div class="container uName" id="uNameInpt">
-            <label class = "label" id="uname_label" for="uName">Username</label>
-            <input type="text" class="form-control" id="uName" name="uName">
-          </div> <!-- Username -->
-          <!--This is the Password input field-->
-          <div class="container password" id="pwInpt">
-            <label class = "label" id="password_label" for="password">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
-          </div> <!-- Password -->
-          <!--This is the Confirm Password input field-->
-          <div class="container cPassword" id="cpwInpt">
-            <label class = "label" for="password">Confirm Password</label>
-            <input type="password" class="form-control" id="cPassword" name="cPassword">
-          </div> <!-- Confirm Password -->
-          <!--This is the Email input field-->
-          <div class="container email">
-            <label class = "label" id="email_label" for="email">Email Address</label>
-            <input type="email" class="form-control" id="email" name="email">
-          </div> <!-- Email Address -->
-          <!--This is the Confirm Email input field-->
-          <div class="container cEmail">
-            <label class = "label" for="email">Confirm Email Address</label>
-            <input type="email" class="form-control" id="cEmail" name="cEmail">
-          </div> <!-- Confirm Email Address -->
-          <div class="dropdown" id="primaryCareer">
-            <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Choose your primary field of interest
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropButton" >
-              <a class="dropdown-item" href="#">Exploring</a>
-              <a class="dropdown-item" href="#">Computer Science</a>
-              <a class="dropdown-item" href="#">Civil Engineering</a>
-              <a class="dropdown-item" href="#">Mechanical Engineering</a>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+</head>
+<h1>Bridge</h1>
+<body>
+    <!-- Start of the Horizontal Panel -->
+    <div class="row" id="horPanel">
+        <!-- This bit helps center the login Area (Left side)-->
+        <div class = "col-lg-4 col-md-2 col-sm-1 col-xs-12"></div>
+        <!-- Start of the Registration input block -->
+        <div class = "col-lg-8 col-md-8 col-sm-12 col-xs-12" id="regBlock">
+            <div>
+            <label class ="label" for="btn-group" id="selectLabel" >Select your account type</label>
             </div>
-          </div>
-          <div class="dropdown" id="secondaryCareer">
-            <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Choose your secondary field of interest
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropButton" >
-            <a class="dropdown-item" href="#">Exploring</a>
-            <a class="dropdown-item" href="#">Computer Science</a>
-            <a class="dropdown-item" href="#">Civil Engineering</a>
-            <a class="dropdown-item" href="#">Mechanical Engineering</a>
-            </div>
-          </div>
-          <div class="container" id="stBtn">
-            <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
-          </div> <!-- Student Continue Button -->
-      </div> <!-- Hidden container: StudentReg -->
+            <div>
+                <!-- Buttons control what content is displayed -->
+                <button type="submit" id="studentOption" class="btn btn-primary">Student</button>
+                <button type="submit" id="creatorOption" class="btn btn-primary">Creator</button>
+            </div> <!-- Account Select Buttons -->
 
-      <!-- Hidden Container until Creator is selected -->
-      <div class="container hidden" id="creatorReg" >
-        <!--This is the First Name input field-->
-        <div class="container fName" id="fNameInpt">
-          <label class = "label" for="fName">First name</label>
-          <input type="text" class="form-control" name="fName">
-        </div> <!-- First Name -->
-        <!--This is the Last Name input field-->
-        <div class="container lName" id="lNameInpt">
-          <label class = "label" for="lName">Last name</label>
-          <input type="text" class="form-control" name="lName">
-        </div> <!-- Last Name -->
-        <!--This is the UserName input field-->
-        <div class="container uName" id="uNameInpt">
-          <label class = "label" for="uName">Username</label>
-          <input type="text" class="form-control" id="uName" name="uName">
-        </div> <!-- Username -->
-        <!--This is the Password input field-->
-        <div class="container password" id="pwInpt">
-          <label class = "label" for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password">
-        </div> <!-- Password -->
-        <!--This is the Confirm Password input field-->
-        <div class="container cPassword" id="cpwInpt">
-          <label class = "label" for="password">Confirm Password</label>
-          <input type="password" class="form-control" id="cpassword" name="cPassword">
-        </div> <!-- Confirm Password -->
-        <!--This is the Email input field-->
-        <div class="container email">
-          <label class = "label" for="email">Email Address</label>
-          <input type="email" class="form-control" id="email" name="email">
-        </div> <!-- Email Address -->
-        <!--This is the Confirm Email input field-->
-        <div class="container cEmail">
-          <label class = "label" for="email">Confirm Email Address</label>
-          <input type="email" class="form-control" id="cEmail" name="cEmail">
-        </div> <!-- Confirm Email Address -->
-        <!-- Dropdown Button for Career Fields -->
-        <div class="dropdown">
-          <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Choose your field of Interest
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropButton">
-            <a class="dropdown-item" href="#">Computer Science</a>
-            <a class="dropdown-item" href="#">Civil Engineering</a>
-            <a class="dropdown-item" href="#">Mechanical Engineering</a>
-          </div>
-        </div>
-        <!--This is the Professional Reference Name input field-->
-        <div class="container" id="cbauNameInpt">
-          <label class = "label" for="prName">Name of Professional Reference</label>
-          <input type="text" class="form-control" id="prName" name="prName">
-        </div> <!-- Professional Reference Name -->
-        <!--This is the Professional Reference Email input field-->
-        <div class="container cEmail">
-          <label class = "label" for="prEmail">Reference Email Address</label>
-          <input type="email" class="form-control" id="prEmail" name="prEmail">
-        </div> <!-- Professional Reference Email Address -->
-        <div class="container">
-          <button type="submit" id="creatorSubmitBtn" class="btn btn-success btn-sm">Submit</button>
-        </div> <!-- Creator Submit Button -->
-      </div> <!-- Hidden container: CreatorReg -->
-      </div> <!-- Registration Block -->
 
-    </div> <!-- Account Form -->
-  </div> <!-- Login Block -->
+            <!-- Hidden Container until Student is selected -->
+            <div class="container" id="registrationblock" >
+                <!--This is the Student ID input field-->
+                <div class="container studentID hidden" id="stdtIDInpt">
+                    <label class = "label" id="studentID_label" for="studentID">Student ID</label>
+                    <input type="text" class="form-control" id="studentID" name="studentID">
+                </div> <!-- Student ID -->
+                <!--This is the First Name input field-->
+                <div class="container fName hidden" id="fNameInpt">
+                    <label class = "label" id="fname_label" for="fName">First Name</label>
+                    <input type="text" class="form-control" id="fName" name="fName">
+                </div> <!-- First Name -->
+                <!--This is the Last Name input field-->
+                <div class="container lName hidden" id="lNameInpt">
+                    <label class = "label" id="lname_label" for="lName">Last Name</label>
+                    <input type="text" class="form-control" id="lName" name="lName">
+                </div> <!-- Last Name -->
+                <!--This is the UserName input field-->
+                <div class="container uName hidden" id="uNameInpt">
+                    <label class = "label" id="uName_label" for="uName">Username</label>
+                    <input type="text" class="form-control" id="uName" name="uName">
+                </div> <!-- Username -->
+                <!--This is the Password input field-->
+                <div class="container password hidden" id="pwInpt">
+                    <label class = "label" id="password_label" for="stpassword">Password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div> <!-- Password -->
+                <!--This is the Confirm Password input field-->
+                <div class="container cPassword hidden" id="cpwInpt">
+                    <label class = "label" for="password">Confirm Password</label>
+                    <input type="password" class="form-control" id="cPassword" name="cPassword">
+                </div> <!-- Confirm Password -->
+                <!--This is the Email input field-->
+                <div class="container email hidden" id="emailInpt">
+                    <label class = "label" id="email_label" for="email">Email Address</label>
+                    <input type="email" class="form-control" id="email" name="email">
+                </div> <!-- Email Address -->
+                <!--This is the Confirm Email input field-->
+                <div class="container cEmail hidden" id="cEmailInpt">
+                    <label class = "label" for="email">Confirm Email Address</label>
+                    <input type="email" class="form-control" id="cEmail" name="cEmail">
+                </div> <!-- Confirm Email Address -->
+                <div class="dropdown hidden" id="priIntInpt">
+                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose your primary field of interest
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropButton" >
+                        <a class="dropdown-item" href="#">Exploring</a>
+                        <a class="dropdown-item" href="#">Computer Science</a>
+                        <a class="dropdown-item" href="#">Civil Engineering</a>
+                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
+                    </div>
+                </div>
+                <div class="dropdown hidden" id="secIntInpt">
+                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose your secondary field of interest
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropButton" >
+                        <a class="dropdown-item" href="#">Exploring</a>
+                        <a class="dropdown-item" href="#">Computer Science</a>
+                        <a class="dropdown-item" href="#">Civil Engineering</a>
+                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
+                    </div>
+                </div>
+                <!-- Dropdown Button for Career Fields -->
+                <div class="dropdown hidden" id="priFldInpt">
+                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Choose your field of Interest
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropButton">
+                        <a class="dropdown-item" href="#">Computer Science</a>
+                        <a class="dropdown-item" href="#">Civil Engineering</a>
+                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
+                    </div>
+                </div>
+                <!--This is the Professional Reference Name input field-->
+                <div class="container hidden" id="prNameInpt">
+                    <label class = "label" for="prName">Name of Professional Reference</label>
+                    <input type="text" class="form-control" id="prName" name="prName">
+                </div> <!-- Professional Reference Name -->
+                <!--This is the Professional Reference Email input field-->
+                <div class="container email hidden" id="prEmailInpt">
+                    <label class = "label" for="prEmail">Reference Email Address</label>
+                    <input type="email" class="form-control" id="prEmail" name="prEmail">
+                </div> <!-- Professional Reference Email Address -->
+                <div class="container hidden" id="crSubmit">
+                    <button type="submit" id="creatorSubmitBtn" class="btn btn-success btn-sm">Submit</button>
+                </div> <!-- Creator Submit Button -->
+                <div class="container hidden" id="stSubmit">
+                    <button type="submit" id="studentSubmitBtn" class="btn btn-success btn-sm">Submit</button>
+                </div> <!-- Student Submit Button -->
+            </div> <!-- Container: Registration -->
+        </div> <!-- Registration BLock -->
+        <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
+    </div> <!-- Horizontal Panel -->
 
-  	<style>
-  	h1{
-  		background-color: #1A7CBC;
-  	}
-  	body{
-  		background-color: #82CBFB;
-      margin: auto;
-  	}
-    /*Overides the Bootstrap settings*/
-    .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
-      background-color: #1A7CBC !important;
-      width: auto;
-      margin-top: auto;
-      margin-left: auto;
-    }
-    .hidden{
-      display: none;
-    }
-    .blue{
-      background-color:#5B5B5B;
-    }
-  	</style>
-      <!-- JavaScript: placed at the end of the document so the pages load faster -->
-  		<!-- jQuery library -->
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    <style>
+        h1{
+            background-color: #1A7CBC;
+        }
+        body{
+            background-color: #82CBFB;
+            margin: auto;
+        }
+        /*Overides the Bootstrap settings*/
+        .btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited{
+            background-color: #1A7CBC !important;
+            width: auto;
+            margin-top: auto;
+            margin-left: auto;
+        }
+        .hidden{
+            display: none;
+        }
+        .blue{
+            background-color:#5B5B5B;
+        }
+    </style>
+    <!-- JavaScript: placed at the end of the document so the pages load faster -->
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
 
-  		<!-- Popper -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+    <!-- Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
     integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
     crossorigin="anonymous"></script>
 
-  		<!-- Latest compiled and minified Bootstrap JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+    <!-- Latest compiled and minified Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
     integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
     crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        //Skips log on screen and takes you directly to the home page if already logged in
-        var profile_id = sessionStorage.getItem('profile_id');
-        if (profile_id == null || profile_id == 0){
-          profile_id = 0;
-        }else{
-          window.location.href = 'home.html'; // move to home page
-        }
-        //Student account form is displayed when clicked
-        $("#studentOption").click(function onchange() {
-          $("#creatorReg").hide();
-          $("#studentReg").show();
-        });
-        //Creator account form is displayed when clicked
-        $("#creatorOption").click(function onchange() {
-          $("#studentReg").hide();
-          $("#creatorReg").show();
-        });
+        $(document).ready(function () {
+//            //Skips log on screen and takes you directly to the home page if already logged in
+//            var profile_id = sessionStorage.getItem('profile_id');
+//            if (profile_id == null || profile_id == 0){
+//                profile_id = 0;
+//            }else{
+//                window.location.href = 'home.html'; // move to home page
+//            }
 
-        $('#studentSubmitBtn').click(function(){ studentSubmit(); });
-        $('#creatorSubmitBtn').click(function(){ creatorSubmit(); });
+            //Student account form is displayed when Student button is clicked
+            $("#studentOption").click(function onchange() {
+                //Hide Creator input fields
+                $("#priFldInpt").hide(); $("#prNameInpt").hide(); $("#prEmailInpt").hide(); $("#crSubmit").hide();
+                //Show Student input fields
+                $("#stdtIDInpt").show(); $("#fNameInpt").show(); $("#lNameInpt").show(); $("#uNameInpt").show();
+                $("#pwInpt").show(); $("#cpwInpt").show(); $("#emailInpt").show(); $("#cEmailInpt").show();
+                $("#priIntInpt").show(); $("#secIntInpt").show(); $("#stSubmit").show();
+            });
 
-        function studentSubmit() {//Runs when Submit is clicked in the Student container
-          console.log("Student submit button was pressed.");
-          //  var uname = $('#uName').val();
-          // console.log("uName is " + uname);
+            //Creator account form is displayed when Creator button is clicked
+            $("#creatorOption").click(function onchange() {
+                //Hide Student input fields
+                $("#stdtIDInpt").hide(); $("#priIntInpt").hide(); $("#secIntInpt").hide(); $("#stSubmit").hide();
+                //Show Creator input fields
+                $("#fNameInpt").show(); $("#lNameInpt").show(); $("#uNameInpt").show(); $("#pwInpt").show();
+                $("#cpwInpt").show(); $("#emailInpt").show(); $("#cEmailInpt").show(); $("#priFldInpt").show();
+                $("#prNameInpt").show(); $("#prEmailInpt").show(); $("#crSubmit").show();
+            });
 
-          $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
+            $('#studentSubmitBtn').click(function(){ studentSubmit(); });
+            $('#creatorSubmitBtn').click(function(){ creatorSubmit(); });
+
+            function studentSubmit() {//Runs when Submit is clicked in the Student container
+                $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
                 $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#studentID').val()] }).done(function(data) {
-              console.log("In the done function.");
-              console.log("pre parse " + data);
-              var errors = JSON.parse(data); //parses the return data
-              var err;
+                    console.log("data = " + data);
+                    var errorsArray = JSON.parse(data); //parses the return data
+                    for(index in errorsArray) {  //Iterate through the error array to display all the arrays
+                        if(errorsArray[index].uNameErr) {  //Checks for the Username error
+                            var orig_label = "Username";  //Original label
+                            document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
+                        }
+                        if(errorsArray[index].passwordErr) {  //Checks for the Password error
+                            var orig_label = "Password";  //Original label
+                            document.getElementById('password_label').innerHTML = orig_label + " " + errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
+                            $('#password').val(""); $('#cPassword').val("");   // Clears Passwords if not valid
+                        }
+                        if(errorsArray[index].emailErr) {  //Checks for the Email error
+                            var orig_label = "Email Address";  //Original label
+                            document.getElementById('email_label').innerHTML = orig_label + " " + errorsArray[index].emailErr.fontcolor("red").fontsize(2);
+                        }
+                        if(errorsArray[index].fNameErr) {  //Checks for the First Name error
+                            var orig_label = "First Name";  //Original label
+                            document.getElementById('fname_label').innerHTML = orig_label + " " + errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
+                        }
+                        if(errorsArray[index].lNameErr) {  //Checks for the Last Name error
+                            var orig_label = "Last Name";  //Original label
+                            document.getElementById('lname_label').innerHTML = orig_label + " " + errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
+                        }
+                        if(errorsArray[index].studentIDErr) {  //Checks for the Student ID error
+                            var orig_label = "Student ID";  //Original label
+                            document.getElementById('studentID_label').innerHTML = orig_label + " " + errorsArray[index].studentIDErr.fontcolor("red").fontsize(2);
+                        }
+                    }  //for: errors
+                });  //done()
+            };  //studentSubmit()
 
-              console.log(errors);
-              console.log("length of errors is " + errors.length);
-              errors.push('blah');
-              console.log(errors);
-              console.log("length of errors is " + errors.length);
-              for(err in errors) {  //Iterate through the error array to display all the arrays
-              console.log("post parse " + err);
-              console.log("post parse " + errors[err]);
-              console.log("post parse " + errors.uNameErr);
-              console.log("value of uName " + $('#uName').val());
-                // switch (err) {
-                //   case 'uNameErr':
-                //     uname_label = 'Username' // Original label with added error label
-                //     document.getElementById('uName').innerHTML = uname_label + " " + errors[err].fontcolor("red").fontsize(1);
-                //     $('#uName').val("");    // clears username if incorrect
-                //     break;
-                //   case 'passwordErr':
-                //
-                //     break;
-                //   case 'emailErr':
-                //
-                //     break;
-                //   case 'fNameErr':
-                //
-                //     break;
-                //   case 'lNameErr':
-                //
-                //     break;
-                //   case 'studentID':
-                //
-                // }  //switch: error
-              }  //for: errors
-          });  //done()
-        }  //studentSubmit()
-
-        function creatorSubmit() {//Runs when Submit is clicked in the Creator container
-          console.log("Creator submit button was pressed.");
-        };  //creatorSubmit()
-
-    });  //ready()
+            function creatorSubmit() {//Runs when Submit is clicked in the Creator container
+              $.post( "php/stReg.php", { 'creatorAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
+              $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#prName').val(),$('#prEmail').val()] }).done(function(data) {
+                  console.log("data = " + data);
+                  var errorsArray = JSON.parse(data); //parses the return data
+                  for(index in errorsArray) {  //Iterate through the error array to display all the arrays
+                      if(errorsArray[index].uNameErr) {  //Checks for the Username error
+                          var orig_label = "Username";  //Original label
+                          document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
+                      }
+                      if(errorsArray[index].passwordErr) {  //Checks for the Password error
+                          var orig_label = "Password";  //Original label
+                          document.getElementById('password_label').innerHTML = orig_label + " " + errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
+                          $('#password').val(""); $('#cPassword').val("");   // Clears Passwords if not valid
+                      }
+                      if(errorsArray[index].emailErr) {  //Checks for the Email error
+                          var orig_label = "Email Address";  //Original label
+                          document.getElementById('email_label').innerHTML = orig_label + " " + errorsArray[index].emailErr.fontcolor("red").fontsize(2);
+                      }
+                      if(errorsArray[index].fNameErr) {  //Checks for the First Name error
+                          var orig_label = "First Name";  //Original label
+                          document.getElementById('fname_label').innerHTML = orig_label + " " + errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
+                      }
+                      if(errorsArray[index].lNameErr) {  //Checks for the Last Name error
+                          var orig_label = "Last Name";  //Original label
+                          document.getElementById('lname_label').innerHTML = orig_label + " " + errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
+                      }
+                      if(errorsArray[index].prNameErr) {  //Checks for the Student ID error
+                          var orig_label = "Name of Professional Reference";  //Original label
+                          document.getElementById('prName_label').innerHTML = orig_label + " " + errorsArray[index].prNameErr.fontcolor("red").fontsize(2);
+                      }
+                      if(errorsArray[index].prEmailErr) {  //Checks for the Student ID error
+                          var orig_label = "Reference Email Address";  //Original label
+                          document.getElementById('prEmail_label').innerHTML = orig_label + " " + errorsArray[index].prEmailErr.fontcolor("red").fontsize(2);
+                      }
+                  }  //for: errors
+              });  //done()
+            };  //creatorSubmit()
+        });  //ready()
     </script>
-
-    </body>
-  </html>
+</body>
+</html>
