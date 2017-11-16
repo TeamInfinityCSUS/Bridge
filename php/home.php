@@ -107,7 +107,7 @@ function generateCards(){ //function to generate video cards, may possibly split
  	           }
    }
   }
-}
+
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
@@ -133,10 +133,10 @@ function uploadContent(){ //uploads content to database
 	}
   if($_POST['type'] == video){
   $vID = substr($_POST['URL'],31,11); //store youtube's video ID into database, every URL is the same other than ID
-	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],$vID,$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert video info into database
+	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES (".$_POST['type'].",".$_POST['who'].",".$vID.",".$_POST['field'].",".$_POST['desc'].",".$date.",".$time.",0,0,".$et.";"; // insert video info into database
   }
   if($_POST['type'] == post){
-	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES ($_POST['type'],$_POST['who'],\"post\",$_POST['field'],$_POST['desc'],$date,$time,0,0,$et;"; // insert post info into database
+	$sql = "INSERT INTO content (kind,username,field,content,description,time_posted,date_posted,views,likes,eternship) VALUES (".$_POST['type'].",".$_POST['who'].",\"post\",".$_POST['field'].",".$_POST['desc'].",".$date.",".$time.",0,0,".$et.";"; // insert post info into database
   }
 	$result = $conn->query($sql);
 

@@ -165,7 +165,7 @@
           <div class="modal-content">
             <div class="modal-header">
 			<div id="vTitle"></div>
-			<iframe src = "..."></iframe>
+			<iframe src = ""></iframe>
             <div class="modal-footer">
               <button type="button" class="btn blue"  id="reactB">React</button><br />
               <button type="button" class="btn blue" id="likeB">Like</button>
@@ -256,18 +256,18 @@ $(document).ready(function () {
           $('#studentB').show(); //show student buttons
           document.getElementById("peAffil").innerHTML = "School"; //show student's group as a school
           document.getElementById("group").innerHTML = user[0].school;
-          document.getElementById("pDescrip1").innerHTML = Primary Interest
+          document.getElementById("pDescrip1").innerHTML = "Primary Interest";
           document.getElementById("pInterest").innerHTML = user[0].primary_interest;
-          document.getElementById("pDescrip2").innerHTML = Secondary Interests
+          document.getElementById("pDescrip2").innerHTML = "Secondary Interests";
           document.getElementById("sInterest").innerHTML = user[0].secondary_interest;
         }
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
           document.getElementById("peAffil").innerHTML = "Company"; //show creator's group as a company
           document.getElementById("group").innerHTML = user[0].company;
-          document.getElementById("pDescrip1").innerHTML = Field
+          document.getElementById("pDescrip1").innerHTML = "Field";
           document.getElementById("pInterest").innerHTML = user[0].field;
-          document.getElementById("pDescrip2").innerHTML = Interests
+          document.getElementById("pDescrip2").innerHTML = "Interests";
           document.getElementById("sInterest").innerHTML = user[0].interests;
         }
         });
