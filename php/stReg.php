@@ -9,11 +9,13 @@ $cEmail = $_POST['studentAcct'][4];
 $fName = $_POST['studentAcct'][5];
 $lName = $_POST['studentAcct'][6];
 $studentID = $_POST['studentAcct'][7];
+$priInt = 'Exploring';
+$secInt = 'Exploring';
 
 $uName = test_input($uName);  //Validate Username
 if(empty($uName)) {
     array_push($outgoing, array('uNameErr'=>'Required'));
-//} else if (!preg_match('/^[a-zA-Z]*$/',$uName)) { 
+//} else if (!preg_match('/^[a-zA-Z]*$/',$uName)) {
 //     //check if username only contains letters and numbers
 //     array_push($outgoing, "uNameErr", "Only letters and numbers.");
 //   }
@@ -74,14 +76,14 @@ if(count($outgoing) == 0) {
     if ($conn->connect_error) { // Connection Check
         die("Connection to database failed: " . $conn->connect_error);
     }
-    
+
     $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
 
     //sets up the Student query
     $in1 = "INSERT INTO site_members(username, password, email, fname, lname, acc_type, is_verified)
     VALUES ($uName, $password, $email, $fName, $lName, 'Student', 0)";
-    $in2 = "INSERT INTO students(username, school_id)
-    VALUES ($uName, $studentID)";
+    $in2 = "INSERT INTO students(username, school_id, primary_interest, secondary_interest)
+    VALUES ($uName, $studentID, $priInt, $priInt)";
 
     if($conn->query($in1) === TRUE && $conn->query($in2) === TRUE) {
         $conn->commit();
