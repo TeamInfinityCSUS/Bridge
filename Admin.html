@@ -10,7 +10,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript">
-        var inner; // This has to be here so all functions can access it
+        var inner; // This stores username keys. This has to be here so all functions can access it
+        var contentinner; // This stores content keys. This has to be here so all functions can access it
         $(document).ready(function(){ // Wait until page is ready
                   /* Skips log on screen and takes you directly to the home page if already logged in
                 var profile_id = sessionStorage.getItem('profile_id');
@@ -29,7 +30,8 @@
                         window.location.href = 'register.html'; // move to register
                 });
                 //$('#searchbar').keyup( function(e){ if (e.keyCode === 13){ update() }; });  // When enter is press inside email
-                update(); // This causes the function update go live on refresh
+                contentupdate(); // The two updates hides each other.
+                update(); // This update is called second so this is after this will show on refresh.
         });
         function liveverify(num){ //runs when the verify button is clicked. Parameter = username from the table
                 if( !confirm('Confirm verify of ' + inner[num] + '?') ){return;};
@@ -37,11 +39,11 @@
                 update();
         }
         function liveedit(num){ //runs when the edit button is clicked. Parameter = username from the table
-                //if( !confirm('Confirm edit of ' + inner[num] + '?') ){return;};
                 $.post( "php/liveedit.php", { 'num': inner[num] }).done(function( data ){ // Hides search and table
-                        document.getElementById('live table').style.display = 'none';
-                        document.getElementById('searchbar').style.visibility = 'hidden';
+                        userhide(0);
                         document.getElementById('edittable').innerHTML = data;
+                        $('#suser').hide();
+                        $('#scontent').hide();
                 });
         }
         function livedelete(num){ //runs when the delete button is clicked. Parameter = username from the table
@@ -54,8 +56,31 @@
                 $.post( "php/edit.php", { 'funct': 'edit', 'num': [$('#e1').val(),$('#e2').val(),$('#e3').val(),$('#e4').val(),$('#e5').val(),$('#e6').val()] });
                 update();
                 document.getElementById('edittable').innerHTML = ""; // Unhide search and table
-                document.getElementById('live table').style.display = 'block';
-                document.getElementById('searchbar').style.visibility = 'visible';
+        }
+        function contentliveedit(num){ //runs when the edit button is clicked. Parameter = CID from the table
+                $.post( "php/contentliveedit.php", { 'num': contentinner[num] }).done(function( data ){ // Hides search and table
+                        contenthide(0);
+                        document.getElementById('edittable').innerHTML = data;
+                        $('#suser').hide();
+                        $('#scontent').hide();
+                });
+        }
+        function contentdelete(num){ //runs when the delete button is clicked. Parameter = username from the table
+                if( !confirm('Confirm delete of Content ID ' + contentinner[num] + '?') ){return;};
+                $.post( "php/contentediting.php", { 'funct': 'delete', 'num': contentinner[num] });
+                contentupdate();
+        }
+        function contentverify(num){ //runs when the delete button is clicked. Parameter = username from the table
+                if( !confirm('A content with 0 likes will not be shown. Like Content ID ' + contentinner[num] + '?') ){return;};
+                $.post( "php/contentediting.php", { 'funct': 'verify', 'num': contentinner[num] });
+                contentupdate();
+        }
+        function contentediting(num){ // This is the edit page. Parameter is 1 for accept and 0 for cancel
+                if( num && !confirm('Apply Changes?') ){return;};
+                $.post( "php/contentediting.php", { 'funct': 'edit', 'num': [$('#e1').val(),$('#e2').val(),$('#e3').val(),$('#e4').val(),$('#e5').val(),$('#e6').val(),$('#e7').val(),$('#e8').val(),$('#e9').val(),$('#e10').val(),$('#e11').text()] });
+                contentupdate();
+                document.getElementById('edittable').innerHTML = ""; // Unhide search and table
+                userhide(0);
         }
         function attemptlog(){ // attempts to log in. Purely for verification. Not used, yet.
                 $.post( "php/log.php", { 'log': [$('#email').val(), $('#password').val()] }).done(function( data ) {
@@ -71,13 +96,48 @@
                 });
         }
         function update(){ // Updates the live search table whenever something appears in the search box
-                var prepend = '<table class="table table-hover"><thead><tr><th>Username</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Account Type</th><th>Verfied</th><th></th></tr></thead><tbody>';
+                var prepend = '<table class="table table-hover"><thead><tr><th>Username</th><th>Email</th><th>First Name</th><th>Last Name</th><th>Account Type</th><th>Verfied(1/0)</th><th></th></tr></thead><tbody>';
                 var postpend = '</tbody></table>';
                 $.post("php/livesearch.php", { 'search' : [$('#searchby').val(),$('#searchinput').val(),$('#searchshow').val()] }).done(function(data){
                         var out = $.parseJSON(data);
                         inner = out.outlisting;
                         document.getElementById('live table').innerHTML = prepend + out.outstring + postpend;
+                        contenthide(0);
+                        userhide(1);
                 });
+        }
+        function contentupdate(){ // Updates the live search table whenever something appears in the content search box
+                var prepend = '<table class="table table-hover"><thead><tr><th>CID</th><th>Kind</th><th>Uploader</th><th>Interest<th>Time Posted</th><th>Date Posted</th><th>Views</th><th>Likes</th><th>Eternship(1/0)</th></tr></thead><tbody>';
+                var postpend = '</tbody></table>';
+                $.post("php/contentlivesearch.php", { 'search' : [$('#contentsearchby').val(),$('#contentsearchinput').val(),$('#contentsearchshow').val()] }).done(function(data){
+                        var out = $.parseJSON(data);
+                        contentinner = out.outlisting;
+                        document.getElementById('content live table').innerHTML = prepend + out.outstring + postpend;
+                        userhide(0);
+                        contenthide(1);
+                });
+        }
+        function userhide(num){ // num is 1 for show and 0 for hide
+                if (num){
+                        document.getElementById('live table').style.display = 'block';
+                        document.getElementById('searchbar').style.visibility = 'visible';
+                        $('#suser').hide();
+                }else{
+                        document.getElementById('live table').style.display = 'none';
+                        document.getElementById('searchbar').style.visibility = 'hidden';
+                        $('#suser').show();
+                }
+        }
+        function contenthide(num){ // num is 1 for show and 0 for hide
+                if (num){
+                        document.getElementById('content live table').style.display = 'block';
+                        document.getElementById('contentsearchbar').style.visibility = 'visible';
+                        $('#scontent').hide();
+                }else{
+                        document.getElementById('content live table').style.display = 'none';
+                        document.getElementById('contentsearchbar').style.visibility = 'hidden';
+                        $('#scontent').show();
+                }
         }
       </script>
   </head>
@@ -92,6 +152,8 @@
         <div class="container data" id="container">
 
 <form>
+<button type="button" id="scontent" onclick="contentupdate()">Show Contents</button><button type="button" id="suser" onclick="update()">Show Users</button>
+</label>
   <div class="input-group" id="searchbar">
     <select id="searchby">
         <option value = "username">By Username</option>
@@ -101,7 +163,7 @@
         <option value = "acc_type">By Account</option>
         <option value = "is_verified">By Verified</option>
    </select>
-    <input type="text" class="form-control" placeholder="Search" size="10" onkeyup="update(this.value)" id="searchinput">
+    <input type="text" class="form-control" placeholder="Search User" size="10" onkeyup="update(this.value)" id="searchinput">
     <select id="searchshow">
         <option value = "1">Show 1</option>
         <option value = "5">Show 5</option>
@@ -111,6 +173,7 @@
    </select>
   </div>
 </form>
+
 <div id="live table">
 <table class="table table-hover">
     <thead>
@@ -120,8 +183,55 @@
         <th>Email</th>
         <th>Username</th>
         <th>Account Type</th>
-        <th>Verfied</th>
-        <th></th>
+        <th>Verfied(1/0)</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+</div>
+
+
+
+<form>
+  <div class="input-group" id="contentsearchbar">
+    <select id="contentsearchby">
+        <option value = "CID">By CID</option>
+        <option value = "kind">By Kind</option>
+        <option selected value = "username">By Uploader</option>
+        <option value = "field">By Interest</option>
+        <option value = "content">By Type</option>
+        <option value = "time_posted">By Time Posted</option>
+        <option value = "data_posted">By Date Posted</option>
+        <option value = "views">By Views</option>
+        <option value = "likes">By Likes</option>
+        <option value = "eternship">By Eternship</option>
+   </select>
+    <input type="text" class="form-control" placeholder="Search Content" size="10" onkeyup="contentupdate(this.value)" id="contentsearchinput">
+    <select id="contentsearchshow">
+        <option value = "1">Show 1</option>
+        <option value = "5">Show 5</option>
+        <option selected value = "10">Show 10</option>
+        <option value = "15">Show 15</option>
+        <option value = "20">Show 20</option>
+   </select>
+  </div>
+</form>
+
+<div id="content live table">
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th>CID</th>
+        <th>Kind</th>
+        <th>Uploader</th>
+        <th>Interest</th>
+        <th>Time Posted</th>
+        <th>Date Posted</th>
+        <th>Views</th>
+        <th>Likes</th>
+        <th>Eternship(1/0)</th>
       </tr>
     </thead>
     <tbody>
@@ -130,7 +240,7 @@
 </table>
 </div>
 <div id="edittable"></div>
-        </div>
+</div>
 
         <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
         </div>
