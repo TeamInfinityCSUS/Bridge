@@ -20,11 +20,11 @@
 	</div>
 
 	<div id = "creatorB" class = "container hidden">
-	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+	<button type="button" id = "mcon" class="btn blue btn-sm" data-toggle = "modal" data-target="#mConM">Manage Content</button>
 	</div>
 
 	<div id = "badminB" class = "container hidden">
-	<button type="button" id = "mcon" class="btn blue btn-sm">Manage Content</button>
+	<button type="button" id = "mcon" class="btn blue btn-sm" data-toggle = "modal" data-target="#mConM">Manage Content</button>
     <button type="button" id="badmin" class="btn blue btn-sm">Manage Company</button>
 	</div>
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
@@ -109,12 +109,11 @@
           <div class="modal-header">
             <h2>Manage Conent</h2>
       </div>
-      </div>
+
       <div class="modal-body">
-	  <button type="button" class="btn blue" id="viewC">View My Content</button>
-	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "uConM">Upload Content</button>
+	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "#uConM">Upload Content</button>
       </div>
-    </div>
+	  </div>
     </div>
     </div>
 
@@ -123,7 +122,6 @@
       <div class="modal-content"> <!-- modal to upload content -->
           <div class="modal-header">
             <h2>Upload Content</h2>
-      </div>
       </div>
       <div class="modal-body">
 		<div class="dropdown">
@@ -145,7 +143,8 @@
       </div>
     </div>
     </div>
-    </div>
+	</div>
+
 
       <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -159,13 +158,14 @@
         </div>
         </div>
         </div>
-
+		
+		<!--Video Player -->
 		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- Primitive video player, will open on clicking video cards -->
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
 			<div id="vTitle"></div>
-			<iframe src = "..."></iframe>
+
             <div class="modal-footer">
               <button type="button" class="btn blue"  id="reactB">React</button><br />
               <button type="button" class="btn blue" id="likeB">Like</button>
@@ -245,35 +245,46 @@ $(document).ready(function () {
     $("#creatorB").hide(); //initially hide all buttons, only one set will be shown after initialization
     $("#badminB").hide();
     $("#studentB").hide();
-    var uName = sessionStorage.getItem('profile_id');
+	var uName = sessionStorage.profile_id;
+	//initial work
     $.post("php/home.php", {action:'init', name:uName}) //initial setup, runs on startup
     .done(function(data){
         user = JSON.parse(data); //fetch self information
         document.getElementById("pName").innerHTML = user[0].fname + " " + user[0].lname; //fill in self profile with information
         document.getElementById("peName").innerHTML = user[0].fname + " " + user[0].lname;
-        document.getElementById("Bio").innerHTML = user[0].about_us;
+        document.getElementById("Bio").innerHTML = user[0].bio;
         if(user[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
           $('#studentB').show(); //show student buttons
-          document.getElementById("peAffil").innerHTML = "School"; //show student's group as a school
+          document.getElementById("pAffil").innerHTML = "School"; //show student's group as a school
           document.getElementById("group").innerHTML = user[0].school;
-          document.getElementById("pDescrip1").innerHTML = Primary Interest
+          document.getElementById("pDescrip1").innerHTML = "Primary Interest";
           document.getElementById("pInterest").innerHTML = user[0].primary_interest;
-          document.getElementById("pDescrip2").innerHTML = Secondary Interests
+          document.getElementById("pDescrip2").innerHTML = "Secondary Interests";
           document.getElementById("sInterest").innerHTML = user[0].secondary_interest;
         }
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
-          document.getElementById("peAffil").innerHTML = "Company"; //show creator's group as a company
+          document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
           document.getElementById("group").innerHTML = user[0].company;
-          document.getElementById("pDescrip1").innerHTML = Field
+          document.getElementById("pDescrip1").innerHTML = "Field";
           document.getElementById("pInterest").innerHTML = user[0].field;
-          document.getElementById("pDescrip2").innerHTML = Interests
+          document.getElementById("pDescrip2").innerHTML = "Interests";
+          document.getElementById("sInterest").innerHTML = user[0].interests;
+        }
+		else if(user[0].acc_type == "Badmin"){
+          $("#badminB").show(); //show creator buttons
+          document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
+          document.getElementById("group").innerHTML = user[0].company;
+          document.getElementById("pDescrip1").innerHTML = "Field";
+          document.getElementById("pInterest").innerHTML = user[0].field;
+          document.getElementById("pDescrip2").innerHTML = "Interests";
           document.getElementById("sInterest").innerHTML = user[0].interests;
         }
         });
-
-      $.post("php/home.php", {action:'cards'}) //generates content cards, thumbnails for videos or posts, initally primitive
-    .done(function(data){
+	  //generate content
+      $.post("php/home.php", {action:'cards',name:uName}) //generates content cards, thumbnails for videos or posts, initally primitive
+      .done(function(data){
+		alert(data);
         $('#videoList').append(data);
         });
   }
@@ -281,12 +292,12 @@ $(document).ready(function () {
 		  $("#newBio").val("");
       });
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
-          $("#newBio").text($("#bio").text());
+          document.getElementById("newBio").innerHTML = user[0].bio;
       });
 
     $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = $("#newBio").text(); //fetch input for new bio
-      $.post("php/home.php", {action:"eProfile", newBio:newB})
+		  $.post("php/home.php", {action:"eProfile", newBio:newB,name:uName})
 		  document.getElementById("Bio").innerHTML = user[0].bio; //update bio to new bio
       });
    $('#uVideo, #uMessage, #uAnn').click(function onchange() { //if option is selected, make dropdown menu title the selection
@@ -313,7 +324,7 @@ $(document).ready(function () {
       });*/
     $('#logOutB').click(function onchange() { //clear session, return back to login page
           sessionStorage.clear();
-          window.location.href = '/Bridge/index.html';
+          window.location.href = 'index.html';
       });
 
 		});
