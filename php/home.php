@@ -1,5 +1,5 @@
 <?php
-	
+
 if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html file sends requests with certain string and this will determine which function to call
     $action = $_POST['action'];
     switch($action) {
@@ -113,6 +113,7 @@ function generateCards(){ //function to generate video cards, may possibly split
                </div>";
  	           }*/
    }
+  }
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
 	$username = $_POST['name'];
