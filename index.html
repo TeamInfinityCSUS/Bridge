@@ -33,6 +33,7 @@
                                 document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
                                 $('#password').val("");    // clears password if incorrect
                         }else{
+								JSON.stringify(data);
                                 sessionStorage.setItem('profile_id',data); // saves the profile_id in sessionStorage for the next page
                                 alert("Profile Login: " + $('#email').val()); // which user profile will be loaded
                                 window.location.href = 'home.html'; // move to home page
