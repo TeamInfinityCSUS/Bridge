@@ -34,7 +34,7 @@ if ($result->num_rows > 0) { //Checks if Query table is empty
         //$result_array .= '<td>' . $row['content'] . '</td>';
         //$result_array .= '<td>' . $row['description'] . '</td>';
         $result_array .= '<td>' . $row['time_posted'] . '</td>';
-        $result_array .= '<td>' . $row['data_posted'] . '</td>';
+        $result_array .= '<td>' . $row['date_posted'] . '</td>';
         $result_array .= '<td>' . $row['views'] . '</td>';
         $result_array .= '<td>' . $row['likes'] . '</td>';
         $result_array .= '<td>' . $row['eternship'] . '</td>';
