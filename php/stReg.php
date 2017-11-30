@@ -78,18 +78,21 @@ if(count($outgoing) == 0) {
     }
 
     $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
-
-    //sets up the Student query
+    $acctType = 'Student';
+    //sets up the query for the SITE_MEMBERS table
     $in1 = "INSERT INTO site_members(username, password, email, fname, lname, acc_type, is_verified)
-    VALUES ($uName, $password, $email, $fName, $lName, 'Student', 0)";
+    VALUES ('$uName', '$password', '$email', '$fName', '$lName', '$acctType', 0)";
+    
+    
+    //Sets up the query for the STUDENTS table
     $in2 = "INSERT INTO students(username, school_id, primary_interest, secondary_interest)
-    VALUES ($uName, $studentID, $priInt, $priInt)";
+    VALUES ((SELECT username FROM site_members WHERE username='$uName'), '$studentID', '$priInt', '$secInt')";
 
     if($conn->query($in1) === TRUE && $conn->query($in2) === TRUE) {
         $conn->commit();
         echo "console.log('New record created successfully')";
     } else {
-        echo "console.log('Error: ' . $addStudent . '<br>' . $conn->error)";
+        echo "console.log('Error: ' . $in1 . $in2 . '<br>' . $conn->error)";
     }
     $conn->close(); // Close Connection
     array_push($outgoing, 0);
