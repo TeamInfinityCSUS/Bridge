@@ -5,18 +5,7 @@ if ($conn->connect_error) { // Connection Check
 }
 $sql = 'SELECT * FROM site_members;'; // Prepare Query
 $result = $conn->query($sql); // Sends Query
-/* ECHO FORMAT
-      <tr>
-        <td>John</td>
-        <td>Doe</td>
-        <td>john@example.com</td>
-      </tr>
-      <tr>
-        <td>Mary</td>
-        <td>Moe</td>
-        <td>mary@example.com</td>
-      </tr>
-*/
+
 $studentarray = '<option value = "AllStudent">All Student</option>';
 $creatorarray = '<option value = "AllCreator">All Creator</option>';
 $badminarray = '<option value = "AllBAdmin">All BAdmin</option>';

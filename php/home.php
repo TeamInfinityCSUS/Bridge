@@ -50,6 +50,7 @@ function viewProfile(){
 
 	$conn->close(); // Close Connection
 }
+
 function generateCards(){ //function to generate video cards, may possibly split fetching database data to different function
   $content = array();
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
@@ -112,8 +113,7 @@ function generateCards(){ //function to generate video cards, may possibly split
                </div>
                </div>";
  	           }*/
-   }
-  }
+}
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
 	$username = $_POST['name'];

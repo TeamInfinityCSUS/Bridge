@@ -115,11 +115,7 @@
       </div>
 	  </div>
     </div>
-      <div class="modal-footer">
-	  <button type="button" class="btn blue" id="viewC">View My Content</button>
-	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "#uConM">Upload Content</button>
-      </div>
-	  </div>
+    </div>
 
 	    <div class="modal fade" id="uConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -268,7 +264,6 @@ $(document).ready(function () {
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
           document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
-
           document.getElementById("group").innerHTML = user[0].company;
           document.getElementById("pDescrip1").innerHTML = "Field";
           document.getElementById("pInterest").innerHTML = user[0].field;
