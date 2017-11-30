@@ -109,22 +109,17 @@
           <div class="modal-header">
             <h2>Manage Conent</h2>
       </div>
-<<<<<<< HEAD
 
       <div class="modal-body">
 	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "#uConM">Upload Content</button>
       </div>
 	  </div>
     </div>
-=======
-      </div>
       <div class="modal-footer">
 	  <button type="button" class="btn blue" id="viewC">View My Content</button>
 	  <button type="button" class="btn blue" id="UC" data-toggle ="modal" data-target = "#uConM">Upload Content</button>
       </div>
 	  </div>
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
-    </div>
 
 	    <div class="modal fade" id="uConM" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -152,11 +147,7 @@
       </div>
     </div>
     </div>
-<<<<<<< HEAD
-	</div>
-
-=======
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
+  </div>
 
       <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -170,11 +161,7 @@
         </div>
         </div>
         </div>
-<<<<<<< HEAD
-		
-=======
 
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
 		<!--Video Player -->
 		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- Primitive video player, will open on clicking video cards -->
         <div class="modal-dialog" role="document">
@@ -281,7 +268,7 @@ $(document).ready(function () {
         else if(user[0].acc_type == "Creator"){
           $("#creatorB").show(); //show creator buttons
           document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
-<<<<<<< HEAD
+
           document.getElementById("group").innerHTML = user[0].company;
           document.getElementById("pDescrip1").innerHTML = "Field";
           document.getElementById("pInterest").innerHTML = user[0].field;
@@ -291,34 +278,16 @@ $(document).ready(function () {
 		else if(user[0].acc_type == "Badmin"){
           $("#badminB").show(); //show creator buttons
           document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
-=======
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
           document.getElementById("group").innerHTML = user[0].company;
           document.getElementById("pDescrip1").innerHTML = "Field";
           document.getElementById("pInterest").innerHTML = user[0].field;
           document.getElementById("pDescrip2").innerHTML = "Interests";
-<<<<<<< HEAD
-=======
-          document.getElementById("sInterest").innerHTML = user[0].interests;
-        }
-		else if(user[0].acc_type == "Badmin"){
-          $("#badminB").show(); //show creator buttons
-          document.getElementById("pAffil").innerHTML = "Company"; //show creator's group as a company
-          document.getElementById("group").innerHTML = user[0].company;
-          document.getElementById("pDescrip1").innerHTML = "Field";
-          document.getElementById("pInterest").innerHTML = user[0].field;
-          document.getElementById("pDescrip2").innerHTML = "Interests";
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
           document.getElementById("sInterest").innerHTML = user[0].interests;
         }
         });
 	  //generate content
       $.post("php/home.php", {action:'cards',name:uName}) //generates content cards, thumbnails for videos or posts, initally primitive
       .done(function(data){
-<<<<<<< HEAD
-		alert(data);
-=======
->>>>>>> 9b485dc6a7e5961dc9b6fd349156121a43161d2a
         $('#videoList').append(data);
         });
   }
