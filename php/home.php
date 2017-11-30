@@ -88,7 +88,6 @@ function generateCards(){ //function to generate video cards, may possibly split
               </div>";
 	           }
 		}
-	}
 	/*if($row['kind'] == 'Post'){
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
             <div class=\"card-block\">
@@ -114,7 +113,7 @@ function generateCards(){ //function to generate video cards, may possibly split
                </div>
                </div>";
  	           }*/
-
+}
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];
 	$username = $_POST['name'];
