@@ -143,8 +143,7 @@
       </div>
     </div>
     </div>
-	</div>
-
+  </div>
 
       <div class="modal fade" id="Settings" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -158,7 +157,7 @@
         </div>
         </div>
         </div>
-		
+
 		<!--Video Player -->
 		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- Primitive video player, will open on clicking video cards -->
         <div class="modal-dialog" role="document">
@@ -284,7 +283,6 @@ $(document).ready(function () {
 	  //generate content
       $.post("php/home.php", {action:'cards',name:uName}) //generates content cards, thumbnails for videos or posts, initally primitive
       .done(function(data){
-		alert(data);
         $('#videoList').append(data);
         });
   }
