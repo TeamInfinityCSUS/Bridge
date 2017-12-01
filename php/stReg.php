@@ -83,22 +83,21 @@ if(count($outgoing) == 0) {
     $in1 = "INSERT INTO site_members(username, password, email, fname, lname, acc_type, is_verified)
     VALUES ('$uName', '$password', '$email', '$fName', '$lName', '$acctType', 0)";
     
-    
     //Sets up the query for the STUDENTS table
     $in2 = "INSERT INTO students(username, school_id, primary_interest, secondary_interest)
-    VALUES ((SELECT username FROM site_members WHERE username='$uName'), '$studentID', '$priInt', '$secInt')";
+    VALUES ('$uName', '$studentID', '$priInt', '$secInt')";
 
     if($conn->query($in1) === TRUE && $conn->query($in2) === TRUE) {
         $conn->commit();
-        echo "console.log('New record created successfully')";
+        array_push($outgoing, array('createSuccess'=>'New record created successfully.'));
+//        echo "console.log('New record created successfully')";
     } else {
-        echo "console.log('Error: ' . $in1 . $in2 . '<br>' . $conn->error)";
+        array_push($outgoing, array('connError'=>[$in1, $in2, $conn->error]));
+//        echo "console.log('Error: ' . $in1 . $in2 . '<br>' . $conn->error)";
     }
     $conn->close(); // Close Connection
-    array_push($outgoing, 0);
     echo json_encode($outgoing);  //Send the Error messages back
 } else {
-    array_push($outgoing, 0);
     echo json_encode($outgoing);  //Send the Error messages back
 }
 

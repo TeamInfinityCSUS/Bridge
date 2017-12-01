@@ -10,6 +10,7 @@ $fName = $_POST['creatorAcct'][5];
 $lName = $_POST['creatorAcct'][6];
 $prName = $_POST['creatorAcct'][7];
 $prEmail = $_POST['creatorAcct'][8];
+$intField = 'Exploring';
 
 $uName = test_input($uName);  //Validate Username
 if(empty($uName)) {
@@ -84,24 +85,26 @@ if(count($outgoing) == 0) {
     }
 
     $conn->begin_transaction(MYSQLI_TRANS_START_READ_WRITE);
-
-    //sets up the Student query
+    $acctType = 'Creator';
+    //sets up the query for the SITE_MEMBERS table
     $in1 = "INSERT INTO site_members(username, password, email, fname, lname, acc_type, is_verified)
-    VALUES ($uName, $password, $email, $fName, $lName, 'Creator', 0)";
-    $in2 = "INSERT INTO creators(username, ref_name, ref_email)
-    VALUES ($uName, $prName, $prEmail)";
+    VALUES ('$uName', '$password', '$email', '$fName', '$lName', '$acctType', 0)";
+    
+    //Sets up the wuery for the CREATORS table
+    $in2 = "INSERT INTO creators(username, ref_name, ref_email, field)
+    VALUES ('$uName', '$prName', '$prEmail', '$intField')";
 
-    if($conn->query($in1) === TRUE && $conn->query($in2) === TRUE) {
+    if($conn->query($in1) === TRUE && $conn->query($in2) === TRUE) {  //If both queries are successful, it commits
         $conn->commit();
-        echo "console.log('New record created successfully')";
+        array_push($outgoing, array('createSuccess'=>'New record created successfully.'));
+//        echo "console.log('New record created successfully')";
     } else {
-        echo "console.log('Error: ' . $in1 . '<br>' . $in2 . '<br>' .$conn->error)";
+        array_push($outgoing, array('connError'=>[$in1, $in2, $conn->error]));
+//        echo "console.log('Error: ' . $in1 . '<br>' . $in2 . '<br>' .$conn->error)";
     }
     $conn->close(); // Close Connection
-    array_push($outgoing, 0);
     echo json_encode($outgoing);  //Send the Error messages back
 } else {
-    array_push($outgoing, 0);
     echo json_encode($outgoing);  //Send the Error messages back
 }
 

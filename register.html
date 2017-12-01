@@ -197,12 +197,23 @@
             $('#studentSubmitBtn').click(function(){ studentSubmit(); });
             $('#creatorSubmitBtn').click(function(){ creatorSubmit(); });
 
-            function studentSubmit() {//Runs when Submit is clicked in the Student container
+            function studentSubmit() {  //Runs when Submit is clicked in the Student container
+                alert("Create Student account?");  //temporary check for account creation
                 $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
                 $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#studentID').val()] }).done(function(data) {
                     console.log("data = " + data);
                     var errorsArray = JSON.parse(data); //parses the return data
                     for(index in errorsArray) {  //Iterate through the error array to display all the arrays
+                        if(errorsArray[index].createSuccess) {  //Checks for the creation success
+                            console.log(errorsArray[index].createSuccess);
+                            alert("Your account has been created and is pending approval.")
+                            window.location.href = 'index.html'; // move to login page
+                        }
+                        if(errorsArray[index].connError) {  //Checks for the connection error
+                            console.log("Connection Error: " + errorsArray[index].connError[0] + " " +
+                                       errorsArray[index].connError[1] + " + errorsArray[index].connError[2]");
+                            alert("There was an error.  Please submit again.");
+                        }
                         if(errorsArray[index].uNameErr) {  //Checks for the Username error
                             var orig_label = "Username";  //Original label
                             document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
@@ -232,12 +243,24 @@
                 });  //done()
             };  //studentSubmit()
 
-            function creatorSubmit() {//Runs when Submit is clicked in the Creator container
-              $.post( "php/stReg.php", { 'creatorAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
-              $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#prName').val(),$('#prEmail').val()] }).done(function(data) {
+            function creatorSubmit() {  //Runs when Submit is clicked in the Creator container
+                alert("Create Creator account?");  //temporary check for account creation
+                $.post( "php/crReg.php", { 'creatorAcct':
+                    [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
+                    $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#prName').val(),$('#prEmail').val()] }).done(function(data) {
                   console.log("data = " + data);
                   var errorsArray = JSON.parse(data); //parses the return data
                   for(index in errorsArray) {  //Iterate through the error array to display all the arrays
+                      if(errorsArray[index].createSuccess) {  //Checks for the creation success
+                            console.log(errorsArray[index].createSuccess);
+                            alert("Your account has been created and is pending approval.")
+                            window.location.href = 'index.html'; // move to login page
+                        }
+                        if(errorsArray[index].connError) {  //Checks for the connection error
+                            console.log("Connection Error: " + errorsArray[index].connError[0] + " " +
+                                       errorsArray[index].connError[1] + " + errorsArray[index].connError[2]");
+                            alert("There was an error.  Please submit again.");
+                        }
                       if(errorsArray[index].uNameErr) {  //Checks for the Username error
                           var orig_label = "Username";  //Original label
                           document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
@@ -268,7 +291,7 @@
                           document.getElementById('prEmail_label').innerHTML = orig_label + " " + errorsArray[index].prEmailErr.fontcolor("red").fontsize(2);
                       }
                   }  //for: errors
-              });  //done()
+                });  //done()
             };  //creatorSubmit()
         });  //ready()
     </script>
