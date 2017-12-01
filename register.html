@@ -69,42 +69,36 @@
                     <label class = "label" for="email">Confirm Email Address</label>
                     <input type="email" class="form-control" id="cEmail" name="cEmail">
                 </div> <!-- Confirm Email Address -->
+                <!-- Dropdown for Student Primary Career Interest -->
                 <div class="dropdown hidden" id="priIntInpt">
-                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose your primary field of interest
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropButton" >
-                        <a class="dropdown-item" href="#">Exploring</a>
-                        <a class="dropdown-item" href="#">Computer Science</a>
-                        <a class="dropdown-item" href="#">Civil Engineering</a>
-                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
-                    </div>
-                </div>
+                    <label class = "label" id="priInt_label" for="email">Choose your Primary Career Interest.</label>
+                    <select id="priInt" class="btn btn-primary btn-sm dropdown-toggle">
+                        <option  selected value="Exploring">Exploring</option>
+                        <option  value="Accountancy">Accountancy</option>
+                        <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                </div> <!-- Dropdown for Student Primary Career Interest -->
+                <!-- Dropdown for Student Secondary Career Interest -->
                 <div class="dropdown hidden" id="secIntInpt">
-                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose your secondary field of interest
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropButton" >
-                        <a class="dropdown-item" href="#">Exploring</a>
-                        <a class="dropdown-item" href="#">Computer Science</a>
-                        <a class="dropdown-item" href="#">Civil Engineering</a>
-                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
-                    </div>
-                </div>
-                <!-- Dropdown Button for Career Fields -->
+                    <label class = "label" id="secInt_label" for="email">Choose your Secondary Career Interest.</label>
+                    <select id="secInt" class="btn btn-primary btn-sm dropdown-toggle">
+                        <option  selected value="Exploring">Exploring</option>
+                        <option  value="Accountancy">Accountancy</option>
+                        <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                </div> <!-- Dropdown for Student Secondart Career Interest -->
+                <!-- Dropdown for Creator Field Interest -->
                 <div class="dropdown hidden" id="priFldInpt">
-                    <button id="dropButton" class="btn btn-primary btn-sm dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Choose your field of Interest
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropButton">
-                        <a class="dropdown-item" href="#">Computer Science</a>
-                        <a class="dropdown-item" href="#">Civil Engineering</a>
-                        <a class="dropdown-item" href="#">Mechanical Engineering</a>
-                    </div>
-                </div>
+                    <label class = "label" id="priFldInpt_label" for="email">Choose your Field of Interest.</label>
+                    <select id="priFld" class="btn btn-primary btn-sm dropdown-toggle">
+                        <option  selected value="Exploring">Exploring</option>
+                        <option  value="Accountancy">Accountancy</option>
+                        <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                    </select>
+                </div> <!-- Dropdown for Creator Field Interest -->
                 <!--This is the Professional Reference Name input field-->
                 <div class="container hidden" id="prNameInpt">
                     <label class = "label" for="prName">Name of Professional Reference</label>
