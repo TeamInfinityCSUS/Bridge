@@ -30,7 +30,7 @@
                 $.post( "php/log.php", { 'log': [$('#email').val(), $('#password').val()] }).done(function( data ) {
                         if (data==0){ // log
                                 email_label = 'Email Address' // Original label with added error label
-                                document.getElementById('email_label').innerHTML = email_label + ' Incorrect password or username'.fontcolor("red").fontsize(1);
+                                document.getElementById('email_label').innerHTML = email_label + ' Incorrect or unverified password or username'.fontcolor("red").fontsize(1);
                                 $('#password').val("");    // clears password if incorrect
                         }else{
 								JSON.stringify(data);
