@@ -15,10 +15,9 @@ $secInt = $_POST['studentAcct'][9];
 $uName = test_input($uName);  //Validate Username
 if(empty($uName)) {
     array_push($outgoing, array('uNameErr'=>'Required'));
-//} else if (!preg_match("/\A[a-zA-Z]\z/", $uName)) {
-//     //check if username only contains letters and numbers
-//     array_push($outgoing, array("uNameErr"=>"Only letters and numbers."));
-//   }
+} else if (!preg_match("/^[a-zA-Z0-9]*$/", $uName)) {
+     //check if username only contains letters and numbers
+     array_push($outgoing, array('uNameErr'=>'Only letters and numbers.'));
 }
 
 $password = test_input($password);   //Validate Password
@@ -27,9 +26,9 @@ if(empty($password)) {
     array_push($outgoing, array('passwordErr'=>'Required'));
 } else if ($password !== $cPassword) {
     array_push($outgoing, array('passwordErr'=>'Passwords must match.'));
-//} else if(!preg_match("/^[a-zA-Z0-9!@#$%^&*()]*$/",$password)) {
-//    // check if Password only contains letters, numbers and special characters
-//    array_push($outgoing, array('passwordErr'=>'Only letters, numbers and special characters.'));
+} else if(!preg_match("/^[a-zA-Z0-9!@#$%^&*()_+-=,.<>?;:]*$/", $password)) {
+    // check if Password only contains letters, numbers and special characters
+    array_push($outgoing, array('passwordErr'=>'Only letters, numbers and special characters.'));
 }
 
 $email = test_input($email);  //Validate Email address
@@ -39,25 +38,25 @@ if(empty($email)) {
 } else if($email !== $cEmail) {
     //Check if emails match
     array_push($outgoing, array('emailErr'=>'Email addresses must match.'));
-//} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-//    // check if e-mail address is properly formatted
-//    array_push($outgoing, array('emailErr'=>'Invalid email format.'));
+} else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    // check if e-mail address is properly formatted
+    array_push($outgoing, array('emailErr'=>'Invalid email format.'));
 }
 
 $fName = test_name($fName);  //Validates First Name
 if(empty($fName)) {
     array_push($outgoing, array('fNameErr'=>'Required.'));
-//} else if (!preg_match("/^[a-zA-Z ]*$/",$fName)) {
-//    // check if First Name only contains letters and whitespace
-//    array_push($outgoing, array('fNameErr'=>'Only letters and white spaces allowed.'));
+} else if (!preg_match("/^[a-zA-Z]*$/", $fName)) {
+    // check if First Name only contains letters and whitespace
+    array_push($outgoing, array('fNameErr'=>'Only letters and white spaces allowed.'));
 }
 
 $lName = test_name($lName);  //Validate Last Name
 if(empty($lName)) {
     array_push($outgoing, array('lNameErr'=>'Required.'));
-//} else if (!preg_match("/^[a-zA-Z ]*$/",$lName)) {
-//    // check if Last Name only contains letters and whitespace
-//    array_push($outgoing, array('lNameErr'=>'Only letters and white spaces allowed.'));
+} else if (!preg_match("/^[a-zA-Z ]*$/",$lName)) {
+    // check if Last Name only contains letters and whitespace
+    array_push($outgoing, array('lNameErr'=>'Only letters and white spaces allowed.'));
 }
 
 $studentID = test_input($studentID);  //Validate Student ID
@@ -65,9 +64,9 @@ if(empty($studentID)) {
     array_push($outgoing, array('studentIDErr'=>'Required.'));
 } else if (strlen($studentID) > 9 || strlen($studentID) < 9) {
     array_push($outgoing, array('studentIDErr'=>'Must be 9 didgits.'));
-//} else if (!preg_match("/^[0-9]*$/",$studentID)) {
-//    // check if Last Name only contains letters and whitespace
-//    array_push($outgoing, array('studentIDErr'=>'Only numbers allowed.'));
+} else if (!preg_match("/^[0-9]*$/",$studentID)) {
+    // check if Last Name only contains letters and whitespace
+    array_push($outgoing, array('studentIDErr'=>'Only numbers allowed.'));
 }
 
 //If there are no error messages, then the data is safe to be added to the database
