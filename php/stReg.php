@@ -9,15 +9,15 @@ $cEmail = $_POST['studentAcct'][4];
 $fName = $_POST['studentAcct'][5];
 $lName = $_POST['studentAcct'][6];
 $studentID = $_POST['studentAcct'][7];
-$priInt = 'Exploring';
-$secInt = 'Exploring';
+$priInt = $_POST['studentAcct'][8];
+$secInt = $_POST['studentAcct'][9];
 
 $uName = test_input($uName);  //Validate Username
 if(empty($uName)) {
     array_push($outgoing, array('uNameErr'=>'Required'));
-//} else if (!preg_match('/^[a-zA-Z]*$/',$uName)) {
+//} else if (!preg_match("/\A[a-zA-Z]\z/", $uName)) {
 //     //check if username only contains letters and numbers
-//     array_push($outgoing, "uNameErr", "Only letters and numbers.");
+//     array_push($outgoing, array("uNameErr"=>"Only letters and numbers."));
 //   }
 }
 

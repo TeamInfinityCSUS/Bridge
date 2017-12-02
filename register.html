@@ -76,7 +76,14 @@
                         <option  selected value="Exploring">Exploring</option>
                         <option  value="Accountancy">Accountancy</option>
                         <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Computer Science">Computer Science</option>
+                        <option  value="Criminal Justice">Criminal Justice</option>
+                        <option  value="Electrical Engineering">Electrical Engineering</option>
+                        <option  value="Law Enforcement">Law Enforcement</option>
+                        <option  value="Mathematics">Mathematics</option>
                         <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option  value="Physics">Physics</option>
+                        <option  value="Security">Security</option>
                     </select>
                 </div> <!-- Dropdown for Student Primary Career Interest -->
                 <!-- Dropdown for Student Secondary Career Interest -->
@@ -86,7 +93,14 @@
                         <option  selected value="Exploring">Exploring</option>
                         <option  value="Accountancy">Accountancy</option>
                         <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Computer Science">Computer Science</option>
+                        <option  value="Criminal Justice">Criminal Justice</option>
+                        <option  value="Electrical Engineering">Electrical Engineering</option>
+                        <option  value="Law Enforcement">Law Enforcement</option>
+                        <option  value="Mathematics">Mathematics</option>
                         <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option  value="Physics">Physics</option>
+                        <option  value="Security">Security</option>
                     </select>
                 </div> <!-- Dropdown for Student Secondart Career Interest -->
                 <!-- Dropdown for Creator Field Interest -->
@@ -96,7 +110,14 @@
                         <option  selected value="Exploring">Exploring</option>
                         <option  value="Accountancy">Accountancy</option>
                         <option  value="Civil Engineering">Civil Engineering</option>
+                        <option  value="Computer Science">Computer Science</option>
+                        <option  value="Criminal Justice">Criminal Justice</option>
+                        <option  value="Electrical Engineering">Electrical Engineering</option>
+                        <option  value="Law Enforcement">Law Enforcement</option>
+                        <option  value="Mathematics">Mathematics</option>
                         <option  value="Mechanical Engineering">Mechanical Engineering</option>
+                        <option  value="Physics">Physics</option>
+                        <option  value="Security">Security</option>
                     </select>
                 </div> <!-- Dropdown for Creator Field Interest -->
                 <!--This is the Professional Reference Name input field-->
@@ -160,13 +181,13 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-//            //Skips log on screen and takes you directly to the home page if already logged in
-//            var profile_id = sessionStorage.getItem('profile_id');
-//            if (profile_id == null || profile_id == 0){
-//                profile_id = 0;
-//            }else{
-//                window.location.href = 'home.html'; // move to home page
-//            }
+            //Skips log on screen and takes you directly to the home page if already logged in
+            var profile_id = sessionStorage.getItem('profile_id');
+            if (profile_id == null || profile_id == 0){
+                profile_id = 0;
+            }else{
+                window.location.href = 'home.html'; // move to home page
+            }
 
             //Student account form is displayed when Student button is clicked
             $("#studentOption").click(function onchange() {
@@ -193,8 +214,9 @@
 
             function studentSubmit() {  //Runs when Submit is clicked in the Student container
                 alert("Create Student account?");  //temporary check for account creation
-                $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
-                $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#studentID').val()] }).done(function(data) {
+                $.post( "php/stReg.php", { 'studentAcct': [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),$('#cEmail').val(),
+                $('#fName').val(),$('#lName').val(),$('#studentID').val(),$('#priInt').val(),$('#secInt').val()] 
+                }).done(function(data) {
                     console.log("data = " + data);
                     var errorsArray = JSON.parse(data); //parses the return data
                     for(index in errorsArray) {  //Iterate through the error array to display all the arrays
@@ -210,28 +232,34 @@
                         }
                         if(errorsArray[index].uNameErr) {  //Checks for the Username error
                             var orig_label = "Username";  //Original label
-                            document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
+                            document.getElementById('uName_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
                         }
                         if(errorsArray[index].passwordErr) {  //Checks for the Password error
                             var orig_label = "Password";  //Original label
-                            document.getElementById('password_label').innerHTML = orig_label + " " + errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
+                            document.getElementById('password_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
                             $('#password').val(""); $('#cPassword').val("");   // Clears Passwords if not valid
                         }
                         if(errorsArray[index].emailErr) {  //Checks for the Email error
                             var orig_label = "Email Address";  //Original label
-                            document.getElementById('email_label').innerHTML = orig_label + " " + errorsArray[index].emailErr.fontcolor("red").fontsize(2);
+                            document.getElementById('email_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].emailErr.fontcolor("red").fontsize(2);
                         }
                         if(errorsArray[index].fNameErr) {  //Checks for the First Name error
                             var orig_label = "First Name";  //Original label
-                            document.getElementById('fname_label').innerHTML = orig_label + " " + errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
+                            document.getElementById('fname_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
                         }
                         if(errorsArray[index].lNameErr) {  //Checks for the Last Name error
                             var orig_label = "Last Name";  //Original label
-                            document.getElementById('lname_label').innerHTML = orig_label + " " + errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
+                            document.getElementById('lname_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
                         }
                         if(errorsArray[index].studentIDErr) {  //Checks for the Student ID error
                             var orig_label = "Student ID";  //Original label
-                            document.getElementById('studentID_label').innerHTML = orig_label + " " + errorsArray[index].studentIDErr.fontcolor("red").fontsize(2);
+                            document.getElementById('studentID_label').innerHTML = orig_label + " " + 
+                                errorsArray[index].studentIDErr.fontcolor("red").fontsize(2);
                         }
                     }  //for: errors
                 });  //done()
@@ -240,8 +268,9 @@
             function creatorSubmit() {  //Runs when Submit is clicked in the Creator container
                 alert("Create Creator account?");  //temporary check for account creation
                 $.post( "php/crReg.php", { 'creatorAcct':
-                    [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),
-                    $('#cEmail').val(),$('#fName').val(),$('#lName').val(),$('#prName').val(),$('#prEmail').val()] }).done(function(data) {
+                    [$('#uName').val(),$('#password').val(),$('#cPassword').val(),$('#email').val(),$('#cEmail').val(),
+                     $('#fName').val(),$('#lName').val(),$('#prName').val(),$('#prEmail').val(),$('#priFld').val()] 
+                    }).done(function(data) {
                   console.log("data = " + data);
                   var errorsArray = JSON.parse(data); //parses the return data
                   for(index in errorsArray) {  //Iterate through the error array to display all the arrays
@@ -257,32 +286,39 @@
                         }
                       if(errorsArray[index].uNameErr) {  //Checks for the Username error
                           var orig_label = "Username";  //Original label
-                          document.getElementById('uName_label').innerHTML = orig_label + " " + errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
+                          document.getElementById('uName_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].uNameErr.fontcolor("red").fontsize(2);
                       }
                       if(errorsArray[index].passwordErr) {  //Checks for the Password error
                           var orig_label = "Password";  //Original label
-                          document.getElementById('password_label').innerHTML = orig_label + " " + errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
+                          document.getElementById('password_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].passwordErr.fontcolor("red").fontsize(2);
                           $('#password').val(""); $('#cPassword').val("");   // Clears Passwords if not valid
                       }
                       if(errorsArray[index].emailErr) {  //Checks for the Email error
                           var orig_label = "Email Address";  //Original label
-                          document.getElementById('email_label').innerHTML = orig_label + " " + errorsArray[index].emailErr.fontcolor("red").fontsize(2);
+                          document.getElementById('email_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].emailErr.fontcolor("red").fontsize(2);
                       }
                       if(errorsArray[index].fNameErr) {  //Checks for the First Name error
                           var orig_label = "First Name";  //Original label
-                          document.getElementById('fname_label').innerHTML = orig_label + " " + errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
+                          document.getElementById('fname_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].fNameErr.fontcolor("red").fontsize(2);
                       }
                       if(errorsArray[index].lNameErr) {  //Checks for the Last Name error
                           var orig_label = "Last Name";  //Original label
-                          document.getElementById('lname_label').innerHTML = orig_label + " " + errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
+                          document.getElementById('lname_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].lNameErr.fontcolor("red").fontsize(2);
                       }
                       if(errorsArray[index].prNameErr) {  //Checks for the Student ID error
                           var orig_label = "Name of Professional Reference";  //Original label
-                          document.getElementById('prName_label').innerHTML = orig_label + " " + errorsArray[index].prNameErr.fontcolor("red").fontsize(2);
+                          document.getElementById('prName_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].prNameErr.fontcolor("red").fontsize(2);
                       }
                       if(errorsArray[index].prEmailErr) {  //Checks for the Student ID error
                           var orig_label = "Reference Email Address";  //Original label
-                          document.getElementById('prEmail_label').innerHTML = orig_label + " " + errorsArray[index].prEmailErr.fontcolor("red").fontsize(2);
+                          document.getElementById('prEmail_label').innerHTML = orig_label + " " + 
+                              errorsArray[index].prEmailErr.fontcolor("red").fontsize(2);
                       }
                   }  //for: errors
                 });  //done()

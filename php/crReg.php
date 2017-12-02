@@ -10,7 +10,7 @@ $fName = $_POST['creatorAcct'][5];
 $lName = $_POST['creatorAcct'][6];
 $prName = $_POST['creatorAcct'][7];
 $prEmail = $_POST['creatorAcct'][8];
-$intField = 'Exploring';
+$intField = $_POST['studentAcct'][9];
 
 $uName = test_input($uName);  //Validate Username
 if(empty($uName)) {
