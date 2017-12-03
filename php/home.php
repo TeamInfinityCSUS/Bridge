@@ -8,6 +8,7 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
 		case 'eProfile' : changeBio();break; //update new self bio
 		case 'viewP' : viewProfile();break;
 		case 'upload' : uploadContent();break;
+		case 'cardsSearch' : cardSearch();break;
     }
 }
 function init(){
@@ -114,8 +115,62 @@ function generateCards(){ //function to generate video cards, may possibly split
                </div>";
  	           }*/
 }
-function search() {
+function cardSearch() {
+	$content = array();
 	
+	$method = $_POST['mode'];
+	if ($method == "content") {
+		$column = "description";
+	} else if ($method == "username") {
+		$column = "username";
+	} else if ($method == "field") {
+		$column = "field";
+	} else {
+		$column = "description";
+	}
+	
+	$terms = "%".$_POST['terms']."%";
+	
+	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+	if ($conn->connect_error) { // Connection Check
+     die("Connection to database failed: " . $conn->connect_error);
+	}
+	
+	$sql = "SELECT * FROM content WHERE ".$column." LIKE '".$terms."';";
+
+	$result = $conn->query($sql); // receive list of content
+	if(!$result) {
+		echo "No results found";
+		return;
+	}
+	if ($result->num_rows > 0) { //while list is not empty
+		while($row = $result->fetch_assoc()) { // fetch row
+			array_push($content, $row); // push row into array
+		}
+	}
+	$conn->close(); // Close Connection
+  foreach($content as $row){ //card generation, will post content based on fetched database info
+	if($row['kind'] == 'Video'){
+	$vid = substr($row['content'],-11);
+	$title = $row['description'];
+	$author = $row['username'];
+	$date = $row['date_posted'];
+	$views = $row['views'];
+	$likes = $row['likes'];
+    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"#Player\">
+            <img class=\"card-img-top\" src=\"https://www.img.youtube.com/vi/$vid/hqdefault.jpg\" alt=\"Thumbnail\">
+            <div class=\"card-block\">
+              <h3 class=\"card-title\">$title</h3>
+              <div class=\"card-footer text-muted\">
+              <p class = \"viewp\">By: $author</p>
+              <p>Uploaded </p>
+              <p>$views Views</p>
+              <p>$likes Likes</p>
+              </div>
+              </div>
+              </div>";
+	           }
+		}
 	}
 function changeBio(){ //changes user's bio and returns it back to the page to change on the fly
 	$newBio = $_POST['newBio'];

@@ -30,7 +30,7 @@
     <img src="images/settingsicon.png" height = "40" width = "40" id = "oPic" class="rounded float-right" data-toggle = "modal" data-target="#Settings">
   </h1>
   <div class="col col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12" id= "column"> <!-- Container for cards -->
-	<form>
+  <form>
   <div class="input-group" id="csearch">
     <select id="cSearchMode">
 		<option selected value = "content">By Content</option>
@@ -324,8 +324,20 @@ $(document).ready(function () {
           document.getElementById("newBio").innerHTML = " ";
       });
 	$('#cSearchButton').click(function onchange() {
-		document.getElementById("videoList").innerHTML="";
-		document.getElementById("videoList").innerHTML="";
+		document.getElementById("videoList").innerHTML = "";
+		var input = $("#cSearchIn").val();
+		var mode = $("#cSearchMode").val();
+		if(!input) {
+			$.post("php/home.php", {action:'cards',name:uName})
+			.done(function(data){
+			$('#videoList').append(data);
+			});
+		} else {
+			$.post("php/home.php", {action:'cardsSearch', terms:input, mode:mode})
+			.done(function(data) {
+			$('#videoList').append(data);
+			});
+		}
 	});
     /*$('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = document.getElementById("newBio").text();
