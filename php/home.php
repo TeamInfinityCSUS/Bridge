@@ -118,8 +118,9 @@ function generateCards(){ //function to generate video cards, may possibly split
 function cardSearch() {
 	$content = array();
 	
-	$method = $_POST['mode'];
-	if ($method == "content") {
+	$method = $_POST['mode']; //Can be content, username, or field.
+	//Describes which column to search for content
+	if ($method == "content") { //This is to properly state which colum we're checking
 		$column = "description";
 	} else if ($method == "username") {
 		$column = "username";
@@ -129,7 +130,8 @@ function cardSearch() {
 		$column = "description";
 	}
 	
-	$terms = "%".$_POST['terms']."%";
+	$terms = "%".$_POST['terms']."%"; //Fetch our search terms
+	//The % is for the LIKE sql term. It'll find our search term anywhere in the column we specify
 	
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
@@ -139,7 +141,7 @@ function cardSearch() {
 	$sql = "SELECT * FROM content WHERE ".$column." LIKE '".$terms."';";
 
 	$result = $conn->query($sql); // receive list of content
-	if(!$result) {
+	if($result->num_rows == 0) {
 		echo "No results found";
 		return;
 	}
@@ -149,7 +151,9 @@ function cardSearch() {
 		}
 	}
 	$conn->close(); // Close Connection
-  foreach($content as $row){ //card generation, will post content based on fetched database info
+	//everything from here on works just like generateCards.
+	//Until we patch up different content types, we'll only see video cards.
+  foreach($content as $row){
 	if($row['kind'] == 'Video'){
 	$vid = substr($row['content'],-11);
 	$title = $row['description'];

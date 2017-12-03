@@ -339,6 +339,25 @@ $(document).ready(function () {
 			});
 		}
 	});
+	$('#cSearchIn').keypress(function(e) {
+		if(e.which == 13) {
+			document.getElementById("videoList").innerHTML = "";
+			var input = $("#cSearchIn").val();
+			var mode = $("#cSearchMode").val();
+			if(!input) {
+				$.post("php/home.php", {action:'cards',name:uName})
+				.done(function(data){
+				$('#videoList').append(data);
+				});
+			} else {
+				$.post("php/home.php", {action:'cardsSearch', terms:input, mode:mode})
+				.done(function(data) {
+				$('#videoList').append(data);
+				});
+			}
+			return false;
+		}
+	});
     /*$('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
 		  var newB = document.getElementById("newBio").text();
       $.post("php/home.php", {action:"eProfile", newBio:newB})
