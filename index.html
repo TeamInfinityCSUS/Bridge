@@ -10,15 +10,14 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
       <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
      <script type="text/javascript">
-          $(document).ready(function(){ // Wait until page is ready
-                  /* Skips log on screen and takes you directly to the home page if already logged in
+        $(document).ready(function(){ // Wait until page is ready
+                  // Skips log on screen and takes you directly to the home page if already logged in
             var profile_id = sessionStorage.getItem('profile_id');
             if (profile_id == null || profile_id == 0){
                 profile_id = 0;
             }else{
                 window.location.href = 'home.html'; // move to home page
             }
-                */
             $("#logInBtn").click( function(){ attemptlog() } ); // When log on button is press
             $('#email').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; });  // When enter is press inside email
             $('#password').keyup( function(e){ if (e.keyCode === 13){ attemptlog() }; }); // When enter is press inside email
