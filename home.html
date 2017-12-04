@@ -71,23 +71,26 @@
     </div>
     </div>
 
-	  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- modal used to view other users' profiles -->
+  <div class="modal fade" id="oProfile" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!--Own user's profile page, similar to viewing another's profile-->
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div class="modal-header" id = "pHeader">
-          <img src="images/defaultavatar.png" id = "pPic" class="img-thumbnail">
+          <img src="images/defaultavatar.png" id = "opPic" class="img-thumbnail">
           <div class="modal-body">
-            <h2 id="poName"></h2>
+            <h2 id="opName"></h2>
       </div>
       </div>
       <div class="modal-body">
         <div id = "oBio"></div>
-		<h2 id = "opAffil"></h2>
+		<h2 id = "opAffil"></h2> <!--School/Company -->
 		<p id= "ogroup"></p>
+    <h2 id = "opDescrip1"></h2> <!--Primary Interest/Field -->
+		<p id= "opInterest"></p>
+    <h2 id = "opDescrip2"></h2> <!-- Secondary Interest/Creator Interests-->
+		<p id= "osInterest"></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" id="rPB">Report</button>
-        <button type="button" class="btn blue" id="fPB" data-toggle ="modal" data-target = "#eProfile">Follow</button>
+    
       </div>
     </div>
     </div>
@@ -174,9 +177,9 @@
 		<div class="modal fade" id="Player" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true"> <!-- Primitive video player, will open on clicking video cards -->
         <div class="modal-dialog" role="document">
           <div class="modal-content">
-            <div class="modal-header">
-			<div id="vTitle"></div>
-
+            <div class="modal-header id =vidwindow">
+			<iframe src="">
+			</iframe>
             <div class="modal-footer">
               <button type="button" class="btn blue"  id="reactB">React</button><br />
               <button type="button" class="btn blue" id="likeB">Like</button>
@@ -196,6 +199,16 @@
   .newProfile{
     height:500px;
     width: 500px;
+  }
+  .del{
+	margin: right;
+	height: 25px;
+	width: 25px;
+  }
+  .play{
+	margin: auto;
+	height: 100px;
+	width: 100px;
   }
   .row{
     margin-bottom: 10px;
@@ -248,6 +261,7 @@
 <script> //Javascript for the page here
 var user;
 var uType;
+var uName;
 $(document).ready(function () {
   if (sessionStorage.getItem('profile_id') == null){ //if no session is detected, move to login page to create session
     window.location.href = 'index.html';
@@ -256,7 +270,7 @@ $(document).ready(function () {
     $("#creatorB").hide(); //initially hide all buttons, only one set will be shown after initialization
     $("#badminB").hide();
     $("#studentB").hide();
-	var uName = sessionStorage.profile_id;
+	uName = sessionStorage.profile_id;
 	//initial work
     $.post("php/home.php", {action:'init', name:uName}) //initial setup, runs on startup
     .done(function(data){
@@ -293,22 +307,14 @@ $(document).ready(function () {
         }
         });
 	  //generate content
-      $.post("php/home.php", {action:'cards',name:uName}) //generates content cards, thumbnails for videos or posts, initally primitive
+      $.post("php/home.php", {action:'cards',me:user}) //generates content cards, thumbnails for videos or posts, initally primitive
       .done(function(data){
         $('#videoList').append(data);
         });
   }
-    $('#hPic').click(function onchange() { //click on to open own profile window
-		  $("#newBio").val("");
-      });
+
     $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
           document.getElementById("newBio").innerHTML = user[0].bio;
-      });
-
-    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
-		  var newB = $("#newBio").text(); //fetch input for new bio
-		  $.post("php/home.php", {action:"eProfile", newBio:newB,name:uName})
-		  document.getElementById("Bio").innerHTML = user[0].bio; //update bio to new bio
       });
    $('#uVideo, #uMessage, #uAnn').click(function onchange() { //if option is selected, make dropdown menu title the selection
      $("#uType").text($(this).text());
@@ -319,9 +325,6 @@ $(document).ready(function () {
 		  var uTitle = $("#uTitle").text();
 		  var uDesc = $("#uDescription").text();
       $.post("php/home.php", {action:"upload",type:uType, who:user[0].username, url: uURL, title: uTitle, desc: uDesc} )
-      });
-    $('#ePB').click(function onchange() { //fill in edit field with original bio, in case only minor edits are needed
-          document.getElementById("newBio").innerHTML = " ";
       });
 	$('#cSearchButton').click(function onchange() {
 		document.getElementById("videoList").innerHTML = "";
@@ -358,14 +361,62 @@ $(document).ready(function () {
 			return false;
 		}
 	});
-    /*$('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
-		  var newB = document.getElementById("newBio").text();
-      $.post("php/home.php", {action:"eProfile", newBio:newB})
+    $('#sPB').click(function onchange() { //replace old profile with new one, replace bio in database
+		  var newB = document.getElementById("newBio").value;
+			$.post("php/home.php", {action:"eProfile", name:uName, newBio:newB})
 			.done(function(data){ //update profile live when finished
-			document.getElementById("Bio").innerHTML = user[0].about_us;
+			document.getElementById('Bio').innerHTML = newB;
 			});
 
-      });*/
+      });
+	document.getElementsByClassName('play').onclick = function() { //fetch video to put into player
+		var ctitle = $(this).card-title; //get name of whoever uploaded content
+		$.post("php/home.php", {action:"fetchvid", title:ctitle})
+			.done(function(data){ //update profile live when finished
+			$("#vidwindow").innerHTML() = "<iframe src='https://www.youtube.com/watch?v=" + data + "'></iframe>";
+			});
+	};
+	document.getElementsByClassName('viewp').onclick = function() { //get user's information, open profile modal
+		var uName = $(this).viewp.substring(4,12); //get name of whoever uploaded content
+		$.post("php/home.php", {action:'viewP',name:uName})
+			.done(function(data){
+				ouser = JSON.parse(data); //fetch self information
+				document.getElementById("opName").innerHTML = ouser[0].fname + " " + ouser[0].lname; //fill in self profile with information
+				document.getElementById("oBio").innerHTML = ouser[0].bio;
+				if(ouser[0].acc_type == "Student"){ //change page based on user type (hide options, tweak profile, etc.)
+					document.getElementById("opAffil").innerHTML = "School"; //show student's group as a school
+					document.getElementById("ogroup").innerHTML = ouser[0].school;
+					document.getElementById("opDescrip1").innerHTML = "Primary Interest";
+					document.getElementById("opInterest").innerHTML = ouser[0].primary_interest;
+					document.getElementById("opDescrip2").innerHTML = "Secondary Interests";
+					document.getElementById("osInterest").innerHTML = ouser[0].secondary_interest;
+				}
+				else if(ouser[0].acc_type == "Creator"){
+					document.getElementById("opAffil").innerHTML = "Company"; //show creator's group as a company
+					document.getElementById("ogroup").innerHTML = ouser[0].company;
+					document.getElementById("opDescrip1").innerHTML = "Field";
+					document.getElementById("opInterest").innerHTML = ouser[0].field;
+					document.getElementById("opDescrip2").innerHTML = "Interests";
+					document.getElementById("osInterest").innerHTML = ouser[0].interests;
+				}
+				else if(ouser[0].acc_type == "Badmin"){
+					document.getElementById("opAffil").innerHTML = "Company"; //show creator's group as a company
+					document.getElementById("ogroup").innerHTML = ouser[0].company;
+					document.getElementById("opDescrip1").innerHTML = "Field";
+					document.getElementById("opInterest").innerHTML = ouser[0].field;
+					document.getElementById("opDescrip2").innerHTML = "Interests";
+					document.getElementById("osInterest").innerHTML = ouser[0].interests;
+				}
+				$("#oProfile").modal('show');
+			});
+	};
+	$('.del').click(function onchange() { //clicking X on a card will delete that content
+		var ctitle = $(this).card-title;
+		$.post("php/home.php", {action:"delete", title:ctitle})
+			.done(function(data){ //update profile live when finished
+			$("#Bio").text(newB);
+			});
+	});
     $('#logOutB').click(function onchange() { //clear session, return back to login page
           sessionStorage.clear();
           window.location.href = 'index.html';

@@ -5,9 +5,11 @@ if(isset($_POST['action']) && !empty($_POST['action'])) { //control module, html
     switch($action) {
 		case 'init': init(); break; //fetch user info and fill in profile
 		case 'cards' : generateCards();break; //generate content
+		case 'fetchvid' : fetchVideo();break;
 		case 'eProfile' : changeBio();break; //update new self bio
 		case 'viewP' : viewProfile();break;
 		case 'upload' : uploadContent();break;
+		case 'delete' : deleteContent();break;
 		case 'cardsSearch' : cardSearch();break;
     }
 }
@@ -31,14 +33,35 @@ function init(){
 
 	$conn->close(); // Close Connection
 }
-
-function viewProfile(){
-	$user_info = array();
+function fetchVideo(){
+	$video = array();
+	$title = $_POST['title'];
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
 	}
-	$sql = "SELECT * FROM site_members,creators,students WHERE username = 'HHill' AND (site_members.username = creators.username OR site_members.username = students.username);"; // Prepare Query
+	$sql = "SELECT content FROM content WHERE description = $title;"; // Prepare Query
+	$result = $conn->query($sql); // Sends Query
+
+	if ($result->num_rows > 0) { //Checks if Query table is empty
+		while($row = $result->fetch_assoc()) { // Fetches the first row
+			array_push($user_info, $row); // Push the first row into the array
+		}
+	}
+	$vid = substr($video['content'],-11);
+	$result = json_encode($vid);
+	echo $result; // Returns the array
+
+	$conn->close(); // Close Connection
+}
+function viewProfile(){
+	$user_info = array();
+	$username = $_POST['uName'];
+	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+	if ($conn->connect_error) { // Connection Check
+     die("Connection to database failed: " . $conn->connect_error);
+	}
+	$sql = "SELECT * FROM site_members,creators,students WHERE username = $username"; // Prepare Query
 	$result = $conn->query($sql); // Sends Query
 
 	if ($result->num_rows > 0) { //Checks if Query table is empty
@@ -53,7 +76,10 @@ function viewProfile(){
 }
 
 function generateCards(){ //function to generate video cards, may possibly split fetching database data to different function
-  $content = array();
+    $content = array();
+	$myuser = $_POST['me'];
+	$myusername = $myuser['username'];
+	$myusertype = $myuser['acc_type'];
 	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
 	if ($conn->connect_error) { // Connection Check
      die("Connection to database failed: " . $conn->connect_error);
@@ -67,20 +93,21 @@ function generateCards(){ //function to generate video cards, may possibly split
 		}
 	}
 	$conn->close(); // Close Connection
-  foreach($content as $row){ //card generation, will post content based on fetched database info
-	if($row['kind'] == 'Video'){
-	$vid = substr($row['content'],-11);
-	$title = $row['description'];
-	$author = $row['username'];
-	$date = $row['date_posted'];
-	$views = $row['views'];
-	$likes = $row['likes'];
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"#Player\">
-            <img class=\"card-img-top\" src=\"https://www.img.youtube.com/vi/$vid/hqdefault.jpg\" alt=\"Thumbnail\">
+	foreach($content as $row){ //card generation, will post content based on fetched database info
+		if($row['kind'] == 'Video'){
+		$vid = substr($row['content'],-11);
+		$title = $row['description'];
+		$author = $row['username'];
+		$date = $row['date_posted'];
+		$views = $row['views'];
+		$likes = $row['likes'];
+		echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+			<img class=\"card-img-top del\" src=\"images/x.png\">
+            <img class=\"card-img-top play\" src=\"images/play.png\" alt=\"Thumbnail\" data-toggle =\"modal\" data-target = \"#Player\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$title</h3>
               <div class=\"card-footer text-muted\">
-              <p class = \"viewp\">By: $author</p>
+              <button type = \"button\" class = \" btn viewp\">By: $author</button>
               <p>Uploaded </p>
               <p>$views Views</p>
               <p>$likes Likes</p>
@@ -88,32 +115,41 @@ function generateCards(){ //function to generate video cards, may possibly split
               </div>
               </div>";
 	           }
-		}
-	/*if($row['kind'] == 'Post'){
+	if($row['kind'] == 'Post'){
+	$content = $row['description'];
+	$author = $row['username'];
+	$date = $row['date_posted'];
     echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
             <div class=\"card-block\">
               <div class=\"card-footer text-muted\">
-              <p>By: $row[2]</p>
-              <p>Uploaded $row[7]</p>
-              <p>$row[8] Views</p>
-              <p>$row[9] Likes</p>
+			  <img class=\"card-img-top del\" src=\"images/x.png\">
+			  <p>$content</p>
+              <p class = \"viewp\">By: $author</p>
+              <p>$likes Likes</p>
               </div>
               </div>
               </div>";
 	           }
    if($row[1] == 'Announcement'){
+	$content = $row['description'];
+	$author = $row['username'];
+	$date = $row['date_posted'];
      echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
              <div class=\"card-block\">
+			 <img class=\"card-img-top del\" src=\"images/x.png\">
                <h3 class=\"card-title\">$row[1]</h3>
                <div class=\"card-footer text-muted\">
-               <p>By: $row[2]</p>
+               <p class = \"viewp\">By: $author</p>
                <p>Uploaded $row[7]</p>
                <p>$row[8] Views</p>
                <p>$row[9] Likes</p>
                </div>
                </div>
                </div>";
- 	           }*/
+ 	           
+	}
+  }
+
 }
 function cardSearch() {
 	$content = array();
@@ -161,8 +197,9 @@ function cardSearch() {
 	$date = $row['date_posted'];
 	$views = $row['views'];
 	$likes = $row['likes'];
-    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\" data-toggle =\"modal\" data-target = \"#Player\">
-            <img class=\"card-img-top\" src=\"https://www.img.youtube.com/vi/$vid/hqdefault.jpg\" alt=\"Thumbnail\">
+    echo "<div class=\"card mx-auto\" style=\"width: 20rem;\">
+			<img class=\"card-img-top del\" src=\"images/x.png\">
+            <img class=\"card-img-top play\" src=\"images/play.png\" alt=\"Thumbnail\" data-toggle =\"modal\" data-target = \"#Player\">
             <div class=\"card-block\">
               <h3 class=\"card-title\">$title</h3>
               <div class=\"card-footer text-muted\">
@@ -185,7 +222,6 @@ function changeBio(){ //changes user's bio and returns it back to the page to ch
 	}
 	$sql = "UPDATE site_members SET bio = $newBio WHERE username = $username;"; // Query to update bio with new bio
 	$result = $conn->query($sql); // returns success msg, no need to use further
-	echo $result;
 	$conn->close(); // Close Connection
 }
 function uploadContent(){ //uploads content to database
@@ -211,5 +247,16 @@ function uploadContent(){ //uploads content to database
 	$result = $conn->query($sql);
 
 	$conn ->close();
+}
+
+function deleteContent(){
+	$deltitle = $_POST['title']; //find content to delete by info in content
+	$conn = new mysqli('athena.ecs.csus.edu','bridge_user','bridge_db','bridge'); // Opens Database
+	if ($conn->connect_error) { // Connection Check
+     die("Connection to database failed: " . $conn->connect_error);
+	}
+	$sql = "DELETE FROM content WHERE content = $deltitle;"; // Query to update bio with new bio
+	$result = $conn->query($sql); // returns success msg, no need to use further
+	$conn->close(); // Close Connection
 }
 ?>
