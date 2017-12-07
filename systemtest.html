@@ -1,0 +1,187 @@
+<!-- DOCTYPE -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Bridge: Login</title>
+    <meta charset="utf-8">
+    <!-- Viewport Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+     <script type="text/javascript">
+        $(document).ready(function(){ // Wait until page is ready
+            $("#test").click( function(){ print() } ); // When log on button is press
+          });
+        function print(){ // Test Log.php
+                var username = "a"; // Test username
+                var password = "a"; // Test password
+
+                // home.php
+                var homeaction = 'init'; // Test home.php
+
+                //contentediting.php
+                var contentID = 0; // content ID
+
+                //edit.php, liveedit.php, stReg.php, and crReg.php
+                //Don't recommend changing these because they will edit the database to test the values
+                var user = ""; // username
+                var pass = "";
+
+                $.post( "php/log.php", { 'log': [username, password] }).done(function( data ) {
+                        var out = "Running log.php with username="+username+", password="+password;
+                        if(data==0){
+                                out += ": Login Failed";
+                        }else{
+                                out += ": Login Success";
+                        }
+                        $("#p1").text(out);
+                });
+
+                $.post("php/home.php", {action:homeaction, name:username}).done(function(data){
+                        JSON.parse(data); //fetch self information
+                        $("#p2").text('Running home.php with action='+homeaction+", username="+username+": Success");
+                }).fail(function(xhr, status, error){
+                        $("#p2").text('Running home.php with action='+homeaction+", username="+username+": Fail to run");
+                });
+
+
+                $.post( "php/contentediting.php", { 'funct': 'edit', 'num': [contentID,"2","3","4","5","6","7","8","9","10","11"] }).done(function(data){
+                        $("#p3").text("Running contentediting.php with function=edit: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p3").text("Running contentediting.php with function=edit: Fail");
+                });
+
+                $.post( "php/contentediting.php", { 'funct': 'verify', 'num': contentID }).done(function(data){
+                        $("#p4").text("Running contentediting.php with function=verify: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p4").text("Running contentediting.php with function=verify: Fail");
+                });
+
+                $.post( "php/contentediting.php", { 'funct': 'delete', 'num': contentID }).done(function(data){
+                        $("#p5").text("Running contentediting.php with function=verify: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p5").text("Running contentediting.php with function=verify: Fail");
+                });
+
+                $.post( "php/contentliveedit.php", { 'num': contentID }).done(function( data ){
+                        $("#p6").text("Running contentliveedit.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p6").text("Running contentliveedit.php: Fail");
+                });
+
+                $.post("php/contentlivesearch.php", { 'search' : [username,"a","1"] }).done(function(data){
+                        $("#p7").text("Running contentlivesearch.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p7").text("Running contentlivesearch.php: Fail");
+                });
+
+                $.post( "php/edit.php", { 'funct': 'verify', 'num': user }).done(function( data ){
+                        $("#p8").text("Running edit.php with function=verify: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p8").text("Running edit.php with function=verify: Fail");
+                });
+
+                $.post( "php/edit.php", { 'funct': 'delete', 'num': user }).done(function( data ){
+                        $("#p9").text("Running edit.php with function=delete: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p9").text("Running edit.php with function=delete: Fail");
+                });
+
+                $.post( "php/edit.php", { 'funct': 'edit', 'num': user }).done(function( data ){
+                        $("#p10").text("Running edit.php with function=edit: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p10").text("Running edit.php with function=edit: Fail");
+                });
+
+                $.post( "php/liveedit.php", { 'num': username }).done(function( data ){
+                        $("#p11").text("Running liveedit.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p11").text("Running liveedit.php: Fail");
+                });
+
+                $.post("php/livesearch.php", { 'search' : [username,"a","1"] }).done(function(data){
+                        $("#p12").text("Running livesearch.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p12").text("Running livesearch.php: Fail");
+                });
+
+                $.post( "php/mailtable.php" ).done(function( data ) {
+                        $("#p13").text("Running mailtable.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p13").text("Running mailtable.php: Fail");
+                });
+
+                $.post( "php/mail.php", { 'to': [], 'message' : "", 'subject' : "" }).done(function( data ) {
+                        $("#p14").text("Running mail.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p14").text("Running mail.php: Fail");
+                });
+
+                $.post( "php/crReg.php", { 'creatorAcct':[user,pass,pass,'','','','','','',"Exploring"]}).done(function(data) {
+                        $("#p15").text("Running crReg.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p15").text("Running crReg.php: Fail");
+                });
+
+                $.post( "php/stReg.php", { 'studentAcct': [user,pass,pass,'','','','','',"Exploring","Exploring"] }).done(function(data) {
+                        $("#p16").text("Running stReg.php: Success");
+                }).fail(function(xhr, status, error){
+                        $("#p16").text("Running stReg.php: Fail");
+                });
+
+        }
+      </script>
+
+  </head>
+  <body>
+    <!-- YOUR CONTENT STARTS HERE -->
+        <h1>Bridge</h1>
+        <div class="row"></div>
+        <div class = "col-lg-2 col-md-2 col-sm-1 col-xs-12"></div>
+
+        <button id="test" type="submit" class="btn btn-success btn-sm">Run Test</button>
+        <p id="p1"> </p>
+        <p id="p2"> </p>
+        <p id="p3"> </p>
+        <p id="p4"> </p>
+        <p id="p5"> </p>
+        <p id="p6"> </p>
+        <p id="p7"> </p>
+        <p id="p8"> </p>
+        <p id="p9"> </p>
+        <p id="p10"> </p>
+        <p id="p11"> </p>
+        <p id="p12"> </p>
+        <p id="p13"> </p>
+        <p id="p14"> </p>
+        <p id="p15"> </p>
+        <p id="p16"> </p>
+
+        <style>
+        h1{
+                background-color: #1A7CBC;
+        }
+        body{
+                background-color: #82CBFB;
+        }
+        loginblock{
+                margin: auto;
+        }
+    password{
+                padding: 20px;
+        }
+        </style>
+    <!-- YOUR CONTENT ENDS HERE -->
+
+    <!-- JavaScript: placed at the end of the document so the pages load faster -->
+                <!-- jQuery library -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+                <!-- Popper -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+                <!-- Latest compiled and minified Bootstrap JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>
