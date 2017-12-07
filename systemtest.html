@@ -36,7 +36,11 @@
                                 out += ": Login Success";
                         }
                         $("#p1").text(out);
+                }).fail(function(xhr, status, error){
+                        var out = "Running log.php with username="+username+", password="+password+"Fail to run";
+                        $("#p1").text(out);
                 });
+
 
                 $.post("php/home.php", {action:homeaction, name:username}).done(function(data){
                         JSON.parse(data); //fetch self information
